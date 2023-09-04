@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>reveal.js - JetBrains presentation template</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reset.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+		<link rel="stylesheet" href="dist/theme/jetbrains-dark.css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/darkula.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+							<section class="background">
+								<h1>Mini-IDE <br/> for IDELang</h1>
+								<p class="event-name-label">
+									IDE Development Course
+								</p>
+								<p class="name-and-position-label">
+									Andrew Vasilyev
+								</p>
+								<div class="jb-square-logo"></div>
+							</section>
+							
+										<section>
+											<h2>Programming Assignment</h2>
+										</section>
+
+										<section>
+											<h3>Objective</h3>
+											<p>Develop a functional mini-IDE for the IDELang language, encapsulating core text editing, syntax highlighting, error detection, and advanced features of modern development environments.</p>
+										</section>
+							
+										<section>
+											<h3>Core Features</h3>
+											<ul>
+												<li>Options to manage IDELang files (create, open, modify, save, close).</li>
+												<li>Basic text editing.</li>
+												<li>Display line numbers.</li>
+											</ul>
+										</section>
+							
+										<section>
+											<h3>Text Manipulation & Advanced Editing</h3>
+											<ul>
+												<li>Text selection with visual markers.</li>
+												<li>Cut, Copy and Paste</li>
+												<li>Undo & Redo</li>
+												<li>In-file search and replace mechanism.</li>
+											</ul>
+										</section>
+
+										<section>
+											<h3>Project Model</h3>
+											<ul>
+												<li>Project explorer/sidebar for IDELang file structure.</li>
+												<li>Context-sensitive actions (New, Rename, Delete).</li>
+												<li>Detect external file modifications.</li>
+											</ul>
+										</section>
+							
+										<section>
+											<h3>Syntax Handling</h3>
+											<ul>
+												<li>Token-category-based syntax highlighting.</li>
+												<li>Syntax error identification and display.</li>
+											</ul>
+										</section>
+							
+										<section>
+											<h3>Code Analysis</h3>
+											<ul>
+												<li>Symbol tables for code elements.</li>
+												<li>Type inference, type checking and type error highlighting.</li>
+												<li>Scope-focused resolve and highlighting of resolve errorse.</li>
+											</ul>
+										</section>
+							
+										<section>
+											<h3>Code Navigation & Refactoring</h3>
+											<ul>
+												<li>Rapid navigation to declarations by symbol's names and by clicking on symbol's usages.</li>
+												<li>Global renaming.</li>
+											</ul>
+										</section>
+							
+										<section>
+											<h3>Optional</h3>
+											<h5>AI-Driven Features</h5>
+											<ul>
+												<li>AI-powered error highlighting.</li>
+											</ul>
+											<h5>Any feature that you want to implement</h5>
+											<ul>
+												<li>Control, data flow and abstract interpretation analysys</li>
+												<li>Call graph and interprocedural analysis</li>
+												<li>etc</li>
+											</ul>
+										</section>
+
+										<section>
+											<h3>Rules</h3>
+											<p>Teams may not exceed 2 students.</p>
+											<p>Existing controls for text editors are not allowed. Implement the text editor from scratch using the graphic API for text rendering.</p>
+											<p>Parser generators, such as ANTLR, are not permitted. They won't help :)</p>
+										</section>
+
+										<section>
+											<h3>Project Submission & Evaluation</h3>
+												<p>Submit source code via github.</p>
+												<p>Defend your project.</p>
+												<p>Evaluation will be based on:
+													<ul>
+														<li>Efficiency & perfomance.</li>
+														<li>Code quality.</li>
+														<li>Scope and nature of features.</li>
+														<li>Creativity</li>
+													</ul>
+												</p>
+										</section>
+							
+										<section>
+											<h2>IDELang specification</h2>
+										</section>
+
+            <section>
+                <h3>Introduction</h3>
+                <p>IDELang is an educational programming language designed for the IDE Development course. With a focus on simplicity, it incorporates basic data types, arithmetic and boolean operations, conditional structures, as well as function and procedure definitions.</p>
+            </section>
+
+            <section>
+                <h3>Data Types</h3>
+<p><strong>number:</strong> Support for integer arithmetic.</p>
+						<pre>
+							<code data-trim data-noescape>
+								var number = 42;</code></pre>
+                    <p><strong>string:</strong> Represent textual data.</p>
+						<pre>
+							<code data-trim data-noescape>
+							var greeting = "Hello, IDELang!";
+						</code></pre>
+                    <p><strong>bool:</strong> Defined as `true` and `false`.</p>
+						<pre>
+							<code data-trim data-noescape>
+var isTrue = true;</code></pre>
+            </section>
+
+            <section>
+                <h3>Variables</h3>
+                <p>Variables are declared using the `var` keyword, with type being inferred from the assigned value.
+					<pre>
+						<code data-trim data-noescape>
+							var x = 5;
+							</code>
+							</pre>
+            </section>
+
+            <section>
+                <h3>Arithmetic Operations</h3>
+                <p>Supported operations: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>
+					<pre>
+						<code data-trim data-noescape>
+	var sum = x + 10;</code></pre>
+            </section>
+
+            <section>
+                <h3>String Operations</h3>
+                <p><code>%</code>: String concatenation
+					<pre>
+						<code data-trim data-noescape>
+	
+					var fullName = "Hello " % "World!";</code></pre>
+            </section>
+
+            <section>
+                <h3>Boolean Operations</h3>
+                <p>Supported operations: <code>&&</code>, <code>||</code>, <code>!</code>, <code>==</code>, <code>!=</code>
+					<pre>
+						<code data-trim data-noescape>	
+					var bothTrue = (x > 4) && (z == true);
+					</code></pre>
+            </section>
+
+            <section>
+                <h3>Conditional Structures</h3>
+                <ul>
+                    <li><code>if(condition) { ... }</code></li>
+                    <li><code>if(condition) { ... } else { ... }</code></li>
+                </ul>
+                <p>Examples:
+					<pre>
+						<code data-trim data-noescape>	
+                    if (x > 10) { y = "Greater"; }
+                    if (z) { y = "True"; } else { y = "False"; }
+				</code>
+			</pre>
+			
+            </section>
+
+            <section>
+                <h3>Loops</h3>
+                <p>While loops: <code>while(condition) { ... }</code></p>
+				<pre>
+					<code data-trim data-noescape>
+var i = 0;
+while (i < 5) {
+   i = i + 1;
+}
+</code>
+</pre>
+            </section>
+
+            <section>
+                <h3>Functions</h3>
+                <p>Functions are defined using the `func` keyword and their return type is inferred based on the type of the returned value.</p>
+				<pre>
+					<code data-trim data-noescape>
+func add(a: number, b: number) 
+{
+	return a + b;  // Inferred return type: number
+}
+</code>
+</pre>
+<p>There can be different functions with same names but different sets of parameters.</p>
+            </section>
+
+            <section>
+                <h3>Procedures (Procs)</h3>
+                <p>Procedures are introduced using the `proc` keyword and do not return a value.</p>
+				<pre>
+					<code data-trim data-noescape>
+proc display(message: string) {
+   ...
+}
+</code></pre>
+            </section>
+
+            <!-- Print Operation Slide -->
+            <section>
+                <h3>Print Operation</h3>
+                <p>The `print` operation is used to display output.</p>
+				<pre>
+					<code data-trim data-noescape>
+print("Hello, World!");  // Displays: Hello, World!
+print(x);                // Displays the value of x
+print(y % " there!");    // Displays: hello there!
+</code></pre>
+</section>
+
+            <!-- Project Structure Slide -->
+            <section>
+                <h3>Project Structure</h3>
+                <ul>
+                    <li><strong>Project Root:</strong> The top-level directory containing all of the project's resources.
+                        <br><em>Attributes</em>: Project name, creation date.</li>
+                    <li><strong>Source Files:</strong> Individual files containing IDELang code.
+                        <br><em>Attributes</em>: File name, file path, last modification date, size.
+                        <br><code>main.idl</code>, <code>utils.idl</code></li>
+                </ul>
+            </section>
+
+            <!-- Metadata Slide -->
+            <section>
+                <h3>Metadata</h3>
+                <p>Each project should maintain a metadata file (like a `.idlconfig` or `.idlproj`) that holds:</p>
+                <ul>
+                    <li>Project-related information</li>
+                    <li>List of source files and their relative paths.</li>
+                </ul>
+            </section>
+
+<section>
+	<h3>Questions & Answers</h3>
+	<p>Thank you for your attention!</p>
+	<p>I'm now open to any questions you might have.</p>
+</section>
+
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/highlight.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/math/math.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/reveal.js-mermaid-plugin@2.0.0/plugin/mermaid/mermaid.js"></script>
+		<script>
+			Reveal.initialize({
+				hash: true,
+				width: 1920,
+  				height: 1080,
+				center: true,
+				margin: 0,
+				mermaid: { },
+				plugins: [ RevealHighlight, RevealNotes, RevealMath.KaTeX, RevealMermaid ]
+			});
+		</script>
+	</body>
+</html>
