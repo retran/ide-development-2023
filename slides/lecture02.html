@@ -1,0 +1,875 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>reveal.js - JetBrains presentation template</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reset.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+	<link rel="stylesheet" href="dist/theme/jetbrains-dark.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/darkula.css">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section class="background">
+				<h1>The Craft <br /> of Plain Text</h1>
+				<p class="event-name-label">
+					IDE Development Course
+				</p>
+				<p class="name-and-position-label">
+					Andrew Vasilyev
+				</p>
+				<div class="jb-square-logo"></div>
+			</section>
+
+			<section>
+				<h3>Agenda</h3>
+				<ul>
+					<li>Understanding Plain Text</li>
+					<li>Understanding Plain Text Editing</li>
+					<li>Understanding Text Rendering</li>
+					<li>Understanding Text Editor Workflow</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>What is plain text?</h2>
+			</section>
+
+			<section>
+				<h3>What is Plain Text?</h3>
+				<p>Plain text refers to unformatted textual data. Unlike rich text, which can include styling and other
+					elements, plain text consists solely of character data. An example of plain text is a simple `.txt`
+					file containing the sentence "Hello, World!" without any bolding, italics, or other embellishments.
+				</p>
+			</section>
+
+			<section>
+				<h3>Plain Text vs Rich Text</h3>
+				<p>
+					<strong>Comparison:</strong> While plain text only contains raw, unformatted characters, rich text
+					can include formatting such as font styles, sizes, colors, and more. Rich text documents can also
+					embed objects like images and tables.
+				</p>
+				<ul>
+					<li><strong>Plain Text Example:</strong> "Hello, World!" in a `.txt` file.</li>
+					<li><strong>Rich Text Example:</strong> "Hello, World!" in bold, italic, and underlined in a `.docx`
+						or `.rtf` file, possibly with an accompanying image.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Plain Text vs Rich Text</h3>
+				<div class="row">
+					<div class="column">
+						<h5>Plain text</h5>
+						<img src="assets/lecture02/plain_text.png" height="600px" />
+					</div>
+					<div class="column">
+						<h5>Rich text</h5>
+						<img src="assets/lecture02/rich_text.png" height="600px" />
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>RTF: Example of rich text format</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							Developed by Microsoft in the mid-1980s, RTF (Rich Text Format) is a proprietary document
+							file format that supports text formatting, such as bold and italics, as well as graphics.
+							Unlike plaintext, RTF retains style and formatting information, making it suitable for
+							exchanging formatted documents between applications and platforms. While not as ubiquitous
+							today, it has played a significant role in the evolution of document interchange formats.
+						</p>
+					</div>
+					<div class="column">
+						<img
+							src="https://origin2.cdn.componentsource.com/sites/default/files/resources/aspose/534981/Rich-Text-Format-RTF.003.png">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Benefits of Plain Text</h3>
+				<ul>
+					<li><strong>Universality:</strong> Almost every system can read and display plain text, making it
+						universally accessible.</li>
+					<li><strong>Compactness:</strong> Without formatting and extra metadata, plain text files are
+						generally smaller in size.</li>
+					<li><strong>Transparency:</strong> The content is directly visible, without hidden data or metadata.
+					</li>
+					<li><strong>Flexibility:</strong> It can be easily processed by many tools and software, from simple
+						text editors to complex algorithms.</li>
+					<li><strong>Stability:</strong> As a long-standing standard, plain text doesn't suffer from
+						software-specific incompatibilities.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Limitations of Plain Text</h3>
+				<ul>
+					<li><strong>No Formatting:</strong> Plain text cannot represent styles like bold or italic.</li>
+					<li><strong>Limited Structuring:</strong> Without special conventions, plain text can't easily
+						represent tables, columns, or other structured data.</li>
+					<li><strong>No Media Embedding:</strong> Images, videos, or audio cannot be embedded within plain
+						text.</li>
+					<li><strong>Character Set Limitations:</strong> Depending on the encoding, certain characters might
+						not be representable.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Evolution of Text Editors</h2>
+			</section>
+
+			<section>
+				<h3>The Typewriter Era</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							The typewriter marked the beginning of mechanical text editing, offering a more efficient
+							way to write than handwriting. Originally invented in the early 1870s, it remained a staple
+							in offices and homes well into the 20th century.
+						</p>
+					</div>
+					<div class="column">
+
+						<img src="https://blogs.loc.gov/inside_adams/files/2015/03/Underwood-no5.jpg" alt="Typewriter"
+							height="600px">
+					</div>
+				</div>
+
+			</section>
+
+			<section>
+				<h3>Punch Cards</h3>
+				<div class="row">
+					<div class="column">
+
+						<p>
+							Punch cards were one of the earliest methods used for programming and data storage,
+							especially in early computing. A sequence of punched holes represented data or commands.
+							They were widely used from the early 1900s until the 1970s.
+						</p>
+					</div>
+					<div class="column">
+						<img src="https://www.metaltoad.com/sites/default/files/inline-images/fortran.png"
+							alt="Punch Cards">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Teletype Systems</h3>
+				<div class="row">
+					<div class="column">
+
+
+						<p>
+							Before the advent of video displays, teletype systems were used as a means of entering and
+							displaying text data in real-time. These machines were often connected to early mainframe
+							and
+							minicomputers and marked the transition to electronic text editing.
+						</p>
+					</div>
+					<div class="column">
+						<img src="https://149366088.v2.pressablecdn.com/wp-content/uploads/2019/07/linux-typewriter-login.jpg"
+							alt="Teletype Machine">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>The Birth of ED</h3>
+				<div class="row">
+					<div class="column">
+
+						<p>
+							ED (short for "editor") was one of the first command-line text editors, created in the early
+							1970s.
+							Designed by Ken Thompson for Unix systems, ED set the foundation for many text editors that
+							followed. While primitive by today's standards, it introduced key editing concepts still
+							used.
+						</p>
+					</div>
+					<div class="column">
+						<img src="https://techtinkering.com/img/articles/cpm_ed_copy_paste.png"
+							alt="ED Editor Screenshot">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>First Display Text Editors</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							With the advent of video display terminals in the late 1970s and early 1980s, text editors
+							evolved to show text directly on a screen rather than print them on paper. Editors like "vi"
+							(on Unix) and "WordStar" (on DOS) emerged, offering users a visual interface to interact
+							with their documents. They marked a significant shift from command-line based editors,
+							providing real-time feedback and enhancing user experience.
+						</p>
+					</div>
+					<div class="column">
+						<img
+							src="https://www.destroyallsoftware.com/assets/posters/screencasts/file-navigation-in-vim.poster-e061ca0e6f51346267322decc1841b02dcc4c397f7cfa332292087018bbe8c18.jpg" />
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Emacs: The Extensible Editor</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							Developed in the mid-1970s by Richard Stallman, Emacs is more than just a text editor; it's
+							an extensible and customizable editing environment. With its unique system of key bindings,
+							and its own built-in programming language (Emacs Lisp), users can customize and extend their
+							editing experience. It is renowned for its powerful features, enabling tasks from editing
+							text to reading emails or even playing games, all within the same interface.
+						</p>
+					</div>
+					<div class="column">
+						<img src="https://www2.lib.uchicago.edu/keith/emacs/images/startup.png"
+							alt="Screenshot of Emacs editor">
+					</div>
+				</div>
+			</section>
+
+
+			<section>
+				<h3>WYSIWYG Text Editors for rich text</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							WYSIWYG editors revolutionized the world of text editing in the late 1980s and early 1990s.
+							Instead of users having to remember markup or commands, these editors allowed for direct
+							manipulation of the text and its appearance. With WYSIWYG, the display on the editor closely
+							matched the final output.
+						</p>
+					</div>
+					<div class="column">
+						<img src="https://i.pinimg.com/originals/63/f2/88/63f288e4c89cf700bdaf69e0fe2b9f72.jpg" />
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h2>Anatomy of plain text</h2>
+			</section>
+
+			<!-- ASCII and Control Characters -->
+
+			<section>
+				<h3>The Underlying Representation</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							In computers, everything is stored as binary data – sequences of 0s and 1s. Text is no
+							exception. Each character is mapped to a unique number using a character encoding, like
+							ASCII. For example, in ASCII encoding, the letter 'A' is represented as the number 65, which
+							in binary is '01000001'. When we type a letter, the computer processes its binary
+							representation, but displays the character we recognize, allowing us to interact using
+							familiar symbols.
+						</p>
+					</div>
+					<div class="column">
+						<img src="https://www.researchgate.net/publication/256296091/figure/tbl1/AS:668567372562441@1536410291715/Decimal-and-Binary-representation-of-DNA-alphabets.png"
+							alt="Characters with their numerical and binary representations">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Origins of ASCII</h3>
+				<div class="row">
+					<div class="column">
+
+						<p>
+							ASCII, standing for American Standard Code for Information Interchange, was developed in the
+							early 1960s by the American National Standards Institute (ANSI). Designed as a standardized
+							character encoding for electronic communication, ASCII represents text in computers,
+							telecommunications equipment, and other devices that use text. Originally, it was created to
+							address the compatibility issues between different types of data processing equipment.
+						</p>
+					</div>
+					<div class="column">
+
+						<img src="https://i.redd.it/t3k0e332m5351.png" />
+					</div>
+				</div>
+
+			</section>
+
+			<section>
+				<h3>The ASCII Table</h3>
+				<div class="row">
+					<div class="column">
+						The ASCII table consists of 128 characters, encompassing control characters (like carriage
+						return
+						and line feed) and printable characters (letters, numbers, and symbols). Each character is
+						represented by a unique 7-bit integer. This table became the backbone for text encoding in early
+						computing and forms the foundation of many encoding systems used today.
+						</p>
+					</div>
+					<div class="column">
+						<img src="https://www.johndcook.com/ascii.png">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Control Characters</h3>
+				<div class="row">
+					<div class="column">
+
+						<p>
+							Control characters, often non-printable and invisible, are special characters used in text
+							to
+							represent non-graphic instructions. Originating from the early days of telegraphy and
+							teletype, they
+							served to control the behavior of devices or instruct them to perform specific operations.
+							In
+							character encodings like ASCII, control characters occupy the first 32 codes (from 0 to 31).
+						</p>
+					</div>
+					<div class="column">
+
+						<img src="https://kbd.news/pic/article/1274/teletype-model-33-art.jpg" height="600" />
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Examples of Control Characters</h3>
+				<ul>
+					<li><strong>Carriage Return (CR):</strong> Moves the caret to the start of the line without
+						advancing to the next line.</li>
+					<li><strong>Line Feed (LF):</strong> Advances the caret to the next line without returning to the
+						start.</li>
+					<li><strong>Tab:</strong> Moves the caret to the next tab stop.</li>
+					<li><strong>Escape:</strong> Often used to begin sequences of characters that represent special
+						commands.</li>
+					<li><strong>Backspace:</strong> Moves the caret backwards one space.</li>
+				</ul>
+			</section>
+
+			<!-- Text Encodings -->
+			<section>
+				<h3>Why Different Encodings?</h3>
+				<div class="row">
+					<div class="column">
+
+						<p>
+							Text encodings are essential because they define how characters are represented as numbers
+							in computers. As the digital world expanded, the need arose for a system that could
+							accommodate more than just English letters and symbols. Different regions and languages
+							necessitated their own encoding schemes, leading to a plethora of text encodings tailored to
+							various linguistic and technical needs.
+						</p>
+					</div>
+					<div class="column">
+
+						<img src="https://www.borgendale.com/codepage/cp1251.gif" height="600" />
+					</div>
+
+			</section>
+
+			<section>
+				<h3>Introduction to Codepages</h3>
+				<div class="row">
+					<div class="column">
+
+						<p>
+							Codepages are sets of characters for a particular encoding. In the era before Unicode,
+							different regions used different codepages to represent their languages. For instance,
+							Western European languages might use the ISO 8859-1 codepage, while Cyrillic-based languages
+							might use ISO 8859-5. Switching between codepages was often necessary to display multiple
+							languages correctly.
+						</p>
+					</div>
+					<div class="column">
+
+						<img src="https://www.codeproject.com/KB/cpp/codepage/codepage.png" />
+					</div>
+				</div>
+
+			</section>
+
+			<section>
+				<h3>KOI-8R Encoding</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							KOI-8R (Kod Obmena Informatsiey-8 Rossiya) is an 8-bit character encoding, designed to cover
+							Russian, which uses the Cyrillic script. Introduced in the 1980s, KOI-8R became one of the
+							main encodings used in Unix-based systems in Russia. An interesting feature of KOI-8R is its
+							resilience to transmission errors: if a single bit is lost, a Cyrillic letter turns into
+							another Cyrillic letter.
+						</p>
+					</div>
+					<div class="column">
+						<img src="https://pbs.twimg.com/media/DTczoc4W0AARjsw.jpg:large" alt="KOI-8R character set"
+							height="600">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Popular Modern Encoding Formats</h3>
+				<ul>
+					<li><strong>UTF-8:</strong> A universal character encoding that can represent any character in the
+						Unicode standard. Efficient for English text.</li>
+					<li><strong>UTF-16:</strong> Uses 16-bits for each character, making it useful for scripts with
+						larger character sets.</li>
+					<li><strong>UTF-32:</strong> Uses 32-bits for each character, allowing direct access to Unicode code
+						points.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Why Speed Matters in Text Editing</h2>
+			</section>
+
+			<section>
+				<h3>Why Speed Matters in Text Editing</h3>
+				<p>
+					The efficiency of text operations directly impacts user productivity and satisfaction. Delays or
+					lags during typing, searching, or other text-related tasks can disrupt the user's flow and
+					concentration. As documents grow in size, the demand for instant response and smooth navigation
+					becomes even more crucial. In competitive environments, the speed of a text editor can be the
+					difference between a user adopting or abandoning the software.
+				</p>
+			</section>
+
+			<section>
+				<h3>Typical Operations in Plain Text Editing</h3>
+				<div class="row">
+					<div class="column">
+
+						<ul>
+							<li><strong>Insertion:</strong> Adding characters or words at a specific position.</li>
+							<li><strong>Deletion:</strong> Removing characters, words, or lines from the text.</li>
+							<li><strong>Search:</strong> Locating specific words, phrases, or patterns within the
+								document.</li>
+							<li><strong>Replace:</strong> Swapping out specific characters or words with others.</li>
+						</ul>
+					</div>
+					<div class="column">
+
+						<ul>
+							<li><strong>Navigation:</strong> Moving the cursor or focus to different parts of the
+								document.</li>
+							<li><strong>Selection:</strong> Highlighting specific portions of text for other operations.
+							</li>
+							<li><strong>Undo/Redo:</strong> Reversing or re-applying recent changes.</li>
+							<li><strong>Copy/Cut/Paste:</strong> Duplicating or moving text within the document or
+								between documents.</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Text representation: Array of Chars</h3>
+				<pre>
+					<code data-trim data-noescape>
+						val text : CharArray = CharArray(1024)</code></pre>
+				<p>
+					In its simplest form, text can be represented as an array of characters, where each element
+					corresponds to a specific character. This approach works well for small texts and offers
+					constant-time access to any character. However, insertions and deletions can be expensive
+					operations, especially in large documents, as they may require shifting many elements.
+				</p>
+			</section>
+
+			<section>
+				<h3>Text representation: Array of Lines</h3>
+				<pre>
+					<code data-trim data-noescape>
+						val text : Array&lt;String&gt; = Array&lt;String&gt;(1024)							
+						</code></pre>
+				<p>
+					Text can also be represented as an array of lines, where each element is a string or an array of
+					characters representing a single line. This structure eases operations like line insertions and
+					deletions. However, operations within a line still face the same challenges as the array of chars
+					representation.
+				</p>
+			</section>
+
+			<section>
+				<h3>The Need for Specialized Structures</h3>
+				<p>
+					While basic arrays offer straightforward text representation, they often struggle with dynamic
+					editing needs. Insertions, deletions, and other modifications can become computationally expensive,
+					especially in large documents. This inefficiency necessitates specialized data structures that
+					optimize these operations, ensuring that text editors remain responsive and efficient even as the
+					size and complexity of the text grows.
+				</p>
+			</section>
+
+			<section>
+				<h3>Text representation: Gap Buffer</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							The gap buffer is a dynamic array with a "gap" or empty space. Cursor movements and text
+							edits occur at the gap's location. When characters are inserted, the gap size decreases, and
+							when they're deleted, the gap size increases. The gap moves with the cursor, and while this
+							requires moving the characters around, it ensures that insertion at the cursor location is
+							always fast. Gap buffers are used in popular editors like Emacs.
+							<br />
+							<a
+								href="https://www.geeksforgeeks.org/gap-buffer-data-structure/>https://www.geeksforgeeks.org/gap-buffer-data-structure/">Read
+								more</a>
+						</p>
+					</div>
+					<div class="column">
+						<img src="https://media.geeksforgeeks.org/wp-content/uploads/20190606201412/Gap-buffer-GROWww.png"
+							alt="Gap Buffer Illustration">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Text representation: Piece Table</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							The piece table is a data structure that maintains original text and its modifications in
+							separate buffers. Instead of editing the original content, modifications are stored
+							separately, and a table keeps track of "pieces" of the content to construct the current
+							state of the text. This approach makes operations like undo and redo very efficient. Piece
+							tables were used in early word processors like Word for DOS.
+							<br />
+							<a href="https://darrenburns.net/posts/piece-table/">Read more</a>
+						</p>
+					</div>
+					<div class="column">
+						<img src="https://www.catch22.net/assets/img/editor1716.gif" alt="Piece Table Illustration">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Text representation: Piece Tree and Rope</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							Ropes and piece trees are a binary-tree-based data structures where each leaf node holds a
+							string fragment.
+							Trees efficiently handle operations like insertion, deletion, and concatenation by
+							manipulating tree nodes rather
+							than characters. Ropes have been employed in editors like Xi, while piece tree is utilized
+							by VS Code.
+							<br />
+							<a href="https://code.visualstudio.com/blogs/2018/03/23/text-buffer-reimplementation">Piece
+								tree</a>
+							<br />
+							<a
+								href="https://www.geeksforgeeks.org/ropes-data-structure-fast-string-concatenation/">Rope</a>
+						</p>
+					</div>
+					<div class="column">
+						<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Vector_Rope_example.svg/1200px-Vector_Rope_example.svg.png"
+							alt="Rope Illustration">
+					</div>
+				</div>
+			</section>
+
+			<section class="text-only small">
+				<div class="row">
+					<div class="column">
+
+						<h5>Array of Chars</h5>
+						<p>Pros:</p>
+						<ul>
+							<li>Simple implementation</li>
+							<li>Constant-time access</li>
+						</ul>
+						<p>Cons:</p>
+						<ul>
+							<li>Expensive insertions/deletions</li>
+						</ul>
+
+						<h5>Array of Lines</h5>
+						<p>Pros:</p>
+						<ul>
+							<li>Eases line operations</li>
+						</ul>
+						<p>Cons:</p>
+						<ul>
+							<li>Challenges with operations within a line</li>
+						</ul>
+
+						<h5>Gap Buffer</h5>
+						<p>Pros:</p>
+						<ul>
+							<li>Efficient cursor-based operations</li>
+							<li>Fast insertions at cursor location</li>
+						</ul>
+						<p>Cons:</p>
+						<ul>
+							<li>Movement of characters around the gap</li>
+						</ul>
+
+					</div>
+					<div class="column">
+						<h5>Piece Table</h5>
+						<p>Pros:</p>
+						<ul>
+							<li>Efficient undo/redo</li>
+							<li>Keeps track of original and modified content</li>
+						</ul>
+						<p>Cons:</p>
+						<ul>
+							<li>May have memory overhead</li>
+						</ul>
+
+						<h5>Piece Tree and Rope</h5>
+						<p>Pros:</p>
+						<ul>
+							<li>Efficient for large texts</li>
+							<li>Fast insertions, deletions, and concatenations</li>
+							<li>Immutability</li>
+						</ul>
+						<p>Cons:</p>
+						<ul>
+							<li>Complex implementation</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h2>Text Rendering</h2>
+			</section>
+
+			<section>
+				<h3>What is Text Rendering?</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							Text rendering is the process of displaying text in a visually readable form on a digital
+							screen. It
+							involves a series of steps, including layout calculations, glyph selection, and pixel
+							rendering,
+							which collectively bring text from a font file to your screen.
+						</p>
+					</div>
+					<div class="column">
+
+						<img src="https://assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c970e42b35859686a66298_6427349e1bf2f05ef6f732f6_62e055c9b75d56bafe1171a9_62e03919d9d2c4eb33a745ce_Screen%25252520Shot%252525202022-07-26%25252520at%2525252011.56.41%25252520AM.png"
+							alt="Text rendering process">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Fonts: Types and Styles</h3>
+				<div class="row">
+					<div class="column">
+
+						<ul>
+							<li><strong>Typefaces vs. Fonts:</strong> Typeface is the design; Font is the
+								implementation.</li>
+							<li><strong>Font Styles:</strong> Includes regular, bold, italic, etc.</li>
+						</ul>
+					</div>
+					<div class="column">
+						<img src="https://www.animaapp.com/blog/wp-content/uploads/2021/12/Image-2.jpg"
+							alt="Different font types and styles">
+					</div>
+				</div>
+
+			</section>
+
+			<section>
+				<h3>Bitmap Fonts</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							Bitmap fonts, sometimes known as raster fonts, are fonts in which each character is
+							represented as an arrangement of pixels in a grid. Each glyph is essentially a bitmap image,
+							predefined for a specific size and resolution.
+						</p>
+					</div>
+					<div class="column">
+						<img src="https://i.pinimg.com/1200x/2c/8e/57/2c8e57760ab53ebcbd7db33ce7eac8f4.jpg">
+					</div>
+				</div>
+				</section>
+
+				<section>
+					<h3>Bitmap Fonts</h3>
+					<div class="row">
+						<div class="column">
+	
+						<ul>
+							<li><b>Fixed Size:</b> Each bitmap font is designed for a specific size. Scaling can result
+								in jagged or blurry edges.</li>
+							<li><b>Pixel Perfect:</b> At their intended size, bitmap fonts are crisp and clear,
+								especially useful for screens with low resolution or specific rendering needs.</li>
+							<li><b>Limitations:</b> Lack of flexibility in scaling and transformations compared to
+								vector fonts.</li>
+							<li><b>Use Cases:</b> Early computer displays, retro video game graphics, and specialized
+								screen applications.</li>
+						</ul>
+					</div>
+					<div class="column">
+						<img src="https://i.pinimg.com/1200x/2c/8e/57/2c8e57760ab53ebcbd7db33ce7eac8f4.jpg">
+					</div>
+				</div>
+
+			</section>
+
+
+			<section>
+				<h3>Vector Fonts</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							Vector fonts, also known as outline fonts, are fonts where each character is defined using
+							geometric shapes like curves and lines. Unlike bitmap fonts, which represent characters
+							using a grid of pixels, vector fonts use mathematical equations to describe the contours and
+							paths that make up each glyph. The most common vector font formats include TrueType (TTF)
+							and PostScript Type 1.
+						</p>
+					</div>
+					<div class="column">
+						<img src="https://fasterthanli.me/static/img/glyph.c5462ca50eee597b.png" alt="font glyph">
+					</div>
+				</div>
+			</section>
+
+
+			<section>
+				<h3>Vector Fonts</h3>
+				<div class="row">
+					<div class="column">
+						<ul>
+							<li><b>Scalability:</b> Vector fonts can be resized without any loss of quality, ensuring
+								sharp and clear characters at any size.</li>
+							<li><b>Flexibility:</b> Can be easily transformed (rotated, skewed) while maintaining
+								clarity.</li>
+							<li><b>Print Quality:</b> Provides smoother edges, especially for large print sizes.</li>
+							<li><b>File Size:</b> Generally, smaller file sizes than bitmap fonts for the same character
+								sets.</li>
+						</ul>
+					</div>
+					<div class="column">
+
+						<!-- Image suggestion: A visual breakdown of a single glyph going through the rendering process -->
+						<img src="https://fasterthanli.me/static/img/glyph.c5462ca50eee597b.png" alt="font glyph">
+					</div>
+				</div>
+			</section>
+
+
+			<section>
+				<h3>Text Line Rendering</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							Rendering a line of text isn't as straightforward as merely displaying glyphs side by side.
+							The process takes into account various factors such as kerning, baseline alignment, and text
+							directionality. Properly rendered lines ensure text is readable, aesthetically pleasing, and
+							maintains the intended meaning.
+						</p>
+					</div>
+					<div class="column">
+						<!-- Image suggestion: A breakdown of a line of text highlighting kerning, alignment, and directionality -->
+						<img src="https://miro.medium.com/v2/resize:fit:1400/1*AAoC41U5wGxXJ0uKFQTZiw.png"/>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Text Scrolling & Viewport</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							The viewport is the visible area of a text document or any other digital content. As
+							documents exceed the size of the viewport, scrolling becomes necessary to navigate through
+							the content. Effective text scrolling is crucial for user experience, allowing seamless
+							exploration while keeping the content readable and well-rendered.
+						</p>
+					</div>
+					<div class="column">
+						<!-- Image suggestion: A graphic illustrating a viewport with a scroll bar, showing parts of a document above and below the visible area -->
+						<img src="https://res.cloudinary.com/practicaldev/image/fetch/s--AF_CAMxi--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/j8hvbkt7hqrt89sebcoy.png" alt="Viewport and scrolling concept">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>The Magic of Anti-aliasing</h3>
+				<div class="row">
+					<div class="column">
+
+						<p>
+							Anti-aliasing techniques smooth out jagged edges in rendered text by subtly coloring the
+							pixels
+							around the edges. This makes the text easier to read and more visually pleasing.
+						</p>
+					</div>
+					<div class="column">
+						<!-- Image suggestion: A side-by-side comparison of text with and without anti-aliasing -->
+						<img src="https://www.computerhope.com/jargon/a/anti-alias.png" alt="Anti-aliasing comparison">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h2>Conclusion</h2>
+			</section>
+
+			<section>
+				<h3>Text Editor Workflow</h3>
+				<ul>
+					<li><b>Initialize Data Structure:</b> Load the text into a suitable data structure for efficient editing.</li>
+					<li><b>Display Initial Content:</b> Render the loaded text onto the editor interface.</li>
+					<li><b>Handle User Input:</b> Process keystrokes, mouse clicks, and other user interactions.</li>
+					<li><b>Modify Data:</b> Based on user input, update the text within the data structure.</li>
+					<li><b>Refresh Display:</b> Render the modified text, reflecting the changes made by the user.</li>
+				</ul>
+			</section>
+			
+			<section>
+				<h3>Next: "Text Editor in IDE"</h3>
+				<img src="https://www.jetbrains.com/idea/features/screenshots/features_2021/LanguageInjections.png" width="1000">
+			</section>
+
+			<section>
+				<h3>Questions & Answers</h3>
+				<p>Thank you for your attention!</p>
+				<p>I'm now open to any questions you might have.</p>
+			</section>
+
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+			<script
+				src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/highlight.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/math/math.min.js"></script>
+			<script
+				src="https://cdn.jsdelivr.net/npm/reveal.js-mermaid-plugin@2.0.0/plugin/mermaid/mermaid.js"></script>
+			<script>
+				Reveal.initialize({
+					hash: true,
+					width: 1920,
+					height: 1080,
+					center: true,
+					margin: 0,
+					mermaid: {},
+					plugins: [RevealHighlight, RevealNotes, RevealMath.KaTeX, RevealMermaid]
+				});
+			</script>
+</body>
+
+</html>

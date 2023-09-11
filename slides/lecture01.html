@@ -1,425 +1,440 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<title>reveal.js - JetBrains presentation template</title>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reset.min.css">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
-		<link rel="stylesheet" href="dist/theme/jetbrains-dark.css">
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/darkula.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-							<section class="background">
-								<h1>Introduction to IDE Development</h1>
-								<p class="event-name-label">
-									IDE Development Course
-								</p>
-								<p class="name-and-position-label">
-									Andrew Vasilyev
-								</p>
-								<div class="jb-square-logo"></div>
-							</section>
-							
-							<section>
-								<h2>Welcome</h2>
-							</section>			
 
-							<!-- Slide 3 -->
-							<section>
-								<h3>Let me introduce myself</h3>
-								<div class="row">
-									<div class="column" style="text-align: center;">
-										<img src="assets/lecture01/lecturer.jpg">						
-									</div>
-									<div class="column">
-										<p>Andrew Vasilyev</p>
-										<p>Degree in Aerospace Systems Engineering.</p>
-										<p>Spent the last 10 years developing tools for software developers:</p>
-										<ul>
-											<li>Enterprise RAD framework and DSLs at a subsidiary of Acronis/Parallels</li>
-											<li>New development platform at 1C Company</li>
-											<li>ReSharper and Rider at JetBrains</li>
-										</ul>
-										<p>
-											<a href="mailto:andrew.vasilyev@jetbrains.com">andrew.vasilyev@jetbrains.com</a>
-											<a href="https://t.me/retran">https://t.me/retran</a>
-										</p>
-									</div>
-								</div>
-							</section>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>reveal.js - JetBrains presentation template</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reset.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+	<link rel="stylesheet" href="dist/theme/jetbrains-dark.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/darkula.css">
+</head>
 
-							<section>
-								<h3>Organizational Notes</h3>
-								<p>Please join our Telegram channel: <a href="https://t.me/+jBxzse2OsjQwYWQy">https://t.me/+jBxzse2OsjQwYWQy</a></p>
-								<p>The course page will be available at: <a href="https://retran.me/ide-development-2023/">https://retran.me/ide-development-2023/</a></p>
-								<p>
-									You will need a GitHub account. 
-									<br /> 
-									Please share your username with the course team.
-								</p>
-							</section>
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section class="background">
+				<h1>Introduction to IDE Development</h1>
+				<p class="event-name-label">
+					IDE Development Course
+				</p>
+				<p class="name-and-position-label">
+					Andrew Vasilyev
+				</p>
+				<div class="jb-square-logo"></div>
+			</section>
 
-							<section>
-								<h2>Course Overview</h2>
-							</section>
+			<section>
+				<h2>Welcome</h2>
+			</section>
 
-							<section>
-								<h3>Learning Targets</h3>
-								<ul>
-									<li>Provide a deep conceptual understanding of IDEs and their underlying architecture.</li>
-									<li>Familiarize students with the specific algorithms and techniques pivotal to IDE development.</li>
-									<li>Ensure students gain hands-on experience in tackling common challenges and scenarios in IDE development.</li>
-									<li>Prepare students for thesis projects and internships within JetBrains' product teams.</li>
-									<li>Empower students to embark on careers at companies specializing in IDE development.</li>
-									<li>Impart insights into the future landscape of IDEs and related software development tools.</li>
-								</ul>
-							</section>
+			<!-- Slide 3 -->
+			<section>
+				<h3>Let me introduce myself</h3>
+				<div class="row">
+					<div class="column" style="text-align: center;">
+						<img src="assets/lecture01/lecturer.jpg">
+					</div>
+					<div class="column">
+						<p>Andrew Vasilyev</p>
+						<p>Degree in Aerospace Systems Engineering.</p>
+						<p>Spent the last 10 years developing tools for software developers:</p>
+						<ul>
+							<li>Enterprise RAD framework and DSLs at a subsidiary of Acronis/Parallels</li>
+							<li>New development platform at 1C Company</li>
+							<li>ReSharper and Rider at JetBrains</li>
+						</ul>
+						<p>
+							<a href="mailto:andrew.vasilyev@jetbrains.com">andrew.vasilyev@jetbrains.com</a>
+							<a href="https://t.me/retran">https://t.me/retran</a>
+						</p>
+					</div>
+				</div>
+			</section>
 
-							<section>
-								<h3>Advice for Success</h3>
-								<ul>
-									<li>Always ask questions (in public channels preferably).</li>
-									<li>Share your insights and discoveries.</li>
-									<li>Collaborate with colleagues.</li>
-									<li>Engage in hands-on coding.</li>
-									<li>Learn by doing.</li>
-									<li>Brag!</li>
-								</ul>
-							</section>
+			<section>
+				<h3>Organizational Notes</h3>
+				<p>Please join our Telegram channel: <a
+						href="https://t.me/+jBxzse2OsjQwYWQy">https://t.me/+jBxzse2OsjQwYWQy</a></p>
+				<p>The course page will be available at: <a
+						href="https://retran.me/ide-development-2023/">https://retran.me/ide-development-2023/</a></p>
+				<p>
+					You will need a GitHub account.
+					<br />
+					Please share your username with the course team.
+				</p>
+			</section>
 
-							<section>
-								<h3>Roadmap</h3>
-									<div class="row">
-										<div class="column">
-											<ul>
-												<li>Introduction to IDE Development</li>
-												<li>The Craft of Text Editing</li>
-												<li>Text Editors in IDE</li>
-												<li>Project Handling in IDE</li>
-												<li>Language Processing Basics</li>
-												<li>Symbol Tables and Resolve</li>
-												<li>Understanding Type Systems and Static Analysis</li>
-											</ul>
-										</div>
-										<div class="column">
-											<ul>
-												<li>Performance and Efficiency of IDEs</li>
-												<li>Understanding Dynamic Analysis</li>
-												<li>Smart Search, Navigation, and Code Completion</li>
-												<li>Code Modifications and Formatting</li>
-												<li>Generation and Refactoring of Code</li>
-												<li>AI-Driven Features</li>
-												<li>Course Recap and Future Trends</li>
-											</ul>
-										</div>
-									</div>
-							</section>			
+			<section>
+				<h2>Course Overview</h2>
+			</section>
 
-							<section>
-								<h3>Recommended Books</h3>
+			<section>
+				<h3>Learning Targets</h3>
+				<ul>
+					<li>Provide a deep conceptual understanding of IDEs and their underlying architecture.</li>
+					<li>Familiarize students with the specific algorithms and techniques pivotal to IDE development.
+					</li>
+					<li>Ensure students gain hands-on experience in tackling common challenges and scenarios in IDE
+						development.</li>
+					<li>Prepare students for thesis projects and internships within JetBrains' product teams.</li>
+					<li>Empower students to embark on careers at companies specializing in IDE development.</li>
+					<li>Impart insights into the future landscape of IDEs and related software development tools.</li>
+				</ul>
+			</section>
 
-								<p>
-									To understand software development problems:
-									<ol>
-										<li>"The Pragmatic Programmer" by Andrew Hunt and David Thomas</li>
-										<li>"Code: The Hidden Language of Computer Hardware and Software" by Charles Petzold</li>
-									</ol>
-								</p>
-								
-								<p>
-									To understand Kotlin:
-									<ol>
-										<li>"Kotlin in Action" by Dmitry Jemerov and Svetlana Isakova</li>
-									</ol>
-								</p>
-								
-								<p>
-									To understand how desktop applications work:
-									<ol>
-										<li>"Modern Operating Systems" by Andrew S. Tanenbaum and Herbert Bos</li>
-									</ol>
-								</p>								
-							</section>
-								
-							<section>
-								<h3>Recommended Books</h3>
+			<section>
+				<h3>Advice for Success</h3>
+				<ul>
+					<li>Always ask questions (in public channels preferably).</li>
+					<li>Share your insights and discoveries.</li>
+					<li>Collaborate with colleagues.</li>
+					<li>Engage in hands-on coding.</li>
+					<li>Learn by doing.</li>
+					<li>Brag!</li>
+				</ul>
+			</section>
 
-								<p>
-									To understand programming languages:
-									<ol>
-										<li>"Compilers: Principles, Techniques, and Tools" by Alfred V. Aho, Monica S. Lam, Ravi Sethi, and Jeffrey D. Ullman</li>
-										<li>"Programming Language Pragmatics" by Michael L. Scott</li>
-										<li>"Programming Languages: Application and Interpretation" by Shriram Krishnamurthi</li>
-										<li>"Language Implementation Patterns" by Terence Parr</li>
-										<li>"Types and Programming Languages" by Benjamin C. Pierce</li>
-										<li>"Programming Languages: Principles and Practices" by Kenneth C. Louden and Kenneth H. Lambert</li>
-									</ol>
-								</p>
-							</section>
-							<section>
-								<h3>Recommended Books</h3>
+			<section>
+				<h3>Roadmap</h3>
+				<div class="row">
+					<div class="column">
+						<ul>
+							<li>Introduction to IDE Development</li>
+							<li>The Craft of Text Editing</li>
+							<li>Text Editors in IDE</li>
+							<li>Project Handling in IDE</li>
+							<li>Language Processing Basics</li>
+							<li>Symbol Tables and Resolve</li>
+							<li>Understanding Type Systems and Static Analysis</li>
+						</ul>
+					</div>
+					<div class="column">
+						<ul>
+							<li>Performance and Efficiency of IDEs</li>
+							<li>Understanding Dynamic Analysis</li>
+							<li>Smart Search, Navigation, and Code Completion</li>
+							<li>Code Modifications and Formatting</li>
+							<li>Generation and Refactoring of Code</li>
+							<li>AI-Driven Features</li>
+							<li>Course Recap and Future Trends</li>
+						</ul>
+					</div>
+				</div>
+			</section>
 
+			<section>
+				<h3>Recommended Books</h3>
 
-								<p>
-									To understand modern approaches to work with code:
-									<ol>
-										<li>"Clean Code: A Handbook of Agile Software Craftsmanship" by Robert C. Martin</li>
-										<li>"Refactoring: Improving the Design of Existing Code" by Martin Fowler</li>
-										<li>"Code Complete: A Practical Handbook of Software Construction" by Steve McConnell</li>
-										<li>"Working Effectively with Legacy Code" by Michael C. Feathers</li>
-									</ol>
-								</p>
-								</section>
-								<section>
-									<h3>Recommended Books</h3>
-									<p>
-										To understand text editors:
-										<ol>
-											<li>"The Craft of Text Editing: Emacs for the Modern World" by Craig A. Finseth</li>
-										</ol>
-									</p>
-	
-								<p>
-									To understand AI:
-									<ol>
-										<li>"Speech and Language Processing" by Dan Jurafsky and James H. Martin</li>
-										<li>"Transformers for Natural Language Processing" by Denis Rothman</li>
-									</ol>
-								</p>
-							</section>
+				<p>
+					To understand software development problems:
+				<ol>
+					<li>"The Pragmatic Programmer" by Andrew Hunt and David Thomas</li>
+					<li>"Code: The Hidden Language of Computer Hardware and Software" by Charles Petzold</li>
+				</ol>
+				</p>
 
-							<section>
-								<h3>Assesment</h3>
-								<ol>
-									<li>
-										Written examination, weight: 50%
-									</li>
-									<li>
-										Programming assignment, weight: 50%
-									</li>
-								</ol>
-								<p> To pass you have to pass each component with at least 45%.</p>
-							</section>
-							
-							<section>
-								<h2>Software Developer Toolset</h2>
-							</section>
-				
-							<section>
-								<h3>What tools do you know and use?</h3>
-								<div class="row">
-									<div class="column">
-										<p class="fragment"> Text Editor</p>
-										<p class="fragment"> Compiler or/and Interpreter </p>
-										<p class="fragment"> Linker </p>
-										<p class="fragment"> Dependency and Package manager </p>
-										<p class="fragment"> Build and/or task automation system </p>
-										<p class="fragment"> Debuggers </p>
-										<p class="fragment"> Perfomance and Memory Profilers </p>
-										<p class="fragment"> Code Indexation and Search </p>
-									</div>
-									<div class="column">
-										<p class="fragment"> Linters </p>
-										<p class="fragment"> Code Formatters and Beautifiers </p>
-										<p class="fragment"> Code Generators/Scaffolders </p>
-										<p class="fragment"> Test Runners </p>
-										<p class="fragment"> Version Control Systems </p>
-										<p class="fragment"> Virtualization & Containerization Tools </p>
-										<p class="fragment"> Bugs and Issues Trackers </p>
-										<p class="fragment"> Knowledge Base and Documentation </p>
-										<p class="fragment"> RAD Tools </p>
-									</div>
-								</div>
-							</section>
-				
-							<section>
-								<h3>Problems of development tools Zoo</h3>
-								<div class="row">
-									<div class="column">
+				<p>
+					To understand Kotlin:
+				<ol>
+					<li>"Kotlin in Action" by Dmitry Jemerov and Svetlana Isakova</li>
+				</ol>
+				</p>
 
-								<p class="fragment"> Editing and reading code as plain text </p>
-								<p class="fragment"> Project, dependency and build chaos </p>
-								<p class="fragment"> Debugging </p>
-								<p class="fragment"> Profiling </p>
-							</div>
-							<div class="column">
-								<p class="fragment"> Version Control </p>
-								<p class="fragment"> Search and Navigation </p>
-								<p class="fragment"> Safe Refactorings </p>
-								<p class="fragment"> Linting </p>
-								<p class="fragment"> etc </p>
-								</div>
-							</div>
+				<p>
+					To understand how desktop applications work:
+				<ol>
+					<li>"Modern Operating Systems" by Andrew S. Tanenbaum and Herbert Bos</li>
+				</ol>
+				</p>
+			</section>
 
-							</section>
+			<section>
+				<h3>Recommended Books</h3>
 
-							<section>
-								<h3>Solution</h3>
-								<p>An Integrated Development Environment (IDE) is a software application that provides comprehensive facilities to computer programmers for software development. An IDE typically combines several tools into one software package</p>
-							</section>
-
-							<section>
-								<h2>A Brief History of IDEs</h2>
-							</section>
-										<section>
-											<h3>1960s and Earlier</h3>
-											<p>Programming in its infancy, primarily hardware-driven.</p>
-											<h5>Punched Cards</h5>
-											<p>Code was physically punched onto cards and processed by machines.</p>
-										</section>
-							
-										<section>
-											<h3>1970s</h3>
-											<p>The era of command-line compilers and the dawn of integrated tools.</p>
-											<h5>Command-Line Compilers</h5>
-											<p>FORTRAN and COBOL compilers took the stage.</p>
-											<h5>First IDEs</h5>
-											<p>Tools began integrating editing, compiling, and debugging.</p>
-										</section>
-							
-										<section>
-											<h3>1980s</h3>
-											<p>The rise of personal computing reshaped the development landscape.</p>
-											<h5>Borland Turbo Pascal</h5>
-											<p>One of the first IDEs to integrate an editor with a compiler.</p>
-											<h5>Microsoft's QuickBasic</h5>
-											<p>An easy-to-use environment for BASIC development.</p>
-										</section>
-							
-										<section>
-											<h3>1990s</h3>
-											<p>Graphical interfaces became mainstream, and Java emerged.</p>
-											<h5>Visual Basic and Delphi</h5>
-											<p>Introduced many to GUI-based software development.</p>
-											<h5>Java and IDEs</h5>
-											<p>Eclipse & NetBeans became the standard for Java development.</p>
-											<h5>Microsoft Visual Studio</h5>
-											<p>A multi-language development hub.</p>
-										</section>
-							
-										<!-- 2000s -->
-										<section>
-											<h3>2000s</h3>
-											<p>The internet era demanded new tools and integrations.</p>
-											<h5>Web Development</h5>
-											<p>IDEs like Dreamweaver focused on web languages like HTML and CSS.</p>
-											<h5>Version Control</h5>
-											<p>IDEs started integrating with tools like Git and SVN.</p>
-											<h5>IntelliJ IDEA</h5>
-											<p>JetBrains released an IDE that introduced refactorings for Java.</p>
-										</section>
-							
-										<section>
-											<h3>2010s</h3>
-											<p>Cloud computing and open-source tools redefined the landscape.</p>
-											<h5>Cloud-Based IDEs</h5>
-											<p>Development environments became accessible via browsers.</p>
-										</section>
-							
-										<section>
-											<h3>2020s and Beyond</h3>
-											<p>Artificial Intelligence and remote work began shaping tools.</p>
-											<h5>AI Integration</h5>
-											<p>IDEs started to provide AI-driven assistance, code suggestions and error detection.</p>
-											<h5>Remote Collaboration</h5>
-											<p>Supporting remote pair programming and collaborative coding became crucial.</p>
-										</section>
-<section>
-    <h3>Holy War</h3>
-    <div class="row">
-        <div class="column">
-            <h5>Lightweight Text Editors</h5>
-            <ul>
-                <li><strong>Speed:</strong> Generally faster due to fewer features.</li>
-                <li><strong>Simplicity:</strong> Straightforward UI, focused on editing.</li>
-                <li><strong>Extensibility:</strong> Plugins/extensions add specific functionalities.</li>
-                <li><strong>Examples:</strong> Sublime Text, Atom, Notepad++.</li>
-                <li><strong>Use Cases:</strong> Quick edits, single-file scripts, note-taking.</li>
-            </ul>
-        </div>
-        <div class="column">
-            <h5>Integrated Development Environments (IDEs)</h5>
-            <ul>
-                <li><strong>Speed:</strong> Might be slower due to many built-in features.</li>
-                <li><strong>Comprehensive:</strong> Feature-rich environment for full development lifecycle.</li>
-                <li><strong>Integrated Tools:</strong> Debugger, compiler, code suggestions, etc.</li>
-                <li><strong>Examples:</strong> IntelliJ IDEA, Eclipse, Visual Studio.</li>
-                <li><strong>Use Cases:</strong> Large-scale projects, multi-file software, collaborative coding.</li>
-            </ul>
-        </div>
-    </div>
-</section>
-
-<section>
-	<h2>Overview of IDE Components</h2>
-</section>
-
-<section>
-	<h3>Project Level</h3>
-	<ul>
-		<li>Virtual File System</li>
-		<li>Project Model</li>
-		<li>Caches</li>
-	</ul>
-</section>
-
-<section>
-	<h3>Code Level</h3>
-	<ul>
-		<li>Lexer</li>
-		<li>Parser</li>
-		<li>Resolve & Semantic Analysis</li>
-		<li>PSI</li>
-		<li>Static Analysis</li>
-		<li>Call Graph and Interprocedural Analysis</li>
-	</ul>
-</section>
-
-<section>
-	<h3>Document and UI Level</h3>
-	<ul>
-		<li>Document Markup</li>
-		<li>Text Editor</li>
-		<li>Dynamic Analysis Integration</li>
-		<li>Other UI Components</li>
-	</ul>
-</section>
-
-<section>
-	<h3>Features</h3>
-	<ul>
-		<li>Code Completion</li>
-		<li>Navigation and Search</li>
-		<li>Refactorings</li>
-		<li>External Tools Integration</li>
-	</ul>
-</section>
-
-<section>
-	<h3>Questions & Answers</h3>
-	<p>Thank you for your attention!</p>
-	<p>I'm now open to any questions you might have.</p>
-</section>
+				<p>
+					To understand programming languages:
+				<ol>
+					<li>"Compilers: Principles, Techniques, and Tools" by Alfred V. Aho, Monica S. Lam, Ravi Sethi, and
+						Jeffrey D. Ullman</li>
+					<li>"Programming Language Pragmatics" by Michael L. Scott</li>
+					<li>"Programming Languages: Application and Interpretation" by Shriram Krishnamurthi</li>
+					<li>"Language Implementation Patterns" by Terence Parr</li>
+					<li>"Types and Programming Languages" by Benjamin C. Pierce</li>
+					<li>"Programming Languages: Principles and Practices" by Kenneth C. Louden and Kenneth H. Lambert
+					</li>
+				</ol>
+				</p>
+			</section>
+			<section>
+				<h3>Recommended Books</h3>
 
 
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/highlight.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/math/math.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/reveal.js-mermaid-plugin@2.0.0/plugin/mermaid/mermaid.js"></script>
-		<script>
-			Reveal.initialize({
-				hash: true,
-				width: 1920,
-  				height: 1080,
-				center: true,
-				margin: 0,
-				mermaid: { },
-				plugins: [ RevealHighlight, RevealNotes, RevealMath.KaTeX, RevealMermaid ]
-			});
-		</script>
-	</body>
+				<p>
+					To understand modern approaches to work with code:
+				<ol>
+					<li>"Clean Code: A Handbook of Agile Software Craftsmanship" by Robert C. Martin</li>
+					<li>"Refactoring: Improving the Design of Existing Code" by Martin Fowler</li>
+					<li>"Code Complete: A Practical Handbook of Software Construction" by Steve McConnell</li>
+					<li>"Working Effectively with Legacy Code" by Michael C. Feathers</li>
+				</ol>
+				</p>
+			</section>
+			<section>
+				<h3>Recommended Books</h3>
+				<p>
+					To understand text editors:
+				<ol>
+					<li>"The Craft of Text Editing: Emacs for the Modern World" by Craig A. Finseth</li>
+				</ol>
+				</p>
+
+				<p>
+					To understand AI:
+				<ol>
+					<li>"Speech and Language Processing" by Dan Jurafsky and James H. Martin</li>
+					<li>"Transformers for Natural Language Processing" by Denis Rothman</li>
+				</ol>
+				</p>
+			</section>
+
+			<section>
+				<h3>Assesment</h3>
+				<ol>
+					<li>
+						Written examination, weight: 50%
+					</li>
+					<li>
+						Programming assignment, weight: 50%
+					</li>
+				</ol>
+				<p> To pass you have to pass each component with at least 45%.</p>
+			</section>
+
+			<section>
+				<h2>Software Developer Toolset</h2>
+			</section>
+
+			<section>
+				<h3>What tools do you know and use?</h3>
+				<div class="row">
+					<div class="column">
+						<p class="fragment"> Text Editor</p>
+						<p class="fragment"> Compiler or/and Interpreter </p>
+						<p class="fragment"> Linker </p>
+						<p class="fragment"> Dependency and Package manager </p>
+						<p class="fragment"> Build and/or task automation system </p>
+						<p class="fragment"> Debuggers </p>
+						<p class="fragment"> Perfomance and Memory Profilers </p>
+						<p class="fragment"> Code Indexation and Search </p>
+					</div>
+					<div class="column">
+						<p class="fragment"> Linters </p>
+						<p class="fragment"> Code Formatters and Beautifiers </p>
+						<p class="fragment"> Code Generators/Scaffolders </p>
+						<p class="fragment"> Test Runners </p>
+						<p class="fragment"> Version Control Systems </p>
+						<p class="fragment"> Virtualization & Containerization Tools </p>
+						<p class="fragment"> Bugs and Issues Trackers </p>
+						<p class="fragment"> Knowledge Base and Documentation </p>
+						<p class="fragment"> RAD Tools </p>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Problems of development tools Zoo</h3>
+				<div class="row">
+					<div class="column">
+
+						<p class="fragment"> Editing and reading code as plain text </p>
+						<p class="fragment"> Project, dependency and build chaos </p>
+						<p class="fragment"> Debugging </p>
+						<p class="fragment"> Profiling </p>
+					</div>
+					<div class="column">
+						<p class="fragment"> Version Control </p>
+						<p class="fragment"> Search and Navigation </p>
+						<p class="fragment"> Safe Refactorings </p>
+						<p class="fragment"> Linting </p>
+						<p class="fragment"> etc </p>
+					</div>
+				</div>
+
+			</section>
+
+			<section>
+				<h3>Solution</h3>
+				<p>An Integrated Development Environment (IDE) is a software application that provides comprehensive
+					facilities to computer programmers for software development. An IDE typically combines several tools
+					into one software package</p>
+			</section>
+
+			<section>
+				<h2>A Brief History of IDEs</h2>
+			</section>
+			<section>
+				<h3>1960s and Earlier</h3>
+				<p>Programming in its infancy, primarily hardware-driven.</p>
+				<h5>Punched Cards</h5>
+				<p>Code was physically punched onto cards and processed by machines.</p>
+			</section>
+
+			<section>
+				<h3>1970s</h3>
+				<p>The era of command-line compilers and the dawn of integrated tools.</p>
+				<h5>Command-Line Compilers</h5>
+				<p>FORTRAN and COBOL compilers took the stage.</p>
+				<h5>First IDEs</h5>
+				<p>Tools began integrating editing, compiling, and debugging.</p>
+			</section>
+
+			<section>
+				<h3>1980s</h3>
+				<p>The rise of personal computing reshaped the development landscape.</p>
+				<h5>Borland Turbo Pascal</h5>
+				<p>One of the first IDEs to integrate an editor with a compiler.</p>
+				<h5>Microsoft's QuickBasic</h5>
+				<p>An easy-to-use environment for BASIC development.</p>
+			</section>
+
+			<section>
+				<h3>1990s</h3>
+				<p>Graphical interfaces became mainstream, and Java emerged.</p>
+				<h5>Visual Basic and Delphi</h5>
+				<p>Introduced many to GUI-based software development.</p>
+				<h5>Java and IDEs</h5>
+				<p>Eclipse & NetBeans became the standard for Java development.</p>
+				<h5>Microsoft Visual Studio</h5>
+				<p>A multi-language development hub.</p>
+			</section>
+
+			<!-- 2000s -->
+			<section>
+				<h3>2000s</h3>
+				<p>The internet era demanded new tools and integrations.</p>
+				<h5>Web Development</h5>
+				<p>IDEs like Dreamweaver focused on web languages like HTML and CSS.</p>
+				<h5>Version Control</h5>
+				<p>IDEs started integrating with tools like Git and SVN.</p>
+				<h5>IntelliJ IDEA</h5>
+				<p>JetBrains released an IDE that introduced refactorings for Java.</p>
+			</section>
+
+			<section>
+				<h3>2010s</h3>
+				<p>Cloud computing and open-source tools redefined the landscape.</p>
+				<h5>Cloud-Based IDEs</h5>
+				<p>Development environments became accessible via browsers.</p>
+			</section>
+
+			<section>
+				<h3>2020s and Beyond</h3>
+				<p>Artificial Intelligence and remote work began shaping tools.</p>
+				<h5>AI Integration</h5>
+				<p>IDEs started to provide AI-driven assistance, code suggestions and error detection.</p>
+				<h5>Remote Collaboration</h5>
+				<p>Supporting remote pair programming and collaborative coding became crucial.</p>
+			</section>
+			<section>
+				<h3>Holy War</h3>
+				<div class="row">
+					<div class="column">
+						<h5>Lightweight Text Editors</h5>
+						<ul>
+							<li><strong>Speed:</strong> Generally faster due to fewer features.</li>
+							<li><strong>Simplicity:</strong> Straightforward UI, focused on editing.</li>
+							<li><strong>Extensibility:</strong> Plugins/extensions add specific functionalities.</li>
+							<li><strong>Examples:</strong> Sublime Text, Atom, Notepad++.</li>
+							<li><strong>Use Cases:</strong> Quick edits, single-file scripts, note-taking.</li>
+						</ul>
+					</div>
+					<div class="column">
+						<h5>Integrated Development Environments (IDEs)</h5>
+						<ul>
+							<li><strong>Speed:</strong> Might be slower due to many built-in features.</li>
+							<li><strong>Comprehensive:</strong> Feature-rich environment for full development lifecycle.
+							</li>
+							<li><strong>Integrated Tools:</strong> Debugger, compiler, code suggestions, etc.</li>
+							<li><strong>Examples:</strong> IntelliJ IDEA, Eclipse, Visual Studio.</li>
+							<li><strong>Use Cases:</strong> Large-scale projects, multi-file software, collaborative
+								coding.</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h2>Overview of IDE Components</h2>
+			</section>
+
+			<section>
+				<h3>Project Level</h3>
+				<ul>
+					<li>Virtual File System</li>
+					<li>Project Model</li>
+					<li>Caches</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Code Level</h3>
+				<ul>
+					<li>Lexer</li>
+					<li>Parser</li>
+					<li>Resolve & Semantic Analysis</li>
+					<li>PSI</li>
+					<li>Static Analysis</li>
+					<li>Call Graph and Interprocedural Analysis</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Document and UI Level</h3>
+				<ul>
+					<li>Document Markup</li>
+					<li>Text Editor</li>
+					<li>Dynamic Analysis Integration</li>
+					<li>Other UI Components</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Features</h3>
+				<ul>
+					<li>Code Completion</li>
+					<li>Navigation and Search</li>
+					<li>Refactorings</li>
+					<li>External Tools Integration</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Questions & Answers</h3>
+				<p>Thank you for your attention!</p>
+				<p>I'm now open to any questions you might have.</p>
+			</section>
+
+
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+			<script
+				src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/highlight.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/math/math.min.js"></script>
+			<script
+				src="https://cdn.jsdelivr.net/npm/reveal.js-mermaid-plugin@2.0.0/plugin/mermaid/mermaid.js"></script>
+			<script>
+				Reveal.initialize({
+					hash: true,
+					width: 1920,
+					height: 1080,
+					center: true,
+					margin: 0,
+					mermaid: {},
+					plugins: [RevealHighlight, RevealNotes, RevealMath.KaTeX, RevealMermaid]
+				});
+			</script>
+</body>
+
 </html>
