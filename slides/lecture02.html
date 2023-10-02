@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<title>reveal.js - JetBrains presentation template</title>
+	<title>IDE Development Course - The Craft of Plain Text</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reset.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
 	<link rel="stylesheet" href="dist/theme/jetbrains-dark.css">
@@ -26,7 +26,7 @@
 			</section>
 
 			<section>
-				<h3>Agenda</h3>
+				<h3>Today's Agenda</h3>
 				<ul>
 					<li>Understanding Plain Text</li>
 					<li>Understanding Plain Text Editing</li>
@@ -143,14 +143,12 @@
 							height="600px">
 					</div>
 				</div>
-
 			</section>
 
 			<section>
 				<h3>Punch Cards</h3>
 				<div class="row">
 					<div class="column">
-
 						<p>
 							Punch cards were one of the earliest methods used for programming and data storage,
 							especially in early computing. A sequence of punched holes represented data or commands.
@@ -168,8 +166,6 @@
 				<h3>Teletype Systems</h3>
 				<div class="row">
 					<div class="column">
-
-
 						<p>
 							Before the advent of video displays, teletype systems were used as a means of entering and
 							displaying text data in real-time. These machines were often connected to early mainframe
@@ -242,7 +238,6 @@
 				</div>
 			</section>
 
-
 			<section>
 				<h3>WYSIWYG Text Editors for rich text</h3>
 				<div class="row">
@@ -263,8 +258,6 @@
 			<section>
 				<h2>Anatomy of plain text</h2>
 			</section>
-
-			<!-- ASCII and Control Characters -->
 
 			<section>
 				<h3>The Underlying Representation</h3>
@@ -290,7 +283,6 @@
 				<h3>Origins of ASCII</h3>
 				<div class="row">
 					<div class="column">
-
 						<p>
 							ASCII, standing for American Standard Code for Information Interchange, was developed in the
 							early 1960s by the American National Standards Institute (ANSI). Designed as a standardized
@@ -304,7 +296,6 @@
 						<img src="https://i.redd.it/t3k0e332m5351.png" />
 					</div>
 				</div>
-
 			</section>
 
 			<section>
@@ -328,7 +319,6 @@
 				<h3>Control Characters</h3>
 				<div class="row">
 					<div class="column">
-
 						<p>
 							Control characters, often non-printable and invisible, are special characters used in text
 							to
@@ -360,7 +350,6 @@
 				</ul>
 			</section>
 
-			<!-- Text Encodings -->
 			<section>
 				<h3>Why Different Encodings?</h3>
 				<div class="row">
@@ -378,7 +367,7 @@
 
 						<img src="https://www.borgendale.com/codepage/cp1251.gif" height="600" />
 					</div>
-
+				</div>
 			</section>
 
 			<section>
@@ -399,7 +388,6 @@
 						<img src="https://www.codeproject.com/KB/cpp/codepage/codepage.png" />
 					</div>
 				</div>
-
 			</section>
 
 			<section>
@@ -586,7 +574,6 @@
 			<section class="text-only small">
 				<div class="row">
 					<div class="column">
-
 						<h5>Array of Chars</h5>
 						<p>Pros:</p>
 						<ul>
@@ -597,7 +584,6 @@
 						<ul>
 							<li>Expensive insertions/deletions</li>
 						</ul>
-
 						<h5>Array of Lines</h5>
 						<p>Pros:</p>
 						<ul>
@@ -607,7 +593,6 @@
 						<ul>
 							<li>Challenges with operations within a line</li>
 						</ul>
-
 						<h5>Gap Buffer</h5>
 						<p>Pros:</p>
 						<ul>
@@ -618,7 +603,6 @@
 						<ul>
 							<li>Movement of characters around the gap</li>
 						</ul>
-
 					</div>
 					<div class="column">
 						<h5>Piece Table</h5>
@@ -631,7 +615,6 @@
 						<ul>
 							<li>May have memory overhead</li>
 						</ul>
-
 						<h5>Piece Tree and Rope</h5>
 						<p>Pros:</p>
 						<ul>
@@ -687,7 +670,6 @@
 							alt="Different font types and styles">
 					</div>
 				</div>
-
 			</section>
 
 			<section>
@@ -704,13 +686,13 @@
 						<img src="https://i.pinimg.com/1200x/2c/8e/57/2c8e57760ab53ebcbd7db33ce7eac8f4.jpg">
 					</div>
 				</div>
-				</section>
+			</section>
 
-				<section>
-					<h3>Bitmap Fonts</h3>
-					<div class="row">
-						<div class="column">
-	
+			<section>
+				<h3>Bitmap Fonts</h3>
+				<div class="row">
+					<div class="column">
+
 						<ul>
 							<li><b>Fixed Size:</b> Each bitmap font is designed for a specific size. Scaling can result
 								in jagged or blurry edges.</li>
@@ -726,9 +708,7 @@
 						<img src="https://i.pinimg.com/1200x/2c/8e/57/2c8e57760ab53ebcbd7db33ce7eac8f4.jpg">
 					</div>
 				</div>
-
 			</section>
-
 
 			<section>
 				<h3>Vector Fonts</h3>
@@ -748,7 +728,6 @@
 				</div>
 			</section>
 
-
 			<section>
 				<h3>Vector Fonts</h3>
 				<div class="row">
@@ -764,13 +743,10 @@
 						</ul>
 					</div>
 					<div class="column">
-
-						<!-- Image suggestion: A visual breakdown of a single glyph going through the rendering process -->
 						<img src="https://fasterthanli.me/static/img/glyph.c5462ca50eee597b.png" alt="font glyph">
 					</div>
 				</div>
 			</section>
-
 
 			<section>
 				<h3>Text Line Rendering</h3>
@@ -784,8 +760,7 @@
 						</p>
 					</div>
 					<div class="column">
-						<!-- Image suggestion: A breakdown of a line of text highlighting kerning, alignment, and directionality -->
-						<img src="https://miro.medium.com/v2/resize:fit:1400/1*AAoC41U5wGxXJ0uKFQTZiw.png"/>
+						<img src="https://miro.medium.com/v2/resize:fit:1400/1*AAoC41U5wGxXJ0uKFQTZiw.png" />
 					</div>
 				</div>
 			</section>
@@ -802,8 +777,8 @@
 						</p>
 					</div>
 					<div class="column">
-						<!-- Image suggestion: A graphic illustrating a viewport with a scroll bar, showing parts of a document above and below the visible area -->
-						<img src="https://res.cloudinary.com/practicaldev/image/fetch/s--AF_CAMxi--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/j8hvbkt7hqrt89sebcoy.png" alt="Viewport and scrolling concept">
+						<img src="https://res.cloudinary.com/practicaldev/image/fetch/s--AF_CAMxi--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/j8hvbkt7hqrt89sebcoy.png"
+							alt="Viewport and scrolling concept">
 					</div>
 				</div>
 			</section>
@@ -820,7 +795,6 @@
 						</p>
 					</div>
 					<div class="column">
-						<!-- Image suggestion: A side-by-side comparison of text with and without anti-aliasing -->
 						<img src="https://www.computerhope.com/jargon/a/anti-alias.png" alt="Anti-aliasing comparison">
 					</div>
 				</div>
@@ -833,17 +807,19 @@
 			<section>
 				<h3>Text Editor Workflow</h3>
 				<ul>
-					<li><b>Initialize Data Structure:</b> Load the text into a suitable data structure for efficient editing.</li>
+					<li><b>Initialize Data Structure:</b> Load the text into a suitable data structure for efficient
+						editing.</li>
 					<li><b>Display Initial Content:</b> Render the loaded text onto the editor interface.</li>
 					<li><b>Handle User Input:</b> Process keystrokes, mouse clicks, and other user interactions.</li>
 					<li><b>Modify Data:</b> Based on user input, update the text within the data structure.</li>
 					<li><b>Refresh Display:</b> Render the modified text, reflecting the changes made by the user.</li>
 				</ul>
 			</section>
-			
+
 			<section>
 				<h3>Next: "Text Editor in IDE"</h3>
-				<img src="https://www.jetbrains.com/idea/features/screenshots/features_2021/LanguageInjections.png" width="1000">
+				<img src="https://www.jetbrains.com/idea/features/screenshots/features_2021/LanguageInjections.png"
+					width="1000">
 			</section>
 
 			<section>

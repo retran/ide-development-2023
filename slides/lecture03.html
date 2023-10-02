@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>IDE Development Course - Text Editor in IDE</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reset.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+	<link rel="stylesheet" href="dist/theme/jetbrains-dark.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/darkula.css">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section class="background">
+				<h1>Text Editor <br /> in IDE</h1>
+				<p class="event-name-label">
+					IDE Development Course
+				</p>
+				<p class="name-and-position-label">
+					Andrew Vasilyev
+				</p>
+				<div class="jb-square-logo"></div>
+			</section>
+
+			<section>
+				<h3>Today's Agenda</h3>
+				<p>
+					Today, we will delve deep into the functionalities and features of text editors, exploring topics
+					such as syntax highlighting, code navigation, document markup, typing assistance, and customization
+					options. We will also discuss the importance of inclusive design and accessibility in text editors
+					to ensure a diverse and inclusive user experience.
+				</p>
+			</section>
+
+			<section>
+				<h2>Features</h2>
+			</section>
+
+			<section>
+				<h3>Introduction</h3>
+				<p>
+					Text editors are pivotal components of Integrated Development Environments (IDEs). They play a
+					crucial role in software development by providing developers with the tools to write, edit, and
+					optimize code efficiently. A well-designed text editor enhances code readability and accelerates the
+					development process, contributing to the overall quality of software products.
+				</p>
+			</section>
+
+			<section>
+				<h3>Syntax Highlighting</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							Syntax highlighting is a feature that displays source code in different colors and fonts
+							according to the category of terms. This feature is crucial for developers as it increases
+							the readability of the code, helps in debugging, and allows developers to distinguish easily
+							between different elements of the code, such as keywords, variables, and symbols.
+						</p>
+					</div>
+					<div class="column">
+						<img src="https://resources.jetbrains.com/help/img/idea/2023.2/ColorSchemeExample_Java.png">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Lexical vs Semantic Syntax Highlighting</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							<b>Lexical syntax highlighting</b> relies on recognizing the syntax of the programming
+							language, coloring keywords, strings, and other elements according to predefined rules. It
+							is faster but less accurate, as it doesn’t understand the context or the semantics of the
+							code.
+						</p>
+					</div>
+					<div class="column">
+						<p>
+							<b>Semantic syntax highlighting</b>, on the other hand, involves understanding the code's
+							context and meaning. It provides more accurate and meaningful highlighting, distinguishing
+							between variables, functions, and types based on their roles and usage in the code, but may
+							be more resource-intensive.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Error Highlighting</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							Error highlighting is a crucial feature in text editors within IDEs. It provides immediate
+							visual feedback to developers about errors in the code. By underlining or changing the color
+							of erroneous code, it allows developers to quickly identify and rectify mistakes, enhancing
+							code quality and reducing debugging time.
+						</p>
+						<p>
+							This feature often works in tandem with other tools like linters and compilers to provide
+							accurate and meaningful error information, helping developers understand the nature and
+							location of the errors, and sometimes even offering suggestions for fixes.
+						</p>
+					</div>
+					<div class="column">
+						<img src="https://adm-10980.intellij.net/zendesk-forum-storage/jc/5460915/error.jpg">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Line Numbers, Rulers, and Guides</h3>
+
+				<div class="row">
+					<div class="column">
+						<p>
+							Line numbers, rulers, and guides are essential features in text editors within IDEs. They
+							aid in code navigation and alignment, allowing developers to quickly locate specific lines
+							of code and maintain proper indentation and formatting, which is crucial for code
+							readability and maintenance.
+						</p>
+					</div>
+					<div class="column">
+						<img src="https://i.stack.imgur.com/dKLsr.jpg">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Code Folding and Regions</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							Code folding allows developers to collapse and expand sections of code, making it easier to
+							manage and navigate through large codebases. Regions, on the other hand, allow developers to
+							group related code blocks, enhancing the organization and readability of the code. Both
+							features contribute to a cleaner and more efficient coding environment.
+						</p>
+					</div>
+					<div class="column">
+						<img src="https://blog.jetbrains.com/wp-content/uploads/2012/03/webide-custFoding3.png">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Breadcrumb Navigation and Code Hierarchy Traversal</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							Breadcrumb navigation provides a hierarchical representation of the code structure, allowing
+							developers to traverse the code hierarchy easily. It is crucial for understanding the
+							relationships
+							and dependencies within the code, enabling developers to maintain a clear mental model of
+							the
+							codebase and make informed coding decisions.
+						</p>
+					</div>
+					<div class="column">
+						<img src="assets/lecture03/breadcrumbs.png">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Bookmarks and Pins</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							Bookmarking and pinning are essential features in IDEs that aid in efficient code navigation
+							and
+							referencing. They allow developers to mark specific lines or sections of code for quick
+							access,
+							reducing the time spent on searching and enhancing overall productivity.
+						</p>
+					</div>
+					<div class="column">
+						<img src="https://resources.jetbrains.com/help/img/idea/2023.2/bookmarks-tool-window.png">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Other Navigation Tools</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							Besides the primary navigation features, text editors also offer a variety of other tools
+							such as search and replace, bookmarks, and jump to line, which further enhance the ease of
+							code navigation. These tools are indispensable for efficient coding, allowing developers to
+							quickly modify, locate, and reference specific parts of the code.
+						</p>
+					</div>
+					<div class="column">
+						<img src="https://resources.jetbrains.com/help/img/dotnet/2023.2/tab_navigation.animated.gif">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Advanced Selection Methods</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							Advanced selection methods, such as box selection and structured selection, are pivotal for
+							efficient code editing. They allow developers to select and modify specific parts of the
+							code accurately, reducing the risk of errors and enhancing the overall coding experience.
+						</p>
+					</div>
+					<div class="column">
+						<img src="assets/lecture03/selection.png">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Multi-cursor Editing</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							Multi-cursor editing is a powerful feature that allows developers to make edits at multiple
+							locations simultaneously, significantly speeding up the coding process. It is particularly
+							useful for making repetitive changes, ensuring consistency and reducing the likelihood of
+							errors.
+						</p>
+					</div>
+					<div class="column">
+						<img src="https://resources.jetbrains.com/help/img/idea/2023.2/multi_carets.animated.gif">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Inlay Hints</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							Inlay hints and adornments provide additional information and visual cues within the text
+							editor,
+							aiding in code comprehension and debugging. They offer insights into variable types,
+							parameter
+							names, and error states, allowing developers to understand and rectify issues more
+							efficiently.
+						</p>
+					</div>
+					<div class="column">
+						<img
+							src="https://resources.jetbrains.com/help/img/dotnet/2023.2/inlay_hints_deconstruction_pattern.png">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Code Vision/Code Lenses</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							Code Vision is a feature in IDEs that provides contextual information and actions directly
+							within the editor, enhancing developer understanding and productivity. It offers insights
+							into the structure, dependencies, and state of the code, allowing developers to make
+							informed decisions and write better quality code.
+						</p>
+					</div>
+					<div class="column">
+						<img src="https://resources.jetbrains.com/help/img/rider/2023.2/code-vision.png">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Split and Multiple Views</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							Split and multiple views in text editors enable developers to view and edit different parts
+							of the
+							codebase simultaneously. This feature is crucial for efficient code comparison, referencing,
+							and
+							multi-tasking, leading to enhanced productivity and code quality.
+						</p>
+					</div>
+					<div class="column">
+						<img src="assets/lecture03/split.png">
+					</div>
+				</div>
+
+			</section>
+
+			<section>
+				<h3>Embedded Languages and Language Injection</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							Embedded languages and language injection allow text editors to support multiple programming
+							languages within a single file. This feature is essential for developing polyglot
+							applications and enhances the text editor's versatility and utility in multi-language
+							projects.
+						</p>
+					</div>
+					<div class="column">
+						<img src="https://resources.jetbrains.com/help/img/idea/2023.2/edit-injection.png">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h2>Document Markup</h2>
+			</section>
+
+			<section>
+				<h3>Understanding Document Markup</h3>
+				<p>
+					Document Markup involves using codes, formats, or tags to define the structure of a document. It is
+					crucial for implementing syntax highlighting in text editors, allowing developers to easily
+					distinguish between different elements of the code, such as keywords, variables, and strings.
+				</p>
+			</section>
+
+			<section>
+				<h3>Highlighters</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							Highlighters are tools within text editors that use document markup to visually
+							differentiate various elements of the code. They utilize different colors, fonts, and styles
+							to represent different elements of the code, enhancing code readability and helping in
+							quickly identifying syntax errors.
+						</p>
+					</div>
+					<div class="column">
+						<img
+							src="https://www.cheapesttextbooks.com/collegeknowledge/wp-content/uploads/2019/10/highlighters.jpg">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Highlighters</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							A highlighter is typically defined as an interval in text (start offset and end offset) with
+							a set of attributes such as color, effect, font, and font style, etc.
+						</p>
+						<p>
+							Highlighters can overlap and stack up to create combined highlighting effects.
+						</p>
+					</div>
+					<div class="column">
+						<img src="https://intellij-support.jetbrains.com/hc/user_images/sdQwpaDCg7GvOMzBIu-6Pw.png">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Interval Trees</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							Interval Trees are data structures that are leveraged for implementing document markup in
+							text editors. They are efficient in storing and querying intervals and are pivotal in
+							maintaining the accuracy of document markup, especially during text modifications.
+						</p>
+						<p>
+							The key abilities of Interval Trees are to efficiently query for all intervals that include
+							a specific point and to build an ordered list of intervals with overlaps.
+						</p>
+						<p>
+							<a href="https://en.wikipedia.org/wiki/Interval_tree">Read more</a>
+						</p>
+					</div>
+					<div class="column">
+						<img
+							src="https://raw.githubusercontent.com/xibsked/menka/master/books/design-analysis-of-algorithm/dc27de43c80e0af3f64d27e1aaca1ae71.png">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Updating Document Markup on Edits</h3>
+				<p>
+					When edits are made to a document, it is crucial to update the document markup accordingly to
+					maintain the accuracy of syntax highlighting and other text decorations. Efficient updating
+					mechanisms are essential to ensure that the modifications in the text are reflected promptly in the
+					markup, avoiding discrepancies and maintaining a coherent representation of the document.
+				</p>
+				<p>
+					This involves recalculating the positions and ranges of the markup elements based on the edits made.
+				</p>
+			</section>
+
+			<section>
+				<h3>Updating Document Markup on Edits</h3>
+
+				<p>On the main thread: <br />
+					1. Update highlighter ranges according to text insertions/deletions.<br />
+					2. Rebalance the interval tree.<br />
+					3. Invalidate the changed area on the screen.</p>
+
+				<p>On a background thread: <br />
+					1. Calculate updates to document markup using language services.<br />
+					2. Cancel and restart if there are new updates.<br />
+					3. Send updates to the main thread.<br />
+					4. Update markup, rebalance, and invalidate changed areas on the screen.</p>
+			</section>
+
+			<section>
+				<h2>Customization, </br> Inclusion and Accessibility</h2>
+			</section>
+
+			<section>
+				<h3>Building Inclusive Text Editors</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							Inclusion and accessibility in text editors are not just about compliance; they are about
+							creating a user-friendly environment for everyone. By incorporating inclusive design
+							principles and accessibility features, we can build text editors that are usable by a
+							diverse range of individuals, fostering equality and diversity in the software development
+							community.
+						</p>
+						<p>
+							<a href="https://www.youtube.com/watch?v=94swlF55tVc"> How A Blind Developer Uses Visual
+								Studio </a>
+						</p>
+					</div>
+					<div class="column">
+						<img src="https://www.drugtargetreview.com/wp-content/uploads/blindness.jpg">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Theme Customization</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							Theme customization is essential for creating a visually pleasing and comfortable coding
+							environment. It allows developers to change the color scheme, icons, and overall appearance
+							of the text editor, reducing eye strain and improving user satisfaction.
+						</p>
+					</div>
+					<div class="column">
+						<img src="https://plugins.jetbrains.com/files/12112/screenshot_19348.png" width="500">
+						<img src="https://plugins.jetbrains.com/files/12138/screenshot_19175.png" width="500">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Screen Reader Support</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							Screen reader support is essential for making text editors accessible to visually impaired
+							users. It converts textual information into synthesized speech, enabling users to understand
+							and interact with the software effectively.
+						</p>
+					</div>
+					<div class="column">
+						<img
+							src="https://www.brickfield.ie/wp-content/uploads/2021/08/5-Insights-from-WebAIMs-Screen-Reader-Survey-3-1536x864.png">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>High Contrast Themes</h3>
+				<div class="row">
+					<div class="column">
+						<p>
+							High contrast themes are crucial for users with visual impairments. They enhance the
+							visibility of text and interface elements, reducing eye strain and improving the overall
+							usability of the text editor.
+						</p>
+					</div>
+					<div class="column">
+						<img src="https://blog.jetbrains.com/wp-content/uploads/2018/10/idea-HighContrastTheme.png">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Keyboard Accessibility</h3>
+				<p>
+					UI should be designed to ensure that all its functionalities are navigable and operable through a
+					keyboard interface, emphasizing keyboard accessibility as a critical component to guarantee
+					universal access to information without the necessity of a mouse. For a UI to be considered
+					keyboard accessible, it must not only be operable via keyboard but must also integrate the following
+					elements: a discernible keyboard focus, a logical tab order, and it must prevent keyboard traps.</p>
+				<p>
+					Keyboard accessibility is vital for users with mobility impairments. It allows users to navigate and
+					interact with the text editor using keyboard shortcuts and commands, ensuring that the software is
+					usable and accessible to a wider range of individuals.
+				</p>
+			</section>
+
+			<section>
+				<h2>Conclusion</h2>
+			</section>
+
+			<section class="no-header">
+				<p>
+					Text editors are the backbone of IDEs. They play a pivotal
+					role in software development, providing developers with the tools needed to write, edit, and
+					optimize code. By understanding and implementing advanced features, customization options, and
+					inclusive design principles, we can build text editors that enhance developer productivity, code
+					quality, and user satisfaction.
+				</p>
+			</section>
+
+			<section>
+				<h3>Next: "Handling Projects in IDEs"</h3>
+				<img src="https://res.cloudinary.com/practicaldev/image/fetch/s--XpR7RBT3--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qdqdur8v3krwpmsrdpxx.png"
+					width="600">
+			</section>
+
+			<section>
+				<h3>Questions & Answers</h3>
+				<p>Thank you for your attention!</p>
+				<p>I'm now open to any questions you might have.</p>
+			</section>
+
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+			<script
+				src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/highlight.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/math/math.min.js"></script>
+			<script
+				src="https://cdn.jsdelivr.net/npm/reveal.js-mermaid-plugin@2.0.0/plugin/mermaid/mermaid.js"></script>
+			<script>
+				Reveal.initialize({
+					hash: true,
+					width: 1920,
+					height: 1080,
+					center: true,
+					margin: 0,
+					mermaid: {},
+					plugins: [RevealHighlight, RevealNotes, RevealMath.KaTeX, RevealMermaid]
+				});
+			</script>
+</body>
+
+</html>
