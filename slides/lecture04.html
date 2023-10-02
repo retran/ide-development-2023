@@ -43,44 +43,64 @@
 			</section>
 
 			<section>
-				<h3>Typical IDE Project Handling Capabilities</h3>
+				<h3>Understanding "Project"</h3>
 				<p>
-					- Managing Project Files and Directories<br />
-					- Handling Dependencies and Libraries<br />
-					- Configuration Management<br />
-					- Create new project from templates <br />
+					A "project" is a detailed organizational structure that encompasses all the necessary files,
+					configurations, settings, and resources required for developing a specific software application or
+					solution. It functions as the primary unit for managing and organizing work within an IDE.
 				</p>
 			</section>
 
 			<section>
-				<h3>Project Model in IDE</h3>
+				<h3>Components of a "Project"</h3>
+				<p>
+					<b>Source Code Files</b>: These are files written in programming languages like Java, C++, Python,
+					etc. <br />
+					<b>Resource Files</b>: These include images, configuration files, and data files, etc. <br />
+					<b>Dependencies</b>: These are the libraries, modules, or packages that the project relies on.
+					<br />
+					<b>Build Configuration</b>: These are instructions on how to compile, run, and debug the software.
+					<br />
+					<b>Project Metadata</b>: This includes information about the project's settings, configurations, and
+					structure, including compiler settings, debug configurations, and other environment-specific
+					parameters. <br />
+					<b>Database Configuration</b>: This includes connections, database scripts, and other related setups
+					if the project interacts with databases. <br />
+					<b>Documentation</b>: This includes comments, READMEs, or any other related documents. <br />
+					<b>Version Control Information</b>: If the project is under version control (like Git, SVN), the IDE
+					might store information about commits, branches, etc. <br />
+				</p>
+			</section>
+
+			<section>
+				<h3>Exploring Project Models</h3>
 				<div class="row">
 					<div class="column">
-						<p>Project Models in IDE represent the structure and organization of the projects, including
-							files, directories, dependencies, and configurations:</p>
-						<p>- API to describe and manage project elements<br />
+						<p>Project Models in IDEs represent the structure and organization of the projects,
+							incorporating files, directories, dependencies, and configurations. They provide:</p>
+						<p>- An API to describe and manage project elements<br />
 							- Notifications about project changes<br />
-							- Facets to provide "configured" views of project (for example, project with different sets
-							of
-							referenced libraries depending on target OS)</p>
+							- Facets to provide configured views of projects, e.g., projects with different sets of
+							referenced libraries depending on the target OS.</p>
 					</div>
 					<div class="column">
-						<img src="https://example.com/project-model-structure-image.jpg">
+						<img src="assets/lecture04/project.png" width="350">
 					</div>
 				</div>
 			</section>
 
 			<section>
-				<h3>Project Model Kinds</h3>
+				<h3>Types of Project Models</h3>
 				<div class="row">
 					<div class="column">
-						<p>- Folder</p>
-						<p>- VCS</p>
-						<p>- Build Configuration</p>
-						<p>- Metadata</p>
+						<p> A project model can be constructed using:<br />
+							- Project Folder<br />
+							- VCS<br />
+							- Build Configuration<br />
+							- Metadata</p>
 					</div>
 					<div class="column">
-						<img src="https://example.com/project-model-structure-image.jpg">
+						<img src="assets/lecture04/folder.png" width="600">
 					</div>
 				</div>
 			</section>
@@ -90,38 +110,39 @@
 			</section>
 
 			<section>
-				<h3>What is VFS?</h3>
+				<h3>Understanding VFS</h3>
 				<div class="row">
 					<div class="column">
-						<p>A Virtual File System (VFS) in an IDE serves as an abstraction layer that enables the
-							efficient interaction between the IDE and the underlying file system, providing a unified
-							interface to access files irrespective of their location.</p>
+						<p>A Virtual File System (VFS) in an IDE acts as an abstraction layer that facilitates efficient
+							interaction between the IDE and the underlying file system, offering a uniform interface to
+							access files regardless of their location.</p>
 					</div>
 					<div class="column">
-						<img src="https://example.com/virtual-file-system-image.jpg">
+						<img src="https://maplehygienesolution.com/wp-content/uploads/2018/06/Box-files.jpg">
 					</div>
 				</div>
 			</section>
 
 			<section>
-				<h3>Why VFS?</h3>
-				<p>Universal API for working with files regardless of their actual location (on disk, in an archive, on
-					an HTTP server, etc.).</p>
-				<p>Detecting and tracking changes in files providing ability to compare old and new versions of file.
-				</p>
-				<p>Enhancing performance and user experience by queueing and reducing IO operations.</p>
-				<p>Providing ability to add additional data attributes to a file.</p>
+				<h3>The Need for VFS</h3>
+				<p>VFS is crucial for:</p>
+				<p>- Providing a universal API for working with files, irrespective of their actual location (on disk,
+					in an archive, on an HTTP server, etc.).</p>
+				<p>- Detecting and tracking changes in files and enabling comparison between old and new versions.</p>
+				<p>- Enhancing performance and user experience by minimizing and optimizing IO operations.</p>
+				<p>- Allowing the addition of extra data attributes to a file.</p>
 			</section>
 
 			<section>
-				<h3>How to VFS?</h3>
-				<p>1. Manage a persistent snapshot of files which has been requested through VFS.</p>
-				<p>2. All operations with files should be executed on VFS.</p>
-				<p>3. Queue operations with real files and execute then on a single background thread asynchronously.
-					Try to hold file lock for a minimal amount of time.</p>
-				<p>4. Track and queue external changes. Execute them on snapshot when IDE requires "refresh".</p>
-				<p>5. "Refresh" VFS on IDE startup, on switch from other application, etc.</p>
-				<p>6. Notify subscribers on changes.</p>
+				<h3>Implementing VFS</h3>
+				<p>1. Manage a persistent snapshot of files that have been requested through VFS.</p>
+				<p>2. Execute all operations with files on VFS.</p>
+				<p>3. Queue operations with actual files and execute them asynchronously on a single background thread,
+					minimizing file lock duration.</p>
+				<p>4. Track and queue external changes. Execute them on the snapshot when the IDE requires a "refresh".
+				</p>
+				<p>5. "Refresh" VFS on IDE startup, when switching from another application, etc.</p>
+				<p>6. Notify subscribers about changes.</p>
 			</section>
 
 			<section>
@@ -132,19 +153,15 @@
 				<h3>What is PSI?</h3>
 				<div class="row">
 					<div class="column">
-						<p>The Program Structure Interface (PSI) is a pivotal component in JetBrains IDEs. It enables
-							the
-							IDE to parse source code into a structured and navigable format, allowing developers to
+						<p>The Program Structure Interface (PSI) is a pivotal component in any JetBrains IDE. It enables
+							the IDE to parse source code into a structured and navigable format, allowing developers to
 							navigate, modify, and analyze the code efficiently.</p>
 						<p>The PSI organizes code into trees and graphs, representing the hierarchical and structural
-							relationship between
-							various elements of the source code, from classes and methods to variables and expressions.
-						</p>
-						<p>IDE utilizes
-							them to facilitate features like code analysis, refactoring, and completion.</p>
+							relationships between various elements of the source code, from classes and methods to
+							variables and expressions.</p>
 					</div>
 					<div class="column">
-						<img src="https://example.com/introduction-to-psi-image.jpg">
+						<img src="https://resources.jetbrains.com/help/img/idea/2023.2/ws_psi_viewer.png" width="700">
 					</div>
 				</div>
 			</section>
@@ -153,11 +170,11 @@
 				<h3>PSI - Files and Modules</h3>
 				<div class="row">
 					<div class="column">
-						<p>Semantic views of files and "file sets" that can incapsulate other elements and provide
-							different scope of views from other modules.</p>
+						<p>Semantic views of files and "file sets" can encapsulate other elements and provide different
+							scopes of views from other modules.</p>
 					</div>
 					<div class="column">
-						<img src="https://example.com/introduction-to-psi-image.jpg">
+						<img src="assets/lecture04/module.png" width="700">
 					</div>
 				</div>
 			</section>
@@ -166,36 +183,35 @@
 				<h3>PSI - Abstract Syntax Tree</h3>
 				<div class="row">
 					<div class="column">
-						<p>Data structure used to represent the contents of a file, where each node in the tree denotes
-							a construct in the source code.</p>
+						<p>A data structure is used to represent the contents of a file, where each node in the tree
+							denotes a construct in the source code.</p>
 					</div>
 					<div class="column">
-						<img src="https://example.com/introduction-to-psi-image.jpg">
+						<img src="assets/lecture04/ast.png" width="700">
 					</div>
 				</div>
 			</section>
 
 			<section>
 				<h3>PSI - Declared Element</h3>
-				<p>A declared element is "something that has declarations". This can be a
-					class declaration, or a method declaration, or something not even related to code - HTML
-					elements, CSS classes and even colours and file system paths.</p>
+				<p>A declared element is "something that has a declaration." This can be a class declaration, a method
+					declaration, or something unrelated to code - such as HTML elements, CSS classes, colors, and file
+					system paths.</p>
 			</section>
 
 			<section>
 				<h3>PSI - Reference</h3>
-				<p>Reference allows any abstract syntax tree node to link to a declared element. The reference might be
-					from a type name in
-					a
-					variable declaration, and would link to the declared element of that type.</p>
+				<p>A reference allows any abstract syntax tree node to link to a declared element. The reference might
+					be from a type name in a variable declaration and would link to the declared element of that type.
+				</p>
 			</section>
 
 			<section>
 				<h3>PSI - Type System</h3>
-				<p>A "type system" is represented through an interface hierarchy, distinct from but related to
-					the declared elements in a programming environment. It serves to model and describe the
-					usage scenarios of declared elements, such as classes or types, which aren't adequately
-					represented by the declared elements themselves.</p>
+				<p>A "type system" is represented through an interface hierarchy, distinct from but related to the
+					declared elements in a programming environment. It serves to model and describe the usage scenarios
+					of declared elements, such as classes or types, which aren't adequately represented by the declared
+					elements themselves.</p>
 			</section>
 
 			<section>
@@ -203,11 +219,25 @@
 				<div class="row">
 					<div class="column">
 						<p>A control flow graph (CFG) is a graphical representation of all paths that might be traversed
-							through a program during its execution, where nodes represent basic blocks and edges
-							represent possible flow of control.</p>
+							through a program during its execution. Nodes represent basic blocks, and edges represent
+							possible flow of control.</p>
 					</div>
 					<div class="column">
-						<img src="https://example.com/introduction-to-psi-image.jpg">
+						<img
+							src="https://www.teach.cs.toronto.edu/~csc110y/fall/notes/17-graphs/images/one-iteration-simple.svg">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>PSI - Call Graph</h3>
+				<div class="row">
+					<div class="column">
+						<p>A Call Graph is a representation of the calling relationships between subroutines (functions
+							or methods) in a program.</p>
+					</div>
+					<div class="column">
+						<img src="https://www2.dmst.aueb.gr/dds/cscout/doc/setfile.gif">
 					</div>
 				</div>
 			</section>
@@ -217,34 +247,40 @@
 			</section>
 
 			<section>
-				<h3>Why to cache?</h3>
-				<p>Parsing and indexing of project files are EXPENSIVE in terms of perfomance.</p>
-				<p>So, all parsing and indexing should be INCREMENTAL.</p>
-				<p>We need caches to store snapshot of project and PSI models and to allow it's incremental updates.</p>
+				<h3>Why cache?</h3>
+				<p>Parsing and indexing of project files are expensive in terms of performance.</p>
+				<p>Therefore, all parsing and indexing should be incremental.</p>
+				<p>Caches are needed to store snapshots of project and PSI models and to allow their incremental
+					updates.</p>
 			</section>
 
 			<section>
 				<h3>What to cache?</h3>
-				<p>- VFS</p>
-				<p>- PSI</p>
-				<p>- Symbol tables</p>
-				<p>- Everything else</p>
+				<p>
+					- VFS<br />
+					- PSI<br />
+					- Symbol tables<br />
+					- Analysis outcomes<br />
+					- Everything else
+				</p>
 			</section>
 
 			<section>
 				<h3>Two kinds of caches</h3>
 				<div class="row">
 					<div class="column">
-						<p>Persistent Caches
-						<p>-Stored in a database in file<br />
-							-Can be restored after IDE or project reloading<br />
+						<p>Persistent Caches</p>
+						<p>
+							- Stored in a database file<br />
+							- Can be restored after IDE or project reloading<br />
 							- Can be loaded by parts<br />
 							- Slow
 						</p>
 					</div>
 					<div class="column">
-						<p>In-memory Caches
-						<p>- Stored in a RAM<br />
+						<p>In-memory Caches</p>
+						<p>
+							- Stored in RAM<br />
 							- Cannot be restored after IDE or project reloading<br />
 							- Fast
 						</p>
@@ -253,15 +289,16 @@
 			</section>
 
 			<section>
-				<h3>Life of typical cache</h3>
-				<p> 1. <b>Build</b> initial state <br />
-					2. <b>Merge</b> new data on updates from file system or PSI <br />
+				<h3>Life of a typical cache</h3>
+				<p>1. <b>Build</b> the initial state <br />
+					2. <b>Merge</b> new data on updates from the file system or PSI <br />
 					3. <b>Drop</b>
 				</p>
-				<p>For persistent cache: <br />
+				<p>For a persistent cache: <br />
 					1. <b>Load</b> from a disk <br />
-					2. <b>MergeLoad</b> - load and merge additional part from a disk <br />
+					2. <b>MergeLoad</b> - load and merge an additional part from a disk <br />
 					3. <b>Save</b> to a disk
+				</p>
 			</section>
 
 			<section>
@@ -269,16 +306,17 @@
 			</section>
 
 			<section>
-				<h3>Why transactions?</h3>
+				<h3>Why Transactions?</h3>
 				<p>Transactional updates ensure data integrity and consistency by treating a series of operations as a
 					single, indivisible <b>unit of work</b>, either fully completing or fully rolling back.</p>
 				<p>
-					<strong>Atomicity:</strong> Ensures all-or-nothing, preventing partial updates and
+					<strong>Atomicity:</strong> Guarantees all-or-nothing, preventing partial updates and
 					inconsistencies.<br />
 					<strong>Consistency:</strong> Maintains system integrity by adhering to predefined rules.<br />
 					<strong>Isolation:</strong> Manages concurrent modifications and prevents conflicts between
 					transactions.<br />
-					<strong>Durability:</strong> Makes changes permanent, surviving subsequent failures.<br />
+					<strong>Durability:</strong> Makes changes permanent, ensuring they survive subsequent
+					failures.<br />
 					<strong>Undo Mechanism:</strong> Facilitates error recovery by rolling back erroneous
 					transactions.<br />
 				</p>
@@ -288,33 +326,28 @@
 				<h3>Unit of Work</h3>
 				<p>
 					The <strong>Unit of Work</strong> is a design pattern in software development used to maintain a
-					list of objects affected by a business transaction. It manages the whole process of tasks from start
-					to end, ensuring cohesion and completeness in handling multiple changes.
+					list of objects affected by a business transaction. It manages the entire process of tasks from
+					start to end, ensuring cohesion and completeness in handling multiple changes.
 				</p>
-
 				<p>
-					<strong>Responsibilities:</strong> Manages transactional state, maintaining a list of tasks that
-					are either to be committed to the database or reverted in case of errors.<br />
+					<strong>Responsibilities:</strong> Manages transactional state, maintaining a list of tasks that are
+					either to be committed to the database or reverted in case of errors.<br />
 					<strong>Benefits:</strong> Ensures data consistency, manages dependencies between tasks, and
 					optimizes performance by batching database operations.<br />
-					<strong>Application in IDEs:</strong> It manages the transactions related to modifications in
-					the Program Structure Interface (PSI), ensuring consistency and integrity in project states.
+					<strong>Application in IDEs:</strong> It manages the transactions related to modifications in the
+					Program Structure Interface (PSI), ensuring consistency and integrity in project states.
 				</p>
 			</section>
 
 			<section>
-				<h3>How to "Unit of Work"</h3>
-				<p>- Create instance of "unit of work" <br />
-					- Register all operations <br />
-					- Ensure that model is available for updates (depending on concurrency model) <br />
-					- Execute all operations one by one on a locked part of model<br />
-					- If any operation failed - rollback all executed operations (or just restore non-updated version on
-					model)<br />
+				<h3>How to Implement Unit of Work</h3>
+				<p>- Create an instance of "unit of work"<br />
+					- Register all operations<br />
+					- Ensure that the model is available for updates (depending on the concurrency model)<br />
+					- Execute all operations one by one on a locked part of the model<br />
+					- If any operation fails - rollback all executed operations (or just restore the non-updated version
+					of the model)<br />
 				</p>
-			</section>
-
-			<section>
-				<h2>Concurrency and Locks</h2>
 			</section>
 
 			<section>
@@ -327,10 +360,9 @@
 			</section>
 
 			<section>
-				<h3>Next: "Language Processing Basics"</h3>
-				<p>We will dive into the basics of language processing where we will explore lexical analysis,
-					syntax analysis, semantic analysis, and more to understand how IDEs process programming languages.
-				</p>
+				<h3>Next: Language Processing Basics</h3>
+				<p>We will dive into the basics of language processing where we will explore lexical analysis, syntax
+					analysis, semantic analysis, and more to understand how IDEs process programming languages.</p>
 			</section>
 
 			<section>
