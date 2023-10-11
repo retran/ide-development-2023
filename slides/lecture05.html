@@ -1,0 +1,915 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>IDE Development Course - Understanding Programming Language Part 1</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reset.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+	<link rel="stylesheet" href="dist/theme/jetbrains-dark.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/darkula.css">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+
+			<section class="background">
+				<h1>Understanding<br />Programming Language
+				<br/>
+				Part 1</h1>
+				<p class="event-name-label">
+					IDE Development Course
+				</p>
+				<p class="name-and-position-label">
+					Andrew Vasilyev
+				</p>x`
+				<div class="jb-square-logo"></div>
+			</section>
+
+			<section>
+				<h3>Today's Agenda</h3>
+				<ul>
+					<li>Finite State Automatons</li>
+					<li>Formal languages</li>
+					<li>Abstract Syntax Trees</li>
+					<li>Lexical Analysis</li>
+					<li>Syntax Analysis</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Introduction to Language Processing</h3>
+				<div class="mermaid" width="1800">
+					<pre>
+						%%{
+							init: {
+								'theme': 'base',
+								'themeVariables': {
+									'fontSize': '35px',
+									'darkmode': true,
+									'lineColor': '#F8B229'
+								}
+							}
+						}%%
+						graph LR
+						A[Code] --> B[???]
+						B --> C[PSI]
+					</pre>
+				</div>
+			</section>
+
+			<section>
+				<h3>Finite State Automatons (FSA)</h3>
+				<p>It's a mathematical model of computation. It represents a system with a limited number of states,
+					transitions between those states, and a starting state. FSAs are used in parsing, lexical analysis,
+					and many other tasks.</p>
+			</section>
+
+			<section>
+				<h3>Finite State Automatons (FSA)</h3>
+				<div class="row">
+					<div class="column">
+						<ul>
+							<li><b>States</b>: Different configurations the FSA can be in.</li>
+							<li><b>Transitions</b>: Movements between states based on inputs.</li>
+							<li><b>Inputs & Outputs</b>: Stream of symbols the FSA processes and the results.</li>
+						</ul>
+					</div>
+					<div class="column">
+						<div class="mermaid">
+							<pre>
+								%%{
+									init: {
+										'theme': 'base',
+										'themeVariables': {
+											'fontSize': '24px',
+											'darkmode': true,
+											'lineColor': '#F8B229'
+										}
+									}
+								}%%
+								graph TD
+								A((start)) -->|c| B[c]
+								B -->|h| C[ch]
+								B -->|a| H[ca]
+								C -->|a| D[cha]
+								C -->|e| E[che]
+								D -->|t| G(chat)
+								E -->|a| F[chea]
+								F -->|t| I(cheat)
+								H -->|t| J(cat)	
+								G --> Z(end)
+								I --> Z
+								J --> Z						
+							</pre>
+						</div>
+						<h5> "chat", "cheat" or "cat"?</h5>
+					</div>
+			</section>
+
+			<section class="small">
+				<h3>Implementing FSAs - switch/when</h3>
+				<pre>
+					<code data-trim data-noescape>
+						fun recognize(input: String): Boolean {
+							enum class State {
+								START, STATE1, STATE2, STATE3, STATE4, STATE5, STATE6, END
+							}
+							var currentState = State.START
+							for (char in input) {
+								currentState = when (currentState) {
+									State.START -> when (char) {
+										'c' -> State.STATE1
+										else -> return false
+									}
+									State.STATE1 -> when (char) {
+										'h' -> State.STATE2
+										'a' -> State.STATE3
+										else -> return false
+									}
+									State.STATE2 -> when (char) {
+										'a' -> State.STATE4
+										'e' -> State.STATE5
+										else -> return false
+									}
+									State.STATE3 -> when (char) {
+										't' -> State.END
+										else -> return false
+									}
+									State.STATE4 -> when (char) {
+										't' -> State.END
+										else -> return false
+									}
+									State.STATE5 -> when (char) {
+										'a' -> State.STATE6
+										else -> return false
+									}
+									State.STATE6 -> when (char) {
+										't' -> State.END
+										else -> return false
+									}
+									State.END -> return false
+								}
+							}
+							return currentState == State.END
+						}	
+					</code>
+				</pre>
+			</section>
+
+			<section class="small">
+				<h3>Implementing FSAs - recursive descent</h3>
+				<pre>
+					<code data-trim data-noescape>
+						fun recognize(input: String): Boolean {
+							val chars = input.toCharArray()
+							var position = 0
+						
+							fun accept(c: Char): Boolean {
+								if (position < chars.size && chars[position] == c) {
+									position++
+									return true
+								}
+								return false
+							}
+						
+							fun stateStart(): Boolean {
+								return accept('c') && state1()
+							}
+						
+							fun state1(): Boolean {
+								return when {
+									accept('h') -> state2()
+									accept('a') -> state3()
+									else -> false
+								}
+							}
+						
+							fun state2(): Boolean {
+								return when {
+									accept('a') -> state4()
+									accept('e') -> state5()
+									else -> false
+								}
+							}
+						
+							fun state3(): Boolean {
+								return accept('t')
+							}
+						
+							fun state4(): Boolean {
+								return accept('t')
+							}
+						
+							fun state5(): Boolean {
+								return accept('a') && state6()
+							}
+						
+							fun state6(): Boolean {
+								return accept('t')
+							}
+						
+							return stateStart() && position == chars.size
+						}
+						
+						fun main() {
+							println(recognize("chat"))   // true
+							println(recognize("cheat"))  // true
+							println(recognize("cat"))    // true
+						}
+					</code>
+				</pre>
+			</section>
+
+			<section class="small">
+				<h3>Implementing FSAs - State pattern</h3>
+				<pre>
+					<code data-trim data-noescape>
+						interface State {
+							fun next(c: Char): State
+							fun isEnd(): Boolean = false
+						}
+						
+						object StartState : State {
+							override fun next(c: Char) = if (c == 'c') State1 else this
+						}
+						
+						object State1 : State {
+							override fun next(c: Char) = when (c) {
+								'h' -> State2
+								'a' -> State3
+								else -> this
+							}
+						}
+						
+						object State2 : State {
+							override fun next(c: Char) = when (c) {
+								'a' -> State4
+								'e' -> State5
+								else -> this
+							}
+						}
+						
+						object State3 : State {
+							override fun next(c: Char) = if (c == 't') EndState else this
+						}
+						
+						object State4 : State {
+							override fun next(c: Char) = if (c == 't') EndState else this
+						}
+						
+						object State5 : State {
+							override fun next(c: Char) = if (c == 'a') State6 else this
+						}
+						
+						object State6 : State {
+							override fun next(c: Char) = if (c == 't') EndState else this
+						}
+						
+						object EndState : State {
+							override fun next(c: Char) = this
+							override fun isEnd() = true
+						}
+						
+						fun recognize(input: String): Boolean {
+							var currentState: State = StartState
+							for (char in input) {
+								currentState = currentState.next(char)
+							}
+							return currentState.isEnd()
+						}
+					</code>
+				</pre>
+			</section>
+
+			<section class="small">
+				<h3>Implementing FSAs - State transition table</h3>
+				<pre>
+					<code data-trim data-noescape>
+						| Current State | 'c'  | 'h'  | 'a'  | 'e'  | 't'  | any other |
+						|---------------|------|------|------|------|------|-----------|
+						| StartState    | S1   | -    | -    | -    | -    | -         |
+						| S1            | -    | S2   | S3   | -    | -    | -         |
+						| S2            | -    | -    | S4   | S5   | -    | -         |
+						| S3            | -    | -    | -    | -    | End  | -         |
+						| S4            | -    | -    | -    | -    | End  | -         |
+						| S5            | -    | -    | S6   | -    | -    | -         |
+						| S6            | -    | -    | -    | -    | End  | -         |
+						| EndState      | -    | -    | -    | -    | -    | -         |
+					</code>
+				</pre>
+			</section>
+
+			<section class="small">
+				<h3>Implementing FSAs - state transition table</h3>
+				<pre>
+					<code data-trim data-noescape>
+						enum class State {
+							StartState, S1, S2, S3, S4, S5, S6, EndState
+						}
+						
+						fun recognize(input: String): Boolean {
+							val transitionTable: Map<State, Map<Char, State>> = mapOf(
+								State.StartState to mapOf('c' to State.S1),
+								State.S1 to mapOf('h' to State.S2, 'a' to State.S3),
+								State.S2 to mapOf('a' to State.S4, 'e' to State.S5),
+								State.S3 to mapOf('t' to State.EndState),
+								State.S4 to mapOf('t' to State.EndState),
+								State.S5 to mapOf('a' to State.S6),
+								State.S6 to mapOf('t' to State.EndState)
+							)
+						
+							var currentState = State.StartState
+							for (char in input) {
+								currentState = transitionTable[currentState]?.get(char) ?: return false
+							}
+							return currentState == State.EndState
+						}				
+					</code>
+				</pre>
+			</section>
+
+			<section>
+				<h2>Formal Languages and Regular Grammars</h2>
+			</section>
+
+			<section>
+				<h3>Definitions</h3>
+				<p><b>Formal languages</b> provide a structured way to represent and process information.</p>
+				<p>Formal language is a set of strings over a fixed alphabet of symbols. The rules for combining these
+					strings are governed
+					by grammars.</p>
+				<p> Consider a formal language over the alphabet {0, 1} that consists of all strings where every 0 is
+					immediately followed by a 1. Examples of strings in this language include "1", "11", "101", and
+					"1101". Strings like "10", "100", and "1100" are not in this language.</p>
+			</section>
+
+			<section>
+				<h3>Definitions</h3>
+				<p><b>String</b> - a finite sequence of symbols
+					chosen from a set called an alphabet. For instance, "1101" is a string over the alphabet {0, 1}.</p>
+				<p><b>Alphabet</b> - a finite set of symbols. These symbols are the basic building blocks that can be
+					used to
+					construct strings in a formal language. For example, the binary alphabet is {0, 1}.</p>
+				<p><b>Symbol</b> - a basic unit in an alphabet. It's an individual character or element that can be used
+					to
+					construct strings. In the English alphabet, "A", "B", and "C" are symbols. In the binary alphabet, 0
+					and 1 are symbols.</p>
+			</section>
+
+			<section>
+				<h3>Formal grammar</h3>
+				<p><b>Formal grammar</b> is a set of production rules for strings in a formal
+					language. The grammar describes how to form strings from the language's alphabet that are valid
+					according to the language's syntax. These rules determine how symbols can be combined to produce
+					valid strings.
+				</p>
+
+				<p>A grammar is said to be "context-free" if the production rules are applied regardless of the
+					surrounding context of the symbols. This is in contrast to context-sensitive grammars, where the
+					application of rules can depend on the surrounding symbols.</p>
+			</section>
+
+			<section>
+				<h3>Grammar of formal language - Example</h3>
+				<div class="row">
+					<div class="column">
+
+						<p>S → 1S | 01S | ε</p>
+						<p>
+							S is a non-terminal symbol.<br />
+							1, 0, and ε (empty string) are terminal symbols.
+						<p>
+							The grammar says that a string S can be replaced by: <br />
+							A "1" followed by another string S. <br />
+							A "01" followed by another string S. <br />
+							An empty string ε.
+						</p>
+						<p>
+							With these rules, we can derive strings like "1", "11", "101", "1101", etc., but not strings
+							like "10" or "100". </p>
+					</div>
+					<div class="column">
+						<div class="mermaid">
+							<pre>
+								%%{
+									init: {
+										'theme': 'base',
+										'themeVariables': {
+											'fontSize': '24px',
+											'darkmode': true,
+											'lineColor': '#F8B229'
+										}
+									}
+								}%%
+								graph TD
+								A((start)) -->|1| A
+								A -->|0| B
+								B -->|1| A	
+								B -->|0| C[error]
+								C -->|1| C
+								C -->|0| C					
+							</pre>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h2>Lexical Analysis</h2>
+			</section>
+
+			<section>
+				<h3>Example</h3>
+				<div class="row">
+					<div class="column">
+						<p>T={ a-z , 0-9 }<br />
+
+							S → Identifier | Constant<br />
+							Identifier → Char AlphaNums ε<br />
+							Constant → Digits ε<br />
+							Digits → Digit | Digit Digits<br />
+
+							AlphaNums → CharOrDigit | CharOrDigit AlphaNums<br />
+							CharOrDigit → a-z | 0-9
+						</p>
+					</div>
+					<div class="column">
+						<div class="mermaid">
+							<pre>
+								%%{
+									init: {
+										'theme': 'base',
+										'themeVariables': {
+											'fontSize': '24px',
+											'darkmode': true,
+											'lineColor': '#F8B229'
+										}
+									}
+								}%%
+								graph TD
+									Start((Start)) -->|a-z| IdentifierStart
+									Start -->|0-9| ConstantStart
+									IdentifierStart -->|a-z, 0-9| IdentifierContinue
+									IdentifierContinue -->|a-z, 0-9| IdentifierContinue
+									ConstantStart -->|0-9| ConstantContinue
+									ConstantContinue -->|0-9| ConstantContinue				
+							</pre>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Lexical Analyzer</h3>
+
+				<p>Tokens are sequences of characters with a collective meaning. Examples include keywords, identifiers,
+					operators, and literals.</p>
+
+				<p><b>Lexical analisys</b> is process of translating input stream to a stream of meaningful tokens.</p>
+
+				<p><b>Lexical analyzer (or lexer)</b> is automata that recognizes tokens in a stream of data and
+					produces stream of meaningful tokens.</p>
+
+				<p>To implement lexer:
+					- Define grammar to describe tokens
+					- Build FSA inputting stream of characters and outputting stream of tokens
+				</p>
+			</section>
+
+			<section class="small">
+				<h3>Example</h3>
+				<pre>
+					<code data-trim data-noescape>
+						sealed class Token
+						data class IdentifierToken(val name: String) : Token()
+						data class ConstantToken(val value: Int) : Token()
+						
+						class Lexer(private val input: String) {
+							private var currentIndex = 0
+						
+							fun tokenize(): List<Token> {
+								val tokens = mutableListOf<Token>()
+								skipWhitespace()
+								while (currentIndex < input.length) {
+									when (val char = peek()) {
+										in '0'..'9' -> tokens.add(constant())
+										in 'a'..'z' -> tokens.add(identifier())
+										else -> throw IllegalArgumentException("Unexpected character '$char' at position $currentIndex.")
+									}
+									skipWhitespace()
+								}
+								return tokens
+							}
+						
+							private fun peek(): Char = if (currentIndex < input.length) input[currentIndex] else 0.toChar()
+							private fun nextChar(): Char = if (currentIndex < input.length) input[currentIndex++] else 0.toChar()
+							private fun skipWhitespace() {
+								while (currentIndex < input.length && peek().isWhitespace()) {
+									currentIndex++
+								}
+							}
+						
+							private fun constant(): ConstantToken {
+								val sb = StringBuilder()
+								while (currentIndex < input.length && Character.isDigit(peek())) {
+									sb.append(nextChar())
+								}
+								return ConstantToken(sb.toString().toInt())
+							}
+						
+							private fun identifier(): IdentifierToken {
+								val sb = StringBuilder()
+								while (currentIndex < input.length && (Character.isDigit(peek()) || Character.isLowerCase(peek()))) {
+									sb.append(nextChar())
+								}
+								return IdentifierToken(sb.toString())
+							}
+						}					
+					</code>
+				</pre>
+			</section>
+
+			<section>
+				<h2>Syntax Analysis</h2>
+			</section>
+
+			<section>
+				<h3>Parse Tree (or concrete syntax tree)</h3>
+				<p>
+					A parse tree, also known as a concrete syntax tree, is a tree representation that reflects the
+					syntactic structure of a string according to some formal grammar.
+				</p>
+			</section>
+
+			<section>
+				<h3>Parse Tree (or concrete syntax tree)</h3>
+				<div class="row">
+					<div class="column">
+						<p>E → E + E <br />
+							E → E * E <br />
+							E → ( E ) <br />
+							E → number
+						</p>
+						<p>Rules are dependent on surrounding symbols, so grammar is context-dependant!</p>
+					</div>
+					<div class="column">
+						<div class="mermaid">
+							<pre>
+								%%{
+									init: {
+										'theme': 'base',
+										'themeVariables': {
+											'fontSize': '24px',
+											'darkmode': true,
+											'lineColor': '#F8B229'
+										}
+									}
+								}%%
+								graph TD
+								E1("(E)")
+								E2("(E)")
+								PLUS["+"]
+								E3("(E)")
+								E4("(E)")
+								TIMES[("*")]
+								E5("(E)")
+								N1["3"]
+								N2["2"]
+								N3["4"]
+							
+								E1 --> PLUS
+								E1 --> E2
+								E1 --> E3
+								E3 --> TIMES
+								E3 --> E4
+								E3 --> E5
+								E2 --> N1
+								E4 --> N2
+								E5 --> N3	
+							</pre>
+						</div>
+					</div>
+				</div>
+			</section>
+
+
+			<section>
+				<h3>Abstract Syntax Tree</h3>
+				<p>
+					<b>An Abstract Syntax Tree (AST)</b> is a hierarchical tree representation of the abstract syntactic
+					structure of a string in formal language. Each node of the tree denotes a
+					symbol occurring in the string.
+				</p>
+				<p>
+					Unlike an parse tree, AST abstracts away many of the specific syntactic details.
+				</p>
+				<p> ASTs are used in the syntax analysis phase of compilers to
+					simplify the structure of the source code, omitting certain syntactic elements to focus more on the
+					semantic structure of the code.
+				</p>
+			</section>
+
+
+			<section>
+				<h3>Abstract Syntax Tree - Example</h3>
+				<div class="row">
+					<div class="column">
+						<p>E → E + E <br />
+							E → E * E <br />
+							E → ( E ) <br />
+							E → number
+						</p>
+					</div>
+					<div class="column">
+						<div class="mermaid">
+							<pre>
+								%%{
+									init: {
+										'theme': 'base',
+										'themeVariables': {
+											'fontSize': '24px',
+											'darkmode': true,
+											'lineColor': '#F8B229'
+										}
+									}
+								}%%
+								graph TD
+								A[+]
+								B[3]
+								C[*]
+								D[2]
+								E[5]
+								A --> B
+								A --> C
+								C --> D
+								C --> E			
+							</pre>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>How to build Abstract Syntax Tree?</h3>
+
+				<p> Basic FSA doesn't know anything about context, so can't select right transition! </p>
+			</section>
+
+			<section>
+				<h3>How to build Abstract Syntax Tree?</h3>
+
+				<p> Add stack to FSA and use it to traverse AST while building. </p>
+
+				<p>An FSA (Finite State Automaton) augmented with a stack is called a Pushdown Automaton (PDA). The
+					stack gives the automaton memory, allowing it to recognize context-free languages, which are a
+					superset of regular languages. The stack can be pushed to, popped from, or inspected, and these
+					operations can influence the transitions between states in the PDA.
+				</p>
+
+				<p>
+					The name "pushdown" comes from the way the stack is used: data is "pushed down" onto the stack and
+					later "popped up" from the stack. The presence of the stack allows a PDA to remember an unbounded
+					amount of information, which is crucial for recognizing languages that have nested or recursive
+					structures
+				</p>
+			</section>
+
+			<section>
+				<h3>Syntax Analyzer</h3>
+
+				<p> A <b>syntax analyzer</b>, commonly known as a <b>parser</b>, is a component in the compilation
+					process responsible
+					for taking a stream of tokens (typically produced by a lexical analyzer) and determining if they
+					form a syntactically correct sequence. It also often constructs a representation of the structure of
+					that sequence, commonly in the form of a parse tree or an abstract syntax tree (AST). </p>
+
+				<p><b>Top-down parsing</b> starts from the root (the start symbol) and constructs the parse tree down to
+					the
+					leaves (the tokens). It starts with the start symbol and tries to rewrite it to match the input. In
+					the process, it predicts which production to use and then matches the production against the input.
+				</p>
+
+				<p><b>Recursive Descent Parsing</b> is a kind of top-down parsing where each non-terminal in the grammar
+					is
+					implemented as a function. The parser tries to apply the productions to predict and match the input.
+				</p>
+			</section>
+
+			<section class="small">
+				<h3>Example</h3>
+				<pre>
+					<code data-trim data-noescape>
+						class RecursiveDescentParser(private val tokens: List<Token>) {
+							private var currentTokenIndex = 0
+						
+							fun parse(): ExprNode {
+								val result = expression()
+								expectEndOfInput()
+								return result
+							}
+						
+							private fun expression(): ExprNode {
+								var node = term()
+								while (peekToken() is OpToken && (peekOp() == '+' || peekOp() == '*')) {
+									val op = nextOp()
+									val rightNode = term()
+									node = BinOpNode(node, op, rightNode)
+								}
+								return node
+							}
+						
+							private fun term(): ExprNode {
+								return when (val token = nextToken()) {
+									is LeftParenToken -> {
+										val node = expression()
+										consumeToken(RightParenToken)
+										node
+									}
+									is NumberToken -> NumberNode(token.value)
+									else -> throw IllegalArgumentException("Unexpected token: $token")
+								}
+							}
+						
+							private fun peekToken(): Token = tokens[currentTokenIndex]
+							private fun nextToken(): Token = tokens[currentTokenIndex++]
+							private fun peekOp(): Char? = (peekToken() as? OpToken)?.op
+							private fun nextOp(): Char = (nextToken() as OpToken).op
+						
+							private fun consumeToken(expected: Token) {
+								if (peekToken() == expected) {
+									currentTokenIndex++
+								} else {
+									throw IllegalArgumentException("Expected token: $expected, but found: ${peekToken()}.")
+								}
+							}
+							private fun expectEndOfInput() {
+								if (currentTokenIndex != tokens.size) {
+									throw IllegalArgumentException("Unexpected token at position $currentTokenIndex: ${tokens[currentTokenIndex]}")
+								}
+							}
+						}
+					</code>
+				</pre>
+			</section>
+
+			<section>
+				<h2> IDE Challenges </h2>
+			</section>
+
+			<section>
+				<h3>Handling Lexical Errors</h3>
+				<p>If a lexer encounters an unidentifiable sequence, it's termed a 'lexical error'. While compilers
+					might halt or flag an error at this point, a IDE needs
+					to gracefully handle the text that follows.</p>
+
+				<h5>Recommended Actions:</h5>
+				<ul>
+					<li><b>Abort Recognition</b>: Terminate the current lexeme's processing.</li>
+					<li><b>Skip to Validity</b>: Bypass the subsequent characters until a recognizable sequence is
+						found, ensuring the lexer is always ready for the next valid input.</li>
+				</ul>
+
+				<p>A user-friendly solution could also involve generating a specific 'Lexer Error' token, which can then
+					be highlighted in the editor, giving developers a clear visual cue of the issue.</p>
+			</section>
+
+			<section>
+				<h3>Incremental Lexical Analysis</h3>
+				<p>It means analyzing only the parts of a code file that have changed, not the whole file again.</p>
+				<h5> How to implement: </h5>
+				<ul>
+					<li>Save each token with its start and end places in the code.</li>
+					<li>When Code Changes:<br />
+						Remove the tokens in the changed code part.<br />
+						Update the position of other tokens. <br />
+						Execute the analysis from the first changed part.
+					</li>
+				</ul>
+				<h5> Possible challenges: </h5>
+				<ul>
+					<li>If Only a Small Part of a Token Changes: Start the analysis from the beginning of that token.
+					</li>
+					<li>When Comments or Strings Change: These tokens are linked. Remember this link when analyzing
+						again.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Syntax Error Recovery Strategies</h3>
+				<h5>Panic Mode Recovery</h5>
+				<p>When an error is detected, skip tokens until a specific "synchronizing" token is found. This often is
+					a token that marks the end of a statement (e.g., a semicolon in many languages or a newline in
+					Python).</p>
+				<h5>Phrase Level Recovery</h5>
+				<p>For some grammar rules, we can predict the likely ending (like a semicolon for an assignment). If an
+					unexpected token is encountered, insert the predicted one. However, this may lead to additional
+					syntax errors that don't exist in the actual code.</p>
+				<h5>Error Productions</h5>
+				<p>If certain common errors are known, they can be represented in the grammar rules. This allows the
+					parser to produce AST nodes for these errors, and later during analysis, the IDE can suggest fixes
+					for them.</p>
+			</section>
+
+			<section>
+				<h3>Incremental Syntax Analysis</h3>
+				<p>In an Integrated Development Environment (IDE), it's not feasible to rebuild the entire Abstract
+					Syntax Tree (AST) for every minor code change. The solution is to rebuild only the modified part of
+					the tree.</p>
+				<h5>How to implement:</h5>
+				<ol>
+					<li>Remember which part of the text each AST node corresponds to.</li>
+					<li>On a text change, find the node that encompasses the modified part.</li>
+					<li>Reanalyze this section and construct a new subtree.</li>
+					<li>Replace the old subtree with the new one.</li>
+					<li>Update position data in the affected nodes.</li>
+				</ol>
+			</section>
+
+			<section>
+				<h2>Conclusion</h2>
+			</section>
+
+			<section>
+				<h3>Language Processing Overview - Update</h3>
+				<div class="mermaid">
+					<pre>
+						%%{
+							init: {
+								'theme': 'base',
+								'themeVariables': {
+									'fontSize': '35px',
+									'darkmode': true,
+									'lineColor': '#F8B229'
+								}
+							}
+						}%%
+						graph LR
+						A[Code] --> B[Lexical Analysis]
+						B --> C[Tokens]
+						C --> D[Syntax Analysis]
+						D --> E[AST]
+						E --> F[???]
+						F --> G[PSI]
+					</pre>
+				</div>
+			</section>
+
+			<section>
+				<h3>What to read?</h3>
+				<div class="row">
+					<div class="column">
+						<img src="assets/lecture05/compilers.jpg" width="500" />
+					</div>
+					<div class="column">
+						<p>
+							Compilers: Principles, Techniques, and Tools<br />
+							by Alfred Aho, Jeffrey Ullman, Ravi Sethi
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Next: Understanding Programming Language Part 2 </h3>
+				<p>
+					In our subsequent lecture, we will delve deep into the world of <b>Symbol Tables</b>. Symbol tables
+					are data structures that store
+					information about the program's various symbols, including variable names, function names, and more.
+				</p>
+				<p>
+					We will also explore the process of <b>References Resolving</b>. This step ensures that every
+					identifier or symbol used in your code corresponds to a valid declaration and that no ambiguities
+					exist.
+				</p>
+			</section>
+
+			<section>
+				<h3>Questions & Answers</h3>
+				<p>Thank you for your attention!</p>
+				<p>I'm now open to any questions you might have.</p>
+			</section>
+
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+			<script
+				src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/highlight.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/math/math.min.js"></script>
+			<script
+				src="https://cdn.jsdelivr.net/npm/reveal.js-mermaid-plugin@2.0.0/plugin/mermaid/mermaid.js"></script>
+			<script>
+				Reveal.initialize({
+					hash: true,
+					width: 1920,
+					height: 1080,
+					center: true,
+					margin: 0,
+					mermaid: {},
+					plugins: [RevealHighlight, RevealNotes, RevealMath.KaTeX, RevealMermaid]
+				});
+			</script>
+</body>
+
+</html>
