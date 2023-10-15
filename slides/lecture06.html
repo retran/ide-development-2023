@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>IDE Development Course - Understanding Programming Language Part 2</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reset.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+	<link rel="stylesheet" href="dist/theme/jetbrains-dark.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/darkula.css">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+
+			<section class="background">
+				<h1>Understanding<br />Programming Language
+					<br />
+					Part 2
+				</h1>
+				<p class="event-name-label">
+					IDE Development Course
+				</p>
+				<p class="name-and-position-label">
+					Andrew Vasilyev
+				</p>
+				<div class="jb-square-logo"></div>
+			</section>
+
+			<section>
+				<h3>Today's Agenda</h3>
+				<ul>
+					<li>Introduction to Symbol Tables</li>
+					<li>Scopes, Lifetimes, and Nesting</li>
+					<li>Structure of Symbol Tables</li>
+					<li>The Resolve Process</li>
+					<li>Optimizations, Caching, and Real-time Updates</li>
+					<li>Symbol Tables and Interoperability</li>
+					<li>Challenges and Future Trends</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Introduction to Symbol Tables</h3>
+				<p>Symbol tables are pivotal structures in compilers and IDEs, aiding in associating symbolic names with
+					their related information.</p>
+			</section>
+
+			<section>
+				<h3>Why Symbol Tables?</h3>
+				<div class="row">
+					<div class="column">
+						<ul>
+							<li><b>Error Detection:</b> Identify undeclared variables, type mismatches, etc.</li>
+							<li><b>Code Navigation:</b> Jump to variable or function definitions.</li>
+							<li><b>Refactoring:</b> Safely rename variables, functions, or classes.</li>
+						</ul>
+					</div>
+					<div class="column">
+						<img src="image_link_suggesting_a_symbol_table_structure">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Historical Context of Symbol Tables</h3>
+				<p>As programming languages evolved, so did the complexity and significance of symbol tables, adapting
+					to handle new language constructs and paradigms.</p>
+			</section>
+
+			<section>
+				<h3>Scopes, Lifetimes, and Nesting</h3>
+				<p>The context in which a symbol is valid and can be accessed is determined by its scope. Nested scopes
+					allow for layered access control to symbols.</p>
+			</section>
+
+			<section>
+				<h3>Scoping it Out</h3>
+				<div class="row">
+					<div class="column">
+						<ul>
+							<li><b>Lifecycle of a Symbol:</b> Declaration, usage, destruction.</li>
+							<li><b>Block Scopes:</b> Valid within blocks like loops or conditionals.</li>
+							<li><b>Function Scopes:</b> Valid within a specific function.</li>
+							<li><b>Class Scopes:</b> Valid within a specific class.</li>
+						</ul>
+					</div>
+					<div class="column">
+						<img src="image_link_showing_scopes_in_a_program">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Scope Resolution</h3>
+				<p>How do compilers and IDEs determine which scope a symbol belongs to? This is the art of scope
+					resolution.</p>
+			</section>
+
+			<section class="small">
+				<h3>Python's LEGB Rule</h3>
+				<pre>
+					<code data-trim data-noescape>
+						def outer_function():
+							x = "outer"
+							def inner_function():
+								x = "inner"
+								print("Inner:", x)
+							inner_function()
+							print("Outer:", x)
+						outer_function()
+					</code>
+				</pre>
+				<p>Outputs:<br>Inner: inner<br>Outer: outer</p>
+			</section>
+
+			<section>
+				<h3>Nestling Among Scopes</h3>
+				<p>Modern languages like Python, C++, and Java provide mechanisms to handle nested scopes effectively,
+					ensuring symbols are accessed and modified in the right contexts.</p>
+			</section>
+
+			<section>
+				<h3>Basic Structure of Symbol Tables</h3>
+				<p>At their core, symbol tables are a mix of data structures fine-tuned for performance and accuracy.
+				</p>
+			</section>
+
+			<section>
+				<h3>Common Implementations</h3>
+				<div class="row">
+					<div class="column">
+						<ul>
+							<li><b>Hash Tables:</b> Fast lookups, ideal for unordered data.</li>
+							<li><b>Trees:</b> Hierarchical structure, suited for nested scopes.</li>
+							<li><b>Linked Lists:</b> Sequential access, simpler but slower.</li>
+						</ul>
+					</div>
+					<div class="column">
+						<img src="image_link_showing_data_structures">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Entries in a Symbol Table</h3>
+				<p>Each entry in a symbol table typically contains the name, type, scope, and other attributes of the
+					symbol.</p>
+			</section>
+
+			<section class="small">
+				<h3>Symbol Table Entry Example</h3>
+				<pre>
+					<code data-trim data-noescape>
+						struct SymbolTableEntry {
+							string name;
+							string type;
+							int scopeLevel;
+							// ... other attributes ...
+						};
+					</code>
+				</pre>
+			</section>
+
+			<section>
+				<h3>The Resolve Process</h3>
+				<p>Resolution is the process of determining the source or reference of a symbol. It's crucial for
+					functionalities like autocomplete and error checking.</p>
+			</section>
+
+			<section>
+				<h3>Resolution in Action</h3>
+				<div class="row">
+					<div class="column">
+						<p>When you type a method name or a variable in an IDE, the IDE uses the resolve process to
+							provide suggestions, verify correctness, or navigate to definitions.</p>
+					</div>
+					<div class="column">
+						<img src="image_link_showing_ide_autocomplete">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Optimizations & Performance Considerations</h3>
+				<p>For real-time editing and large codebases, performance is paramount. Let's explore how IDEs handle
+					these challenges.</p>
+			</section>
+
+			<section>
+				<h3>Efficiency Techniques</h3>
+				<div class="row">
+					<div class="column">
+						<ul>
+							<li><b>Avoiding Redundancy:</b> Storing symbols uniquely.</li>
+							<li><b>Fast Lookup Strategies:</b> Using optimized data structures.</li>
+							<li><b>Garbage Collection:</b> Pruning unused or outdated symbols.</li>
+						</ul>
+					</div>
+					<div class="column">
+						<img src="image_link_showing_optimized_symbol_table">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Symbol Tables in Modern IDEs</h3>
+				<p>Modern IDEs use advanced techniques like symbol indexing and incremental updates to handle real-time
+					editing and massive codebases efficiently.</p>
+			</section>
+
+			<section>
+				<h3>Challenges of Large Codebases</h3>
+				<div class="row">
+					<div class="column">
+						<p>Handling projects with millions of lines of code poses scalability concerns. How do modern
+							IDEs manage this?</p>
+					</div>
+					<div class="column">
+						<img src="image_link_showing_large_codebase_handling">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Symbol Indexing</h3>
+				<p>By indexing symbols, IDEs can speed up lookup times, making operations like auto-completion and "jump
+					to definition" extremely fast.</p>
+			</section>
+
+			<section>
+				<h3>Incremental Updates</h3>
+				<div class="row">
+					<div class="column">
+						<p>As developers edit code, IDEs must update symbol tables in real-time. Incremental updates
+							ensure that only modified parts are reprocessed, not the entire project.</p>
+					</div>
+					<div class="column">
+						<img src="image_link_showing_incremental_updates">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Challenges and Advanced Topics</h3>
+				<p>As technology evolves, new challenges arise. Let's delve into some advanced topics and challenges in
+					symbol resolution.</p>
+			</section>
+
+			<section>
+				<h3>Resolving Symbols in Dynamic Languages</h3>
+				<div class="row">
+					<div class="column">
+						<p>Dynamic languages, where types might be determined at runtime, pose unique challenges for
+							IDEs in terms of symbol resolution.</p>
+					</div>
+					<div class="column">
+						<img src="image_link_showing_dynamic_language_resolution">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Third-Party Libraries and Dependencies</h3>
+				<p>Modern applications rely heavily on external libraries. How do IDEs resolve symbols from these
+					external sources?</p>
+			</section>
+
+			<section>
+				<h3>Overloading and Templates</h3>
+				<div class="row">
+					<div class="column">
+						<p>Methods or functions with the same name but different parameters, or templated functions, can
+							cause ambiguity. Let's see how IDEs tackle this.</p>
+					</div>
+					<div class="column">
+						<img src="image_link_showing_method_overloading">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Disambiguation and Resolution</h3>
+				<p>IDEs employ sophisticated algorithms to correctly identify which overloaded method or function a
+					particular reference corresponds to.</p>
+			</section>
+
+			<section>
+				<h3>Symbol Tables & Debugging</h3>
+				<div class="row">
+					<div class="column">
+						<p>Symbol tables also play a pivotal role in debugging, helping map machine code back to
+							human-readable source code.</p>
+					</div>
+					<div class="column">
+						<img src="image_link_showing_debugging_with_symbol_tables">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Key Takeaways</h3>
+				<ul>
+					<li>Importance of Symbol Tables in IDEs</li>
+					<li>Efficient Structures for Symbol Storage</li>
+					<li>Challenges in Symbol Resolution</li>
+					<li>Advanced Techniques in Modern IDEs</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Next: Understanding Programming Language Part 2 </h3>
+				<p>
+					In our subsequent lecture, we will delve deep into the world of <b>Symbol Tables</b>. Symbol tables
+					are data structures that store
+					information about the program's various symbols, including variable names, function names, and more.
+				</p>
+				<p>
+					We will also explore the process of <b>References Resolving</b>. This step ensures that every
+					identifier or symbol used in your code corresponds to a valid declaration and that no ambiguities
+					exist.
+				</p>
+			</section>
+
+			<section>
+				<h3>Questions & Answers</h3>
+				<p>Thank you for your attention!</p>
+				<p>I'm now open to any questions you might have.</p>
+			</section>
+
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+			<script
+				src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/highlight.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/math/math.min.js"></script>
+			<script
+				src="https://cdn.jsdelivr.net/npm/reveal.js-mermaid-plugin@2.0.0/plugin/mermaid/mermaid.js"></script>
+			<script>
+				Reveal.initialize({
+					hash: true,
+					width: 1920,
+					height: 1080,
+					center: true,
+					margin: 0,
+					mermaid: {},
+					plugins: [RevealHighlight, RevealNotes, RevealMath.KaTeX, RevealMermaid]
+				});
+			</script>
+</body>
+
+</html>
