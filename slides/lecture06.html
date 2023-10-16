@@ -18,7 +18,7 @@
 			<section class="background">
 				<h1>Understanding<br />Programming Language
 					<br />
-					Part 2
+					Part 3
 				</h1>
 				<p class="event-name-label">
 					IDE Development Course
@@ -32,295 +32,431 @@
 			<section>
 				<h3>Today's Agenda</h3>
 				<ul>
-					<li>Introduction to Symbol Tables</li>
-					<li>Scopes, Lifetimes, and Nesting</li>
-					<li>Structure of Symbol Tables</li>
-					<li>The Resolve Process</li>
-					<li>Optimizations, Caching, and Real-time Updates</li>
-					<li>Symbol Tables and Interoperability</li>
-					<li>Challenges and Future Trends</li>
+					<li>Introduction to Semantic Analysis</li>
+					<li>Understanding Symbols and Name Resolution</li>
+					<li>Exploring Scopes, Lifetimes, and Nesting</li>
+					<li>Delving into Symbol Tables</li>
+					<li>IDE-specific Usages of Symbol Tables</li>
+					<li>Challenges and Advanced Topics in Symbol Resolution</li>
 				</ul>
 			</section>
 
 			<section>
-				<h3>Introduction to Symbol Tables</h3>
-				<p>Symbol tables are pivotal structures in compilers and IDEs, aiding in associating symbolic names with
-					their related information.</p>
+				<h2>Semantic Analysis</h2>
 			</section>
 
 			<section>
-				<h3>Why Symbol Tables?</h3>
-				<div class="row">
-					<div class="column">
-						<ul>
-							<li><b>Error Detection:</b> Identify undeclared variables, type mismatches, etc.</li>
-							<li><b>Code Navigation:</b> Jump to variable or function definitions.</li>
-							<li><b>Refactoring:</b> Safely rename variables, functions, or classes.</li>
-						</ul>
-					</div>
-					<div class="column">
-						<img src="image_link_suggesting_a_symbol_table_structure">
-					</div>
-				</div>
+				<h3>Semantic Analysis</h3>
+				<p>Ensuring the source code not only "sounds right" but also "makes sense" within the context of the
+					language's rules.</p>
+				<h5>Purpose of Semantic Analysis</h5>
+				<ul>
+					<li>Understands the meaning of syntactically correct code.</li>
+					<li>Determines valid meaning within the language's rules.</li>
+					<li>Operates on the abstract syntax tree (AST) or other intermediate representations.</li>
+				</ul>
 			</section>
 
 			<section>
-				<h3>Historical Context of Symbol Tables</h3>
-				<p>As programming languages evolved, so did the complexity and significance of symbol tables, adapting
-					to handle new language constructs and paradigms.</p>
+				<h3>Key Operations in Semantic Analysis</h3>
+				<ul>
+					<li><b>Name and Reference Resolution:</b> Mapping symbolic names to their actual definitions or
+						declarations.</li>
+					<li><b>Scope Rules Enforcement:</b> Valid access of variables and functions.</li>
+					<li><b>Type Checking:</b> Compatibility of data types in operations.</li>
+					<li><b>Variable Binding:</b> Confirmation of variable declaration and initialization.</li>
+					<li><b>Function/Method Binding:</b> Validity of function or method calls.</li>
+				</ul>
 			</section>
 
 			<section>
-				<h3>Scopes, Lifetimes, and Nesting</h3>
-				<p>The context in which a symbol is valid and can be accessed is determined by its scope. Nested scopes
-					allow for layered access control to symbols.</p>
+				<h3>Errors Detected by Semantic Analysis</h3>
+				<p>While syntax errors are about code structure, semantic errors delve into logical mistakes.</p>
+				<ul>
+					<li>Using an undefined variable.</li>
+					<li>Out-of-bounds array access.</li>
+					<li>Incorrect function call arguments.</li>
+				</ul>
+
+				<p><code>int result = "hello" + 5;</code></p>
+				<p>Syntactically correct but semantically problematic in many statically-typed languages.</p>
 			</section>
 
 			<section>
-				<h3>Scoping it Out</h3>
-				<div class="row">
-					<div class="column">
-						<ul>
-							<li><b>Lifecycle of a Symbol:</b> Declaration, usage, destruction.</li>
-							<li><b>Block Scopes:</b> Valid within blocks like loops or conditionals.</li>
-							<li><b>Function Scopes:</b> Valid within a specific function.</li>
-							<li><b>Class Scopes:</b> Valid within a specific class.</li>
-						</ul>
-					</div>
-					<div class="column">
-						<img src="image_link_showing_scopes_in_a_program">
-					</div>
-				</div>
+				<h2>Symbols and Name Resolution</h2>
+			</section>
+
+			<section>
+				<h3>Symbols and References</h3>
+				<p>
+					<b>Symbols</b> represent named entities in programming languages.
+				</p>
+				<p>
+					In the context of a symbol table, a symbol can refer to variables, functions, classes, modules, or
+					any other identifiable construct in
+					code. The symbol table stores information about each symbol, such as its location, type, and scope.
+				</p>
+
+				<p><b> Reference </b> of a symbol refers to a specific occurrence in the code where the value associated
+					with
+					that symbol is accessed or used, rather than where it's defined or declared.</p>
+			</section>
+
+			<section>
+				<h3>Name Resolution (aka "Symbol Resolution" or simply "Resolve")</h3>
+				<p>
+					Symbol resolution, often referred to as "name resolution" or "binding", is the process by which a
+					compiler, interpreter or IDE maps a symbol in the source code
+					to its corresponding declaration or definition. This is essential for ensuring that the correct
+					piece of data or functionality is accessed when a symbol is referenced. </p>
+			</section>
+
+			<section>
+				<h3>Name Resolution</h3>
+				<p>The IDE evaluates the scoping rules of the language to deduce potential locations where the
+					symbol's definition might reside. This can range from the enclosing block for local variables to
+					module or namespace levels for global ones.</p>
+
+				<p>If a symbol isn't found in the nearest scope, the IDE explores enclosing or parent scopes. For
+					instance, in object-oriented languages, a base class will be inspected if a method is absent in a
+					derived class.</p>
+
+				<p>For languages with support for function or operator overloading, the resolution process takes
+					into account the symbol's usage context, like argument types and quantity, to determine the
+					correct overload.</p>
+			</section>
+
+			<section>
+				<h3>Name Resolution</h3>
+				<p>For languages that bifurcate compilation and linking, resolution can be twofold. During compilation,
+					symbols are checked within the current translation unit, while during linking, resolution spans
+					across units.</p>
+
+				<p>Languages or systems that allow dynamic linking can have symbol resolution during runtime. This is
+					typical when libraries or modules are dynamically loaded and linked.</p>
+			</section>
+
+			<section>
+				<h3>Resolution Errors</h3>
+				<p>If a symbol remains unresolved, the compiler or interpreter flags a resolution error, signaling that
+					a declaration or definition for the symbol was not located.</p>
+
+				<p>IDE typically marks symbol as unresolved and continues the process taking in account that symbol does
+					not have useful meaning. </p>
+			</section>
+
+			<section>
+				<h2>Scopes, Lifetimes, and Nesting</h2>
+			</section>
+
+			<section>
+				<h3>Scopes</h3>
+				<p>
+					<b>Scope</b> determines the region or portion of the code where a symbol can be accessed or
+					modified.
+				</p>
+				<p>
+					It defines the visibility and accessibility of a symbol. Scopes can be nested, meaning
+					a
+					scope can be contained within another scope. Typical scopes include local (inside a function or
+					method), class (inside a class), and global (accessible throughout the code).</p>
+			</section>
+
+			<section>
+				<h3>Lifetimes</h3>
+				<p>
+					Lifetime refers to the duration or period during program execution when a symbol exists in memory.
+				</p>
+				<p>
+					It starts when memory is allocated for the symbol and ends when the memory is deallocated. Lifetime
+					is closely tied to scope in many programming languages. For instance, a variable with local scope
+					usually
+					has a lifetime that lasts as long as the function containing it is executing.</p>
+			</section>
+
+			<section>
+				<h3>Nesting</h3>
+				<p><b>Nesting</b> in programming denotes the encapsulation of one scope or structure within another.</p>
+				<p> This hierarchical organization, evident in constructs like nested loops or functions within
+					functions,
+					facilitates a layered access to symbols. Through nesting, inner scopes can reference outer scope
+					symbols while maintaining the capability to shadow or override them, ensuring clarity and precision
+					in symbol utilization.</p>
+			</section>
+
+			<section>
+				<h3>Symbol Qualifiers</h3>
+				<p>
+					A <b>symbol qualifier</b>, often simply called a "qualifier", is a prefix to a symbol that provides
+					a more
+					specific context to that symbol.
+				</p>
+				<p>Examples: namespace, package or module qualifiers, class or object qualifiers, etc. </p>
+				<p> It's used to disambiguate symbols that might have the same name but
+					reside in different scopes or namespaces.
+				</p>
+			</section>
+
+			<section class="small">
+				<h3>Example</h3>
+				<pre>
+					<code data-trim data-noescape>
+						// Global scope
+						int globalVariable = 100;  // Has a global scope and lifetime extending the entire execution of the program
+						
+						class Program
+						{
+							// Class-level scope
+							static int classVariable = 50;  // Has a class-level scope and lifetime as long as the containing class is in memory
+						
+							static void Main(string[] args)
+							{
+								// Method-level scope
+								int localVariable = 10;  // Has a method-level scope and lifetime limited to the execution of the Main method
+								
+								Console.WriteLine(globalVariable);  // Accessible because it's in a global scope
+																	// "Console." is a class qualifier.
+								Console.WriteLine(classVariable);   // Accessible because it's in the class scope
+								
+								if (true)
+								{
+									// Block-level scope
+									int blockVariable = 5;  // Has a block-level scope and lifetime limited to this if-block
+									
+									Console.WriteLine(localVariable);   // Accessible because the block is inside the method
+									Console.WriteLine(blockVariable);   // Accessible within its own block
+								}
+								
+								// Console.WriteLine(blockVariable);  // This would be an error. blockVariable is out of scope here.
+							}
+						
+							static void AnotherMethod()
+							{
+								// Console.WriteLine(localVariable);  // This would be an error. localVariable is out of scope since it's local to Main.
+								Console.WriteLine(classVariable);   // Accessible because it's in the class scope
+							}
+						}
+					</code>
+				</pre>
 			</section>
 
 			<section>
 				<h3>Scope Resolution</h3>
-				<p>How do compilers and IDEs determine which scope a symbol belongs to? This is the art of scope
-					resolution.</p>
-			</section>
-
-			<section class="small">
-				<h3>Python's LEGB Rule</h3>
-				<pre>
-					<code data-trim data-noescape>
-						def outer_function():
-							x = "outer"
-							def inner_function():
-								x = "inner"
-								print("Inner:", x)
-							inner_function()
-							print("Outer:", x)
-						outer_function()
-					</code>
-				</pre>
-				<p>Outputs:<br>Inner: inner<br>Outer: outer</p>
+				<p>Scope resolution refers to the process by which a compiler or interpreter determines which variable,
+					function, or other symbol a reference in the code pertains to, especially when there are multiple
+					symbols with the same name in different scopes. The process involves checking various scopes in a
+					hierarchical manner until the appropriate symbol is found or until it's determined that the symbol
+					does not exist in any accessible scope.</p>
 			</section>
 
 			<section>
-				<h3>Nestling Among Scopes</h3>
-				<p>Modern languages like Python, C++, and Java provide mechanisms to handle nested scopes effectively,
-					ensuring symbols are accessed and modified in the right contexts.</p>
+				<h2>Symbol Tables</h2>
 			</section>
 
 			<section>
-				<h3>Basic Structure of Symbol Tables</h3>
-				<p>At their core, symbol tables are a mix of data structures fine-tuned for performance and accuracy.
+				<h3>Symbol Tables</h3>
+				<p>A symbol table is a data structure used by compilers, interpreters, and IDEs to store information
+					about symbols (such as variable names, function names, class names, etc.) used in the source
+					code of a program. It plays a crucial role in the process of name binding, wherein symbolic names in
+					the source code are associated (or "bound") with specific memory addresses, data types, or
+					functionalities in the compiled or interpreted code.</p>
+			</section>
+
+			<section>
+				<h3>Role of Symbol Tables</h3>
+				<div class="row">
+					<div class="column">
+						<ul>
+							<li>Name Binding</li>
+							<li>Data Storage</li>
+							<li>Scoping</li>
+							<li>Error Checking</li>
+						</ul>
+					</div>
+					<div class="column">
+						<pre>
+							<code data-trim data-noescape>
+								struct SymbolTableEntry {
+									string name;
+									string type;
+									int scopeLevel;
+									// ... other attributes ...
+								};
+							</code>
+						</pre>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Role of Symbol Tables</h3>
+				<p>Associating symbolic names in the source code with specific attributes such as memory addresses, data
+					types, or functionalities in the compiled or interpreted code.</p>
+				<p>Managing different scopes in a program to ensure names are resolved in the correct context. This
+					includes local vs. global scopes and nested scopes.</p>
+				<p>Using symbol tables, compilers can detect errors such as use of undeclared variables, type
+					mismatches, and redeclaration of variables.</p>
+			</section>
+
+			<section>
+				<h3>Role of Symbol Tables</h3>
+				<p>Storing attributes for each symbol:</p>
+				<p>
+					Type (int, float, etc.)<br />
+					Scope (local, global)<br />
+					References to PSI trees and` declared elements<br />
+					Any other relevant data<br />
 				</p>
 			</section>
 
 			<section>
-				<h3>Common Implementations</h3>
+				<h3>Nested or Chained Symbol Tables</h3>
 				<div class="row">
 					<div class="column">
-						<ul>
-							<li><b>Hash Tables:</b> Fast lookups, ideal for unordered data.</li>
-							<li><b>Trees:</b> Hierarchical structure, suited for nested scopes.</li>
-							<li><b>Linked Lists:</b> Sequential access, simpler but slower.</li>
-						</ul>
+						<p>Reflecting the hierarchical structure of the source code, especially in languages that
+							support nested scopes or classes.</p>
 					</div>
 					<div class="column">
-						<img src="image_link_showing_data_structures">
+						<div class="mermaid">
+							<pre>
+								%%{
+									init: {
+										'theme': 'base',
+										'themeVariables': {
+											'fontSize': '24px',
+											'darkmode': true,
+											'lineColor': '#F8B229'
+										}
+									}
+								}%%
+								graph TB
+								Global(Global Scope) --> Table1[Symbol Table: Global]
+								Table1 --> Local1[Namespace Scope] --> Table2[Symbol Table: Namespace]
+								Table2 --> Local2[Class Scope 1] --> Table3[Symbol Table: Class1]
+								Table2 --> Local2[Class Scope 2] --> Table4[Symbol Table: Class2]
+								Table3 --> Local3[Method Scope 1] --> Table5[Symbol Table: Method1]
+								Table3 --> Local4[Method Scope 2] --> Table6[Symbol Table: Method2]
+								Table4 --> Local5[Method Scope 3] --> Table7[Symbol Table: Method3]
+						
+								style Global fill:#f9d457,stroke:#f08c00
+								style Local1 fill:#bfe5bf,stroke:#5cd65c
+								style Local2 fill:#ffa07a,stroke:#ff4500
+								style Local3 fill:#dda0dd,stroke:#da70d6
+							</pre>
+						</div>
 					</div>
 				</div>
 			</section>
 
 			<section>
-				<h3>Entries in a Symbol Table</h3>
-				<p>Each entry in a symbol table typically contains the name, type, scope, and other attributes of the
-					symbol.</p>
-			</section>
-
-			<section class="small">
-				<h3>Symbol Table Entry Example</h3>
-				<pre>
-					<code data-trim data-noescape>
-						struct SymbolTableEntry {
-							string name;
-							string type;
-							int scopeLevel;
-							// ... other attributes ...
-						};
-					</code>
-				</pre>
+				<h3>Common Implementation</h3>
+				<P>
+					<b>Hash Tables:</b> Fast lookups, ideal for unordered data.<br />
+					<b>Trees:</b> Hierarchical structure, suited for nested scopes.<br />
+					<b>Linked Lists:</b> Sequential access, simpler but slower.
+				</p>
 			</section>
 
 			<section>
-				<h3>The Resolve Process</h3>
-				<p>Resolution is the process of determining the source or reference of a symbol. It's crucial for
-					functionalities like autocomplete and error checking.</p>
-			</section>
-
-			<section>
-				<h3>Resolution in Action</h3>
+				<h3>Spaghetti Stack</h3>
 				<div class="row">
 					<div class="column">
-						<p>When you type a method name or a variable in an IDE, the IDE uses the resolve process to
-							provide suggestions, verify correctness, or navigate to definitions.</p>
+						<p>Facilitates the construction of a symbol table and scope hierarchy during AST traversal.</p>
+						<p><b>push</b> - Introduce a new child node and designate it as the top of the stack.</p>
+						<p><b>pop</b> - Revert to the parent node as the new top of the stack.</p>
 					</div>
 					<div class="column">
-						<img src="image_link_showing_ide_autocomplete">
+						<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Spaghettistack.svg/800px-Spaghettistack.svg.png"
+							width="300" />
 					</div>
 				</div>
 			</section>
 
 			<section>
-				<h3>Optimizations & Performance Considerations</h3>
-				<p>For real-time editing and large codebases, performance is paramount. Let's explore how IDEs handle
-					these challenges.</p>
+				<h3>Spaghetti Stack</h3>
+				<p>During traversal, the compiler encounters constructs like loops, conditionals, and functions. Each
+					potentially introduces a new scope.</p>
+				<p>As nested constructs are encountered, the spaghetti stack manages these scopes. New scopes link to
+					parent scopes using the stack.</p>
+				<p>The stack maintains a hierarchy. The top represents the current scope, while deeper elements
+					represent outer scopes. Symbols are added to the current scope's table as encountered.</p>
+				<p>For symbol references, the compiler starts at the current scope and navigates the stack's hierarchy
+					until the symbol is found or deemed undefined.</p>
 			</section>
 
 			<section>
-				<h3>Efficiency Techniques</h3>
-				<div class="row">
-					<div class="column">
-						<ul>
-							<li><b>Avoiding Redundancy:</b> Storing symbols uniquely.</li>
-							<li><b>Fast Lookup Strategies:</b> Using optimized data structures.</li>
-							<li><b>Garbage Collection:</b> Pruning unused or outdated symbols.</li>
-						</ul>
-					</div>
-					<div class="column">
-						<img src="image_link_showing_optimized_symbol_table">
-					</div>
-				</div>
+				<h2> IDE-specific usages and challenges </h2>
 			</section>
 
 			<section>
-				<h3>Symbol Tables in Modern IDEs</h3>
-				<p>Modern IDEs use advanced techniques like symbol indexing and incremental updates to handle real-time
-					editing and massive codebases efficiently.</p>
+				<h3>How IDEs Utilize Symbol Tables</h3>
+				<h5>Error Checking</h5>
+				<p>Identify unresolved symbols or symbols used out of their intended context.</p>
+				<h5>Type Checking and Inference</h5>
+				<p>Perform type checks, suggest type-specific methods, and infer types using symbol table data.</p>
+				<h5>Syntax and Semantic Highlighting</h5>
+				<p>Differentiate symbols using colors and styles based on their nature and context.</p>
 			</section>
 
 			<section>
-				<h3>Challenges of Large Codebases</h3>
-				<div class="row">
-					<div class="column">
-						<p>Handling projects with millions of lines of code poses scalability concerns. How do modern
-							IDEs manage this?</p>
-					</div>
-					<div class="column">
-						<img src="image_link_showing_large_codebase_handling">
-					</div>
-				</div>
+				<h3>How IDEs Utilize Symbol Tables</h3>
+				<h5>Code Navigation</h5>
+				<p>
+					<b>Go to Symbol</b>: Jump to the source of a symbol's declaration using part of the name.<br />
+					<b>Go to Definition</b>: Jump to the source of a symbol's declaration.<br />
+					<b>Find References/Usages</b>: List all references of a symbol in the project.
+				</p>
+				<h5>Auto-completion</h5>
+				<p>Offer relevant symbol suggestions based on context for faster and error-free coding.</p>
+				<h5>Refactorings</h5>
+				<p>Consistently rename symbols throughout the project using the symbol table.</p>
 			</section>
 
 			<section>
-				<h3>Symbol Indexing</h3>
-				<p>By indexing symbols, IDEs can speed up lookup times, making operations like auto-completion and "jump
-					to definition" extremely fast.</p>
+				<h5>How IDEs Utilize Symbol Tables</h5>
+				<h5>Code Documentation and Tooltips</h5>
+				<p>Display symbol metadata, like documentation or type information, as tooltips.</p>
+				<h5>Scope and Lifetime Visualization</h5>
+				<p>Highlight or indicate the scope and lifetime of variables based on symbol table structure.</p>
 			</section>
 
 			<section>
-				<h3>Incremental Updates</h3>
-				<div class="row">
-					<div class="column">
-						<p>As developers edit code, IDEs must update symbol tables in real-time. Incremental updates
-							ensure that only modified parts are reprocessed, not the entire project.</p>
-					</div>
-					<div class="column">
-						<img src="image_link_showing_incremental_updates">
-					</div>
-				</div>
+				<h5>Debugging</h5>
+				<p>Resolve variable names, display call stacks, and evaluate expressions during debugging sessions.</p>
+				<h5>Code Generation</h5>
+				<p>Generate code templates like "implement interface" or "override method" using the symbol table.</p>
 			</section>
 
 			<section>
 				<h3>Challenges and Advanced Topics</h3>
-				<p>As technology evolves, new challenges arise. Let's delve into some advanced topics and challenges in
-					symbol resolution.</p>
+
+				<h5>Incremental Updates</h5>
+				<p>Maintain the spaghetti stack and replace subtrees according to updates to ensure the symbol table
+					remains consistent with the code.</p>
+
+				<h5>Third-Party Libraries and Dependencies</h5>
+				<p>Handling symbols from external sources can be tricky. IDEs need to integrate symbols from third-party
+					libraries and dependencies without overwhelming the developer or mixing them up with the project's
+					own symbols. This often involves creating separate symbol tables or namespaces and ensuring they're
+					correctly linked and accessible.</p>
+
+				<h5>Overloading and Templates</h5>
+				<p>Function overloading and templates introduce complexities as a single symbol name can represent
+					multiple entities. The IDE needs to correctly identify and differentiate each overloaded function or
+					template instantiation, ensuring type safety and correct navigation.</p>
+
+				<h5>Resolving Symbols in Dynamic Languages</h5>
+				<p>Dynamic languages, like Python or JavaScript, pose a unique challenge because types and symbols can
+					change at runtime. IDEs use heuristic methods, type inference, and sometimes even runtime
+					information to make educated guesses about symbol resolution in these contexts.</p>
 			</section>
 
 			<section>
-				<h3>Resolving Symbols in Dynamic Languages</h3>
-				<div class="row">
-					<div class="column">
-						<p>Dynamic languages, where types might be determined at runtime, pose unique challenges for
-							IDEs in terms of symbol resolution.</p>
-					</div>
-					<div class="column">
-						<img src="image_link_showing_dynamic_language_resolution">
-					</div>
-				</div>
-			</section>
-
-			<section>
-				<h3>Third-Party Libraries and Dependencies</h3>
-				<p>Modern applications rely heavily on external libraries. How do IDEs resolve symbols from these
-					external sources?</p>
-			</section>
-
-			<section>
-				<h3>Overloading and Templates</h3>
-				<div class="row">
-					<div class="column">
-						<p>Methods or functions with the same name but different parameters, or templated functions, can
-							cause ambiguity. Let's see how IDEs tackle this.</p>
-					</div>
-					<div class="column">
-						<img src="image_link_showing_method_overloading">
-					</div>
-				</div>
-			</section>
-
-			<section>
-				<h3>Disambiguation and Resolution</h3>
-				<p>IDEs employ sophisticated algorithms to correctly identify which overloaded method or function a
-					particular reference corresponds to.</p>
-			</section>
-
-			<section>
-				<h3>Symbol Tables & Debugging</h3>
-				<div class="row">
-					<div class="column">
-						<p>Symbol tables also play a pivotal role in debugging, helping map machine code back to
-							human-readable source code.</p>
-					</div>
-					<div class="column">
-						<img src="image_link_showing_debugging_with_symbol_tables">
-					</div>
-				</div>
-			</section>
-
-			<section>
-				<h3>Key Takeaways</h3>
-				<ul>
-					<li>Importance of Symbol Tables in IDEs</li>
-					<li>Efficient Structures for Symbol Storage</li>
-					<li>Challenges in Symbol Resolution</li>
-					<li>Advanced Techniques in Modern IDEs</li>
-				</ul>
-			</section>
-
-			<section>
-				<h3>Next: Understanding Programming Language Part 2 </h3>
+				<h3>Next: Understanding Programming Language Part 3</h3>
 				<p>
-					In our subsequent lecture, we will delve deep into the world of <b>Symbol Tables</b>. Symbol tables
-					are data structures that store
-					information about the program's various symbols, including variable names, function names, and more.
-				</p>
-				<p>
-					We will also explore the process of <b>References Resolving</b>. This step ensures that every
-					identifier or symbol used in your code corresponds to a valid declaration and that no ambiguities
-					exist.
+					In our next session, we'll explore type systems and their role in programming. We'll also dive into
+					semantic analysis, which helps interpret the meaning of code, and touch on type inference, which
+					lets languages deduce types on their own. Join us for a deeper look into these essential topics.
 				</p>
 			</section>
 
