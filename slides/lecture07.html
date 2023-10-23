@@ -1,0 +1,856 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>IDE Development Course - Understanding Programming Language Part 3</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reset.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+	<link rel="stylesheet" href="dist/theme/jetbrains-dark.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/darkula.css">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+
+			<section class="background">
+				<h1>Understanding<br />
+					Programming Language<br />
+					Part 3
+				</h1>
+				<p class="event-name-label">
+					IDE Development Course
+				</p>
+				<p class="name-and-position-label">
+					Andrew Vasilyev
+				</p>
+				<div class="jb-square-logo"></div>
+			</section>
+
+			<section>
+				<h3>Today's Agenda</h3>
+				<ul>
+					<li>Syntax Directed Translation</li>
+					<li>Introduction to Type Systems and Type Checking</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Syntax Directed Translation</h2>
+			</section>
+
+			<section>
+				<h3>Syntax Directed Translation</h3>
+				<p>A method to analyze or translate code from one language to another, like to machine codes,
+					involves linking a specific action to each grammar rule. When the parser uses this rule, the action
+					is carried out.
+				</p>
+				<p>
+					This can be done during the initial analysis of the code, but it's easier to first make an Abstract
+					Syntax Tree (AST), then go through it, doing the linked action for each part of the tree based on
+					its type.
+				</p>
+				<p>
+					Also, changing a Concrete Syntax Tree (CST) to an AST is same method.
+				</p>
+			</section>
+
+			<section>
+				<h3>Attributes</h3>
+				<p><b>Attributes</b> are the properties assigned to the nodes of the syntax tree, used in Syntax
+					Directed
+					Translation for semantic analysis.</p>
+				<p><b>Annotated AST</b> = AST + Attributes</p>
+			</section>
+
+			<section>
+				<h3>Inherited Attributes</h3>
+				<p><b>Inherited</b> attributes are computed from the attribute values of their parent and/or sibling
+					nodes. (top and siblings -> bottom)</p>
+			</section>
+
+			<section>
+				<h3>Inherited Attributes</h3>
+				<div class="row">
+					<div class="column">
+						<pre>
+							<code data-trim data-noescape>
+								int x = 10;
+								{
+									int y = x + 5;
+								}
+							</code>
+						</pre>
+					</div>
+					<div class="column">
+						<div class="mermaid">
+							<pre>
+								%%{
+									init: {
+										'theme': 'base',
+										'themeVariables': {
+											'fontSize': '24px',
+											'darkmode': true,
+											'lineColor': '#F8B229'
+										}
+									}
+								}%%
+
+								graph TD;
+								A["Program (Global)"]
+								B["Declaration: int x = 10"]
+								C["Block (Block 1)"]
+								D["Declaration: int y = x + 5"]
+								E["Expression: x + 5"]
+								F["Variable: x"]
+								G["Constant: 5"]
+							
+								A --> B
+							
+								%% Inherited Attributes
+								B -->|Scope: Global| C
+								C -->|Scope: Block 1| D
+								D -->|Scope: Block 1| E
+								E -->|Scope: Block 1| F
+								E -->|Scope: Block 1| G
+							</pre>
+						</div>
+					</div>
+				</div>
+
+			</section>
+
+			<section>
+				<h3>Synthesized Attributes</h3>
+				<p><b>Synthesized</b> attributes are computed from the attribute values of their child nodes (bottom ->
+					top).</p>
+			</section>
+
+			<section>
+				<h3>Synthesized Attributes</h3>
+				<div class="row">
+					<div class="column">
+						<pre>
+							<code data-trim data-noescape>
+								3 + 4 * 5
+							</code>
+						</pre>
+					</div>
+					<div class="column">
+						<div class="mermaid">
+							<pre>
+								%%{
+									init: {
+										'theme': 'base',
+										'themeVariables': {
+											'fontSize': '24px',
+											'darkmode': true,
+											'lineColor': '#F8B229'
+										}
+									}
+								}%%
+								graph TD;
+								A["Expression"]
+								B["Addition"]
+								C["3 (int)"]
+								D["Multiplication"]
+								E["4 (int)"]
+								F["5 (int)"]
+														
+								%% Synthesized Attributes
+								C -->|"Type: int"| B
+								E -->|"Type: int"| D
+								F -->|"Type: int"| D
+								D -->|"Type: int"| B
+								B -->|"Type: int"| A
+							</pre>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>How to implement SDT?</h3>
+				<p>Basically, SDT is depth first traversal of AST.</p>
+				<p>Calculate and save inherited attributes while moving bottom.</p>
+				<p>Calculate and save synthesized attributes while moving top.</p>
+			</section>
+
+			<section>
+				<h3>Better approach - "Visitor" pattern</h3>
+				<p>The Visitor Pattern separates an algorithm from an object structure on which it operates, allowing
+					for the execution of operations on objects without changing their classes.</p>
+				<p>By implementing a visitor, you can define new operations on the AST nodes, which is crucial for SDT.
+					Each node in the AST can accept a visitor, which carries out the operation defined for that node's
+					type.</p>
+				<h5>Advantages of Using Visitor Pattern</h5>
+				<ul>
+					<li>Enhances flexibility by allowing new operations on AST nodes without modifying them.</li>
+					<li>Separates concerns, keeping the AST structure and operations on it decoupled.</li>
+					<li>Centralizes the operation logic, making the code easier to understand and maintain.</li>
+				</ul>
+			</section>
+
+			<section class="small">
+				<h3>Example: Simple Interpreter</h3>
+				<pre>
+					<code data-trim data-noescape>
+						sealed class Node {
+							abstract fun accept(visitor: Visitor): Int
+						}
+						
+						data class IntegerNode(val value: Int) : Node() {
+							override fun accept(visitor: Visitor): Int {
+								return visitor.visit(this)
+							}
+						}
+						
+						data class AdditionNode(val left: Node, val right: Node) : Node() {
+							override fun accept(visitor: Visitor): Int {
+								return visitor.visit(this)
+							}
+						}
+						
+						data class MultiplicationNode(val left: Node, val right: Node) : Node() {
+							override fun accept(visitor: Visitor): Int {
+								return visitor.visit(this)
+							}
+						}
+						
+						interface Visitor {
+							fun visit(node: IntegerNode): Int
+							fun visit(node: AdditionNode): Int
+							fun visit(node: MultiplicationNode): Int
+						}
+						
+						class EvaluationVisitor : Visitor {
+							override fun visit(node: IntegerNode): Int {
+								return node.value
+							}
+						
+							override fun visit(node: AdditionNode): Int {
+								return node.left.accept(this) + node.right.accept(this)
+							}
+						
+							override fun visit(node: MultiplicationNode): Int {
+								return node.left.accept(this) * node.right.accept(this)
+							}
+						}
+						
+						fun main() {
+							val expression = AdditionNode(
+								IntegerNode(3),
+								MultiplicationNode(
+									IntegerNode(4),
+									IntegerNode(5)
+								)
+							)
+						
+							val visitor = EvaluationVisitor()
+							val result = expression.accept(visitor)
+							println(result)  // Output: 23
+						}
+					</code>
+				</pre>
+			</section>
+
+			<section class="small">
+				<h3>Example: Interpreter with Name and Scope Resolution</h3>
+				<pre>
+					<code data-trim data-noescape>
+						data class SymbolTable(val table: MutableMap<String, Int> = mutableMapOf(), val parent: SymbolTable? = null) {
+							fun nest(): SymbolTable {
+								return SymbolTable(table.toMutableMap(), this)
+							}
+						
+							fun set(name: String, value: Int) {
+								table[name] = value
+							}
+						
+							operator fun get(name: String): Int? {
+								return table[name] ?: parent?.get(name)
+							}
+						}
+						
+						sealed class Node {
+							abstract fun accept(visitor: Visitor, symbolTable: SymbolTable): Int
+						}
+						
+						data class BlockNode(val statements: List<Node>) : Node() {
+							override fun accept(visitor: Visitor, symbolTable: SymbolTable): Int {
+								return visitor.visit(this, symbolTable)
+							}
+						}
+						
+						data class IntegerNode(val value: Int) : Node() {
+							override fun accept(visitor: Visitor, symbolTable: SymbolTable): Int {
+								return visitor.visit(this, symbolTable)
+							}
+						}
+						
+						data class VariableNode(val name: String) : Node() {
+							override fun accept(visitor: Visitor, symbolTable: SymbolTable): Int {
+								return visitor.visit(this, symbolTable)
+							}
+						}
+						
+						data class DeclarationNode(val name: String, val expression: Node) : Node() {
+							override fun accept(visitor: Visitor, symbolTable: SymbolTable): Int {
+								return visitor.visit(this, symbolTable)
+							}
+						}
+						
+						data class AdditionNode(val left: Node, val right: Node) : Node() {
+							override fun accept(visitor: Visitor, symbolTable: SymbolTable): Int {
+								return visitor.visit(this, symbolTable)
+							}
+						}
+						
+						data class MultiplicationNode(val left: Node, val right: Node) : Node() {
+							override fun accept(visitor: Visitor, symbolTable: SymbolTable): Int {
+								return visitor.visit(this, symbolTable)
+							}
+						}
+						
+						interface Visitor {
+							fun visit(node: BlockNode, symbolTable: SymbolTable): Int
+							fun visit(node: IntegerNode, symbolTable: SymbolTable): Int
+							fun visit(node: VariableNode, symbolTable: SymbolTable): Int
+							fun visit(node: DeclarationNode, symbolTable: SymbolTable): Int
+							fun visit(node: AdditionNode, symbolTable: SymbolTable): Int
+							fun visit(node: MultiplicationNode, symbolTable: SymbolTable): Int
+						}
+						
+						class EvaluationVisitor : Visitor {
+							override fun visit(node: BlockNode, symbolTable: SymbolTable): Int {
+								var lastResult = 0
+								var nestedSymbolTable = symbolTable.nest()
+								for (statement in node.statements) {
+									lastResult = statement.accept(this, nestedSymbolTable)
+								}
+								return lastResult
+							}
+						
+							override fun visit(node: IntegerNode, symbolTable: SymbolTable): Int {
+								return node.value
+							}
+						
+							override fun visit(node: VariableNode, symbolTable: SymbolTable): Int {
+								return symbolTable[node.name] ?: error("Undefined variable: ${node.name}")
+							}
+						
+							override fun visit(node: DeclarationNode, symbolTable: SymbolTable): Int {
+								val value = node.expression.accept(this, symbolTable)
+								symbolTable.set(node.name, value)
+								return value
+							}
+						
+							override fun visit(node: AdditionNode, symbolTable: SymbolTable): Int {
+								return node.left.accept(this, symbolTable) + node.right.accept(this, symbolTable)
+							}
+						
+							override fun visit(node: MultiplicationNode, symbolTable: SymbolTable): Int {
+								return node.left.accept(this, symbolTable) * node.right.accept(this, symbolTable)
+							}
+						}
+						
+						fun main() {
+							val program = BlockNode(
+								listOf(
+									DeclarationNode("x", IntegerNode(3)),
+									BlockNode(
+										listOf(
+											DeclarationNode("y", IntegerNode(4)),
+											BlockNode(
+												listOf(
+													DeclarationNode("z", AdditionNode(VariableNode("x"), VariableNode("y")))
+												)
+											)
+										)
+									)
+								)
+							)
+						
+							val visitor = EvaluationVisitor()
+							val result = program.accept(visitor, SymbolTable())
+							println(result)  // Output: 7
+						}
+					</code>
+				</pre>
+			</section>
+
+			<section>
+				<h2>Type Systems and Type Checking</h2>
+			</section>
+
+			<section>
+				<h3>What is Type?</h3>
+				<p><b>Type</b> is:</br>
+					A set of values<br>
+					A set of operations defined on these values
+				</p>
+				<p>
+					A <b>type error</b> occurs when an operation is performed on a value for which that operation is not
+					defined.</p>
+			</section>
+
+
+			<section>
+				<h3>Type Systems</h3>
+				<p>
+					A type system is a collection of rules that govern how operations on values are determined. It plays
+					a pivotal role in ensuring that the program behaves as expected by restricting the operations that
+					can be performed on different types of data.
+				</p>
+			</section>
+
+			<section>
+				<h3>Type Systems</h3>
+				<p>
+					The method of <b>type checking</b> is a procedure where the type system verifies the correctness of
+					the program by checking whether the operations performed on values are allowed based on their types.
+					It can catch type errors before the program is run, which aids in debugging and ensuring the
+					program's reliability.
+				</p>
+				<p>
+					<b>Type safety</b> is a characteristic of a programming language that ensures type errors are either
+					prevented or detected, providing a layer of reliability and predictability in the code. It ensures
+					that operations performed are semantically correct according to the type system rules.
+				</p>
+			</section>
+
+			<section>
+				<h3>Type Systems</h3>
+
+				<p>
+					<b>Memory safety</b> is a feature that prevents programs from accessing memory outside of their
+					allocated space, which could lead to unpredictable behavior or security vulnerabilities. A strong
+					type system can aid in achieving memory safety by enforcing strict rules on data operations.
+				</p>
+				<p>
+					<b>The implementation of polymorphism</b> is a way that allows values to be treated as instances of
+					multiple types. Through polymorphism, different types can share the same interface, enabling a
+					unified way of accessing a variety of data types, which can simplify code and promote reusability
+					and flexibility.
+				</p>
+			</section>
+
+			<section>
+				<h3>Kinds of Typing</h3>
+				<p>
+					<b>Typeless</b>: Types are not checked.<br>
+					<b>Static Typing</b>: Types are checked at compile time.<br>
+					<b>Dynamic Typing</b>: Types are checked at runtime.
+				</p>
+			</section>
+
+			<section>
+				<h3>Static vs Dynamic Typing</h3>
+				<table>
+					<thead>
+						<tr>
+							<th>Aspect</th>
+							<th>Typeless</th>
+							<th>Static Typing</th>
+							<th>Dynamic Typing</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Error Detection</td>
+							<td>No error detection</th>
+							<td>Early detection at compile-time</td>
+							<td>Late detection at run-time</td>
+						</tr>
+						<tr>
+							<td>Debugging</td>
+							<td>Very hard</th>
+							<td>Easy</td>
+							<td>Harder</td>
+						</tr>
+						<tr>
+							<td>Performance</td>
+							<td>Best</th>
+							<td>Better</td>
+							<td>May be slower due to runtime checks</td>
+						</tr>
+						<tr>
+							<td>Code Verbosity</td>
+							<td>Depends</th>
+							<td>More verbose</td>
+							<td>Less verbose</td>
+						</tr>
+						<tr>
+							<td>Static analysis</td>
+							<td>Very hard</th>
+							<td>Easy</td>
+							<td>Very hard</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+
+			<section>
+				<h3>Type Coercion</h3>
+				<p>Type coercion is the process of converting a value from one type to another.</p>
+				<pre>
+					<code data-trim data-noescape>
+						var a = "42";
+						var b = a * 1; // "42" is coerced to 42
+					</code>
+				</pre>
+			</section>
+
+			<section>
+				<h3>Type Punning</h3>
+				<p>Type punning is reinterpreting the underlying bit representation of a value as a value of a different
+					type.</p>
+
+				<pre>
+					<code data-trim data-noescape>
+						union {
+						float f;
+						int i;
+						} pun;
+
+						pun.f = 3.14;
+						int pi_approx = pun.i; // Type punning
+					</code>
+				</pre>
+			</section>
+
+			<section>
+				<h3>Strong vs Weak Typing</h3>
+				<p>Strong and weak typing refer to how strictly types are enforced in a programming language.</p>
+				<p>
+					<strong>Strong Typing:</strong><br />
+
+					Types are enforced strictly. <br />
+					Type errors are caught before runtime.<br />
+					Examples: Java, C++, Rust.
+				</p>
+				<p>
+					<strong>Weak Typing:</strong> <br />
+
+					Types are enforced more loosely.<br />
+					Type coercion allows operations between mismatched types.<br />
+					Examples: JavaScript, PHP.
+				</p>
+			</section>
+
+			<section>
+				<h3>Static vs Runtime Type Checking</h3>
+				<p>Strong and weak typing refer to how strictly types are enforced in a programming language.</p>
+				<p>
+					<strong>Static Typing Checking:</strong><br />
+
+					Performed at compile-time.<br />
+					Catches type errors before program runs.<br />
+				</p>
+				<p>
+					<strong>Dynamic Typing Checking:</strong> <br />
+
+					Performed as program executes.<br />
+					Type errors detected at runtime, can lead to runtime exceptions.<br />
+				</p>
+			</section>
+
+			<section>
+				<h3>Null, the Million Dollar Mistake</h3>
+				<p>Null pointers and null references are common concepts in programming, representing a lack of value or
+					reference. However, they can lead to runtime errors if not handled properly. Tony Hoare, who
+					introduced null references, later termed it a "billion dollar mistake" due to the myriad of bugs it
+					led to. <br /> <a
+						href="https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare/">More</a>
+				</p>
+				<h5> Questions: </h5>
+				<p>
+					What is the semantic of this "value"?
+					Why do different types allow the assignment of the same "value"? <br />
+					What operations are applicable to this "value"? <br />
+					How can we statically check whether an operation is applicable to a "value"? <br />
+				</p>
+			</section>
+
+			<section>
+				<h3>Null, the Million Dollar Mistake</h3>
+				<h5> Workarounds: </h5>
+
+				<p><b>Null Object Pattern</b>: Utilize a null object that encapsulates the absence of a value or object,
+					yet
+					still conforms to the expected interface, thereby avoiding null reference errors.</p>
+
+				<p><b>Optional Types (Optional<>)</b>: Introduce optional types that clearly indicate the possibility of
+					absence of a value, making the code more self-explanatory and safe.</p>
+
+				<p><b>Nullable Reference Types</b> (as seen in C# and Kotlin): Employ nullable reference types that must
+					be
+					explicitly declared, making it clear when a reference could be null and requiring developers to
+					handle the null case.</p>
+			</section>
+
+
+			<section>
+				<h3>Type-Safe Systems</h3>
+				<p>Type-safe systems help prevent type errors, making code more reliable and easier to maintain. They
+					enforce rules about how different types of data can be used, catching mistakes before they cause
+					problems.</p>
+				<ul>
+					<li><strong>Error Prevention:</strong> Catch type errors early, reducing bugs.</li>
+					<li><strong>Code Clarity:</strong> Make code more readable and understandable by enforcing clear
+						rules on data usage.</li>
+					<li><strong>Performance Optimizations:</strong> Enable better compiler optimizations for improved
+						runtime performance.</li>
+					<li><strong>Examples:</strong> Strongly typed languages like Java, C++, and Rust implement type
+						safety, while TypeScript brings type safety to JavaScript.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Implementing Static Type Checking</h3>
+				<ul>
+					<li><strong>Parsing:</strong> Create Abstract Syntax Tree (AST) from source code.</li>
+					<li><strong>Symbol Table:</strong> Track identifiers and their types.</li>
+					<li><strong>Semantic Analysis:</strong> Traverse AST, ensure operations are performed on compatible
+						types.</li>
+					<li><strong>Type Inference:</strong> Deduce types based on context (if applicable).</li>
+					<li><strong>Error Reporting:</strong> Report type errors with meaningful messages.</li>
+					<li><strong>Type Annotation:</strong> Annotate AST with type information for later compilation
+						stages.</li>
+				</ul>
+			</section>
+
+			<section class="small">
+				<h3>Example: Interpreter with Type Checking</h3>
+				<pre>
+					<code data-trim data-noescape>
+						sealed class Type
+						object IntType : Type()
+						object StringType : Type()
+
+						data class SymbolTable(
+							val table: MutableMap<String, Pair<Type, Any>> = mutableMapOf(),
+							val parent: SymbolTable? = null
+						) {
+							fun nest(): SymbolTable {
+								return SymbolTable(table.toMutableMap(), this)
+							}
+
+							fun set(name: String, type: Type, value: Any) {
+								table[name] = Pair(type, value)
+							}
+
+							operator fun get(name: String): Pair<Type, Any>? {
+								return table[name] ?: parent?.get(name)
+							}
+						}
+
+						sealed class Node {
+							abstract fun accept(visitor: Visitor, symbolTable: SymbolTable): Any
+						}
+
+						data class BlockNode(val statements: List<Node>) : Node() {
+							override fun accept(visitor: Visitor, symbolTable: SymbolTable): Any {
+								return visitor.visit(this, symbolTable)
+							}
+						}
+
+						data class IntegerNode(val value: Int) : Node() {
+							override fun accept(visitor: Visitor, symbolTable: SymbolTable): Any {
+								return visitor.visit(this, symbolTable)
+							}
+						}
+
+						data class StringNode(val value: String) : Node() {
+							override fun accept(visitor: Visitor, symbolTable: SymbolTable): Any {
+								return visitor.visit(this, symbolTable)
+							}
+						}
+
+						data class VariableNode(val name: String) : Node() {
+							override fun accept(visitor: Visitor, symbolTable: SymbolTable): Any {
+								return visitor.visit(this, symbolTable)
+							}
+						}
+
+						data class DeclarationNode(val name: String, val expression: Node, val type: Type) : Node() {
+							override fun accept(visitor: Visitor, symbolTable: SymbolTable): Any {
+								return visitor.visit(this, symbolTable)
+							}
+						}
+
+						data class AdditionNode(val left: Node, val right: Node) : Node() {
+							override fun accept(visitor: Visitor, symbolTable: SymbolTable): Any {
+								return visitor.visit(this, symbolTable)
+							}
+						}
+
+						interface Visitor {
+							fun visit(node: BlockNode, symbolTable: SymbolTable): Any
+							fun visit(node: IntegerNode, symbolTable: SymbolTable): Any
+							fun visit(node: StringNode, symbolTable: SymbolTable): Any
+							fun visit(node: VariableNode, symbolTable: SymbolTable): Any
+							fun visit(node: DeclarationNode, symbolTable: SymbolTable): Any
+							fun visit(node: AdditionNode, symbolTable: SymbolTable): Any
+						}
+
+						class TypeCheckingVisitor  : Visitor {
+							override fun visit(node: BlockNode, symbolTable: SymbolTable): Any {
+								var lastResult: Any = 0
+								var lastType: Type = IntType
+								var nestedSymbolTable = symbolTable.nest()
+								for (statement in node.statements) {
+									(lastResult, lastType) = statement.accept(this, nestedSymbolTable) as Pair<Any, Type>
+								}
+								return Pair(lastResult, lastType)
+							}
+
+							override fun visit(node: IntegerNode, symbolTable: SymbolTable): Any {
+								return Pair(node.value, IntType)
+							}
+
+							override fun visit(node: StringNode, symbolTable: SymbolTable): Any {
+								return Pair(node.value, StringType)
+							}
+
+							override fun visit(node: VariableNode, symbolTable: SymbolTable): Any {
+								val (type, value) = symbolTable[node.name] ?: error("Undefined variable: ${node.name}")
+								return Pair(value, type)
+							}
+
+							override fun visit(node: DeclarationNode, symbolTable: SymbolTable): Any {
+								val (value, type) = node.expression.accept(this, symbolTable) as Pair<Any, Type>
+								when (type) {
+									is IntType -> if (node.type != IntType) error("Type mismatch: expected IntType, got ${value::class}")
+									is StringType -> if (node.type != StringType) error("Type mismatch: expected StringType, got ${value::class}")
+								}
+								symbolTable.set(node.name, node.type, value)
+								return Pair(value, type)
+							}
+
+							override fun visit(node: AdditionNode, symbolTable: SymbolTable): Any {
+								val (leftValue, leftType) = node.left.accept(this, symbolTable) as Pair<Any, Type>
+								val (rightValue, rightType) = node.right.accept(this, symbolTable) as Pair<Any, Type>
+								return when {
+									leftType is IntType && rightType is IntType -> Pair(leftValue as Int + rightValue as Int, IntType)
+									leftType is StringType && rightType is StringType -> Pair(leftValue as String + rightValue as String, StringType)
+									else -> error("Type mismatch: cannot add $leftValue and $rightValue")
+								}
+							}
+						}
+
+						fun main() {
+							val program = BlockNode(
+								listOf(
+									DeclarationNode("x", IntegerNode(3), IntType),
+									DeclarationNode("y", StringNode("hello"), StringType),
+									BlockNode(
+										listOf(
+											DeclarationNode("z", AdditionNode(VariableNode("x"), IntegerNode(5)), IntType),
+											DeclarationNode("w", AdditionNode(VariableNode("y"), StringNode(" world")), StringType)
+										)
+									)
+								)
+							)
+						
+							val typeChecker = TypeCheckingVisitor()
+							val (result, type) = program.accept(typeChecker, SymbolTable()) as Pair<Any, Type>
+							println(result)  // Output: hello world
+						}
+				</code>
+				</pre>
+			</section>
+
+			<section>
+				<h2>Conclusion</h2>
+			</section>
+
+			<section>
+				<h3>Programming Language Processing in IDE - Updated</h3>
+				<div class="mermaid">
+					<pre>
+						%%{
+							init: {
+								'theme': 'base',
+								'themeVariables': {
+									'fontSize': '30px',
+									'darkmode': true,
+									'lineColor': '#F8B229'
+								}
+							}
+						}%%
+						graph LR
+						A[Code] --> B[Lexical Analysis]
+						B --> C[Tokens]
+						C --> D[Syntax Analysis]
+						D --> E[AST]
+						E --> F[Semantic Analysis]
+						F --> G[Annotated and checked AST]
+						G --> I[???]
+						I --> M[PSI]
+					</pre>
+				</div>
+			</section>
+
+			<section>
+				<h3>What to read?</h3>
+				<div class="row">
+					<div class="column">
+						<img src="https://m.media-amazon.com/images/I/41kqKqZhzpL._SX342_SY445_.jpg" width="500" />
+					</div>
+					<div class="column">
+						<p>
+							Types and Programming Languages <br />
+							by Benjamin C. Pierce
+						</p>
+					</div>
+				</div>
+			</section>
+
+
+			<section>
+				<h3>Next: Type Inference, Formal Verification and Static Analysis</h3>
+				<p>
+					Dive into advanced topics to further enhance the robustness and correctness of your code:
+				<ul>
+					<li><strong>Type Inference:</strong> Discover how compilers deduce types of variables and
+						expressions, reducing the need for explicit type annotations, while maintaining type safety.
+					</li>
+					<li><strong>Formal Verification:</strong> Explore methods to mathematically prove the correctness of
+						your code, ensuring it behaves as expected under all conditions.</li>
+					<li><strong>Static Analysis:</strong> Learn about tools and techniques to analyze your code's
+						behavior without executing it, identifying potential bugs and vulnerabilities early in the
+						development process.</li>
+				</ul>
+				</p>
+			</section>
+
+			<section>
+				<h3>Questions & Answers</h3>
+				<p>Thank you for your attention!</p>
+				<p>I'm now open to any questions you might have.</p>
+			</section>
+
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+			<script
+				src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/highlight.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/math/math.min.js"></script>
+			<script
+				src="https://cdn.jsdelivr.net/npm/reveal.js-mermaid-plugin@2.0.0/plugin/mermaid/mermaid.js"></script>
+			<script>
+				Reveal.initialize({
+					hash: true,
+					width: 1920,
+					height: 1080,
+					center: true,
+					margin: 0,
+					mermaid: {},
+					plugins: [RevealHighlight, RevealNotes, RevealMath.KaTeX, RevealMermaid]
+				});
+			</script>
+</body>
+
+</html>
