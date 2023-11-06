@@ -30,20 +30,21 @@
 				<h3>Today's Agenda</h3>
 				<ul>
 					<li>Dynamic Analysis</li>
-					<li>Debuggers</li>
-					<li>Perfomarmance Profiling</li>
+					<li>Performance Profiling</li>
 					<li>Memory Profiling</li>
-					<li>Unit Testing and Test Coverage</li>
-					<li>Interactive REPL (Read-Evaluate-Print Loop) Environments</li>
+					<li>Test Coverage</li>
 					<li>Bridging Static and Dynamic Analysis</li>
 				</ul>
 			</section>
 
 			<section>
-				<h3>Introduction to Dynamic Analysis</h3>
-				<p>Unpacking the Term: What is Dynamic Analysis?</p>
+				<h2>Dynamic Analysis</h2>
+			</section>
+
+			<section>
+				<h3>What is Dynamic Analysis?</h3>
 				<ul>
-					<li>Dynamic analysis is the examination of a program’s behavior during execution.</li>
+					<li><b>Dynamic analysis</b> is the examination of a program’s behavior <b>during execution</b>.</li>
 					<li>Key for understanding runtime behavior, performance issues, and bugs.</li>
 					<li>It allows for real-time error detection, performance optimization, and ensuring correctness of
 						code.</li>
@@ -51,17 +52,7 @@
 			</section>
 
 			<section>
-				<h2>Why Dynamic Analysis in IDE Development?</h2>
-				<ul>
-					<li>Real-time feedback: Quick identification and rectification of issues during development.</li>
-					<li>Performance Optimization: Spotting and resolving performance bottlenecks.</li>
-					<li>Improved Debugging: Easier identification of bugs and problematic code segments.</li>
-					<li>Enhanced Code Quality: Ensures code correctness and robustness through runtime analysis.</li>
-				</ul>
-			</section>
-
-			<section>
-				<h3>Comparative Study: Static vs Dynamic Analysis</h3>
+				<h3>Static vs Dynamic Analysis</h3>
 				<table>
 					<thead>
 						<tr>
@@ -91,242 +82,328 @@
 			</section>
 
 			<section>
-				<h3>Fundamentals of Dynamic Analysis</h3>
-				<p>Data Collection Techniques</p>
-			</section>
-			<section>
-				<h3>Sampling and Instrumentation</h3>
+				<h3>Dynamic Analysis Methods</h3>
 				<ul>
 					<li>Sampling: Periodic collection of data at set intervals to analyze program behavior.</li>
 					<li>Instrumentation: Inserting additional code into the program to collect data during execution.
 					</li>
-				</ul>
-			</section>
-			<section>
-				<h3>Tracing and Hooks</h3>
-				<ul>
 					<li>Tracing: Recording events or function calls during program execution for later analysis.</li>
 					<li>Hooks: Points in code where additional functionality can be inserted to gather data or alter
 						program behavior.</li>
 				</ul>
 			</section>
+
 			<section>
-				<h3>Event Tracing for Windows (ETW)</h3>
+				<h3>Dynamic Analysis Methods</h3>
 				<ul>
-					<li>High-speed, low-overhead, scalable logging service by Microsoft.</li>
-					<li>Allows collection of detailed execution information from a running system.</li>
-					<li>Valuable for performance profiling, debugging, and analyzing complex software behaviors.</li>
-				</ul>
-			</section>
-			<section>
-				<h3>Hardware Performance Counters</h3>
-				<ul>
-					<li>Provide insights into hardware-level operations.</li>
-					<li>Measure events like cache misses, branch mispredictions, etc.</li>
-					<li>Crucial for optimizing performance and understanding CPU behavior in relation to code execution.
+					<li>Hardware Performance Counters: Measure events like cache misses, branch mispredictions, etc.
 					</li>
+					<li>Instruction Set Simulator (ISS):Simulates the behavior of a processor to provide deeper insights
+						into code execution.</li>
 				</ul>
 			</section>
+
 			<section>
-				<h3>Instruction Set Simulator (ISS)</h3>
+				<h2>Performance Profiling</h2>
+			</section>
+
+			<section>
+				<h3>Performance Profiling</h3>
+				<p>Performance profiling is the process of gathering and analyzing data about the execution of a program
+					to identify areas where it may be optimized for better efficiency and speed.</p>
 				<ul>
-					<li>Simulates the behavior of a processor to provide deeper insights into code execution.</li>
-					<li>Helps in analyzing performance, detecting bugs, and optimizing both software and hardware
-						configurations.</li>
-				</ul>
-				<img src="images/instruction-set-simulator-example.png" alt="Example of Instruction Set Simulator" />
-			</section>
-			<section>
-				<h3>A Journey Through Debuggers</h3>
-				<p>The Debugger’s Role: A critical tool for code analysis and correction.</p>
-			</section>
-			<section>
-				<h3>Features and Functionalities of Debuggers</h3>
-				<ul>
-					<li>Breakpoints: Halt execution for analysis.</li>
-					<li>Debugging Symbols: Provide a roadmap to code.</li>
-					<li>Expression Evaluator: Decipher code expressions.</li>
+					<li>Measuring resource usage (CPU, memory, disk I/O, etc.).</li>
+					<li>Identifying bottlenecks and performance hotspots.</li>
+					<li>Optimizing code to improve overall program performance.</li>
 				</ul>
 			</section>
+
 			<section>
-				<h3>Visual Aids in Debugging</h3>
-				<ul>
-					<li>Heatmaps: Visual narratives of code execution.</li>
-					<li>Call Graphs: Visualize call flow and function relationships.</li>
-				</ul>
-				<img src="images/heatmap-example.png" alt="Example of a Heatmap" />
-			</section>
-			<section>
-				<h3>The Power of Visual Debugging Tools</h3>
-				<ul>
-					<li>Spotting bottlenecks and errors becomes intuitive.</li>
-					<li>Enhanced understanding of code behavior and performance.</li>
-					<li>Faster and more effective debugging process.</li>
-				</ul>
-				<img src="images/visual-debugging-example.png" alt="Example of Visual Debugging" />
-			</section>
-			<section>
-				<h3>Profiling: A Close-up on Program Performance</h3>
-				<p>Metrics Matter: Analyzing program's performance through various metrics.</p>
-			</section>
-			<section>
-				<h3>Call Graph Collection</h3>
+				<h3>Metrics: Call Graph</h3>
 				<ul>
 					<li>Traces the call journey of functions and methods.</li>
 					<li>Helps in understanding the flow of program execution and identifying performance bottlenecks.
 					</li>
 				</ul>
-				<img src="images/call-graph-example.png" alt="Example of a Call Graph" />
 			</section>
+
 			<section>
-				<h3>Function and Procedure Execution Time</h3>
+				<h3>Metrics: Execution Time</h3>
 				<ul>
 					<li>Measuring the time taken by functions and procedures to execute.</li>
 					<li>Accounting for nested calls and cumulative execution time.</li>
 				</ul>
 			</section>
+
 			<section>
-				<h3>Procedure Call Counts</h3>
+				<h3>Metrics: Call Counts</h3>
 				<ul>
 					<li>Keeping track of how often procedures are invoked.</li>
 					<li>Helpful in identifying frequently called procedures which could be optimized for better
 						performance.</li>
 				</ul>
 			</section>
+
 			<section>
-				<h3>Thread Block Time</h3>
+				<h3>Metrics: Thread Block Time</h3>
 				<ul>
 					<li>Measuring the time threads spend waiting for resource access or at critical sections.</li>
 					<li>Key for analyzing and improving multi-threaded program performance.</li>
 				</ul>
 			</section>
+
 			<section>
-				<h3>Diving into Modes: User mode vs Kernel mode</h3>
+				<h3>Metrics: User mode vs Kernel mode Time</h3>
 				<ul>
 					<li>User Mode: Restricted mode for running application code.</li>
 					<li>Kernel Mode: Privileged mode for running system code.</li>
 				</ul>
 			</section>
+
 			<section>
-				<h3>Implementation Strategies for Profiling</h3>
-				<p>Sampling, Instrumentation, Event Tracing, and Performance Counters</p>
+				<h3>Implementation: Sampling</h3>
+				<p>Intermittent processor interruptions for call stack snapshots.</p>
+				<p>Example: Sampling might involve pausing the program's execution every 100 milliseconds to capture a
+					snapshot of the call stack, which can then be analyzed to understand the code's execution flow and
+					performance characteristics.</p>
+			</section>
+
+			<section>
+				<h3>Implementation: Instrumentation</h3>
+				<p>Code augmentation for statistics gathering.</p>
+				<p>Example: Instrumentation involves adding code snippets to record function execution times. For
+					instance, adding timing code to measure the duration of specific functions or methods during program
+					execution.</p>
+			</section>
+
+			<section>
+				<h3>Implementation: Event Tracing</h3>
+				<p>Event tracing involves capturing detailed events and data during program execution for later
+					analysis.</p>
+				<p>Example: Event tracing can involve logging every network request made by an application, including
+					details like request and response times. This data can be invaluable for diagnosing network-related
+					performance issues.</p>
+			</section>
+
+			<section>
+				<h3>Implementation: Performance Counters</h3>
+				<p>Performance counters are mechanisms for collecting real-time data on various system and application
+					performance metrics.</p>
+				<p>Example: Performance counters can track CPU usage, memory usage, and disk I/O in real-time. For
+					instance, they can help identify CPU bottlenecks when a program is consuming excessive CPU
+					resources.</p>
+			</section>
+
+			<section>
+				<h2> Memory profiling </h2>
+			</section>
+
+			<section>
+				<h3>What is Memory Profiling?</h3>
+				<p>Memory profiling is the process of monitoring and analyzing a program's memory usage during execution
+					to identify memory-related issues and optimize memory management.</p>
+				<p>Memory-related issues such as memory leaks, excessive memory consumption, and inefficient memory
+					management can lead to application crashes and degraded performance. Memory profiling helps in
+					detecting and addressing these issues.</p>
+			</section>
+
+			<section>
+				<h3>Metrics</h3>
+				<p>Memory Footprint: Total memory used by the program.</p>
+				<p>Memory footprint measurement in memory profiling refers to the assessment of the overall memory
+					consumption by the program. It provides insights into how much RAM the program is actively using
+					during its execution. Monitoring the memory footprint is essential to ensure that the program's
+					memory usage remains within acceptable limits, preventing excessive memory consumption that can lead
+					to performance degradation or crashes.</p>
+			</section>
+
+			<section>
+				<h3>Metrics</h3>
+				<p>Heap and Stack Usage: Understanding what resides in the heap and stack.</p>
+				<p>Heap and stack usage analysis in memory profiling involves examining the contents of both the
+					program's heap and stack memory regions. The heap stores dynamically allocated objects and data
+					structures, while the stack is used for function call frames and local variables. Understanding what
+					resides in these memory areas is crucial for optimizing memory management. It helps in identifying
+					if objects are unnecessarily held in memory, leading to potential memory leaks or inefficient memory
+					utilization.</p>
 			</section>
 			<section>
-				<h3>Sampling</h3>
+				<h3>Metrics</h3>
+				<p>Object Dependency: Identifying references preventing garbage collection.</p>
+				<p>Object dependency analysis in memory profiling focuses on identifying references and relationships
+					between objects in memory. It helps in pinpointing objects that are being held in memory due to
+					references, preventing them from being garbage collected when they are no longer needed. Identifying
+					and resolving these dependencies is crucial for efficient memory management, as it can prevent
+					memory leaks and ensure optimal memory usage.</p>
+			</section>
+
+			<section>
+				<h3>Metrics</h3>
+				<p>Allocation/Deallocation: Analysis of memory allocation and deallocation patterns.</p>
+				<p>Analysis of memory allocation and deallocation patterns in memory profiling involves tracking how and
+					when memory is allocated and released during program execution. This provides insights into the
+					program's memory management behavior. Understanding these patterns helps in optimizing memory usage,
+					identifying potential memory fragmentation issues, and ensuring that resources are released properly
+					when they are no longer needed, contributing to efficient memory management.</p>
+			</section>
+
+			<section>
+				<h3>Implementation: Heap Dumps</h3>
+				<p>Heap dumps are a memory profiling strategy that involves generating detailed snapshots of the objects
+					in the program's heap memory. These snapshots provide a comprehensive view of the objects, their
+					sizes, and their relationships. Heap dumps are valuable for diagnosing memory-related issues,
+					identifying memory leaks, and understanding memory consumption patterns. Developers can use heap
+					dumps to analyze the memory landscape and optimize memory usage effectively.</p>
+			</section>
+
+			<section>
+				<h3>Implementation: Snapshot Comparison</h3>
+				<p>Snapshot comparison is a memory profiling strategy that involves capturing memory snapshots at
+					different points in the program's execution and comparing them. This technique helps in identifying
+					changes in memory usage over time. By taking snapshots before and after specific program events or
+					at regular intervals, developers can track memory allocation and deallocation patterns. Comparing
+					snapshots can reveal memory leaks, excessive memory consumption, and areas for memory optimization.
+				</p>
+			</section>
+
+			<section>
+				<h3>Implementation: Object Retention Analysis</h3>
+				<p>Object retention analysis is a memory profiling strategy that focuses on identifying objects that are
+					being retained in memory longer than necessary. Such retained objects can lead to memory leaks and
+					inefficient memory usage. Memory profilers analyze object lifetimes and references to pinpoint
+					objects causing retention issues. Developers can then address these problems by releasing references
+					appropriately or optimizing object management to improve memory efficiency.</p>
+			</section>
+
+			<section>
+				<h3>Implementation: Instrumentation</h3>
+				<p>Instrumentation is a memory profiling strategy that involves inserting code into the program to
+					collect memory-related data. Developers add instrumentation code to monitor key events such as
+					object creation, destruction, and memory allocations. This code augmentation provides valuable
+					insights into memory usage patterns. Instrumentation can be used to track memory-related metrics and
+					detect memory-related issues, aiding in memory profiling and optimization efforts.</p>
+			</section>
+
+			<section>
+				<h3>Implementation: Memory Allocation Tracking</h3>
+				<p>Memory allocation tracking is a memory profiling strategy that monitors memory allocation and
+					deallocation events during program execution. By tracking how and when memory is allocated and
+					released, developers gain a comprehensive understanding of memory usage patterns. This information
+					helps in optimizing memory management, identifying potential memory fragmentation issues, and
+					ensuring that resources are released properly when they are no longer needed, contributing to
+					efficient memory usage.</p>
+			</section>
+
+			<section>
+				<h3>Implementation: Garbage Collection Analysis</h3>
+				<p>Garbage collection analysis is a memory profiling strategy that focuses on assessing how efficiently
+					memory is being reclaimed by the garbage collector. Memory profilers track garbage collection events
+					and measure their impact on memory usage. Analyzing garbage collection behavior helps in optimizing
+					memory management strategies, identifying long pauses caused by garbage collection, and ensuring
+					that memory is reclaimed promptly, contributing to smoother and more efficient program execution.
+				</p>
+			</section>
+
+			<section>
+				<h2>Test Coverage</h2>
+			</section>
+
+			<section>
+				<h3>What is Test Coverage?</h3>
+				<p>Test coverage is a metric used in software testing to measure the extent to which a set of test cases
+					exercises or covers a software application's code. It quantifies the percentage of code lines,
+					functions, statements, or branches that have been executed by the tests. Test coverage helps assess
+					the thoroughness and effectiveness of the testing process.</p>
+			</section>
+
+			<section>
+				<h3>Why is Test Coverage Important?</h3>
+				<p>Test coverage is important because it provides insights into the quality and reliability of software.
+					It helps answer questions such as:</p>
 				<ul>
-					<li>Intermittent processor interruptions for call stack snapshots.</li>
-					<li>Provides a statistically significant view of program execution.</li>
+					<li>Have all critical parts of the code been tested?</li>
+					<li>Is there untested code that might contain bugs?</li>
+					<li>Are the test cases comprehensive enough to catch potential issues?</li>
 				</ul>
+				<p>High test coverage increases confidence in the software's correctness and helps in identifying areas
+					that need additional testing or improvement.</p>
 			</section>
+
 			<section>
-				<h3>Instrumentation</h3>
+				<h3>Test Coverage Metrics</h3>
+				<p>There are several types of test coverage metrics, including:</p>
 				<ul>
-					<li>Code augmentation for statistics gathering.</li>
-					<li>Allows detailed data collection at specific points in code.</li>
-				</ul>
-			</section>
-			<section>
-				<h3>Event Tracing and Performance Counters</h3>
-				<ul>
-					<li>Logging events and performance metrics in real-time.</li>
-					<li>Provides comprehensive insights into program behavior.</li>
-				</ul>
-			</section>
-			<section>
-				<h3>Memory Profiling: Understanding Program Memory Usage</h3>
-				<p>Measurement Metrics</p>
-			</section>
-			<section>
-				<h3>Memory Footprint</h3>
-				<ul>
-					<li>Assessing how much memory the program is using.</li>
-					<li>Important for efficient memory management.</li>
-				</ul>
-			</section>
-			<section>
-				<h3>Heap and Stack Insights</h3>
-				<ul>
-					<li>Understanding what objects and values reside in the heap and stack during program execution.
-					</li>
-					<li>Crucial for memory optimization and management.</li>
-				</ul>
-			</section>
-			<section>
-				<h3>Object Dependency Tracing</h3>
-				<ul>
-					<li>Identifying object references preventing garbage collection.</li>
-					<li>Helpful for resolving memory leaks and optimizing memory usage.</li>
-				</ul>
-			</section>
-			<section>
-				<h3>Allocation/Deallocation Frequency and Volume</h3>
-				<ul>
-					<li>Analysis of how frequently and in what volume memory is allocated and deallocated.</li>
-					<li>Insight into memory management patterns and potential issues.</li>
-				</ul>
-			</section>
-			<section>
-				<h3>Allocation/Deallocation Frequency and Volume</h3>
-				<ul>
-					<li>Analysis of how frequently and in what volume memory is allocated and deallocated.</li>
-					<li>Insight into memory management patterns and potential issues.</li>
-				</ul>
-			</section>
-			<section>
-				<h3>Snapshot Comparison</h3>
-				<ul>
-					<li>Comparing memory snapshots before and after specific program events or time intervals.</li>
-					<li>Identifying memory usage changes and potential issues.</li>
-				</ul>
-			</section>
-			<section>
-				<h3>Object Retention Analysis</h3>
-				<ul>
-					<li>Identifying memory retention issues, such as objects that are not being released when they
-						should be.</li>
-					<li>Crucial for resolving memory leaks.</li>
-				</ul>
-			</section>
-			<section>
-				<h3>Unit Testing and Test Coverage Integration within IDEs</h3>
-				<p>Test Coverage Measurement</p>
-			</section>
-			<section>
-				<h3>Ensuring Comprehensive Test Coverage</h3>
-				<ul>
-					<li>Measuring how much of the code is exercised by tests.</li>
-					<li>Ensures that all critical parts of the code are tested thoroughly.</li>
-				</ul>
-			</section>
-			<section>
-				<h3>Implementation Strategies for Test Coverage</h3>
-				<p>Techniques and Tools for Measuring Test Coverage</p>
-			</section>
-			<section>
-				<h3>Interactive REPL (Read-Evaluate-Print Loop) Environments</h3>
-				<p>Exploring REPL: An iterative approach to coding and debugging.</p>
-			</section>
-			<section>
-				<h3>Interactive Debugging</h3>
-				<ul>
-					<li>Real-time code analysis and correction in a REPL environment.</li>
-					<li>Allows for immediate feedback and iterative development.</li>
-				</ul>
-			</section>
-			<section>
-				<h3>Hot Code Reloading</h3>
-				<p>What is Hot Code Reloading?</p>
-			</section>
-			<section>
-				<h3>The Advantages of Hot Code Reloading</h3>
-				<ul>
-					<li>A mechanism for faster development and testing cycles.</li>
-					<li>Allows developers to see the effects of code changes without restarting the application.</li>
+					<li>Line Coverage: Measures the percentage of code lines executed by tests.</li>
+					<li>Function Coverage: Measures the percentage of functions or methods called by tests.</li>
+					<li>Statement Coverage: Measures the percentage of individual statements executed by tests.</li>
+					<li>Branch Coverage: Measures the percentage of code branches taken by tests, assessing decisions
+						and conditional logic.</li>
 				</ul>
 			</section>
 
 			<section>
-				<h3>Next: TO DO</h3>
+				<h3>Interpreting Test Coverage Results</h3>
+				<p>Interpreting test coverage results involves analyzing the coverage percentage and understanding its
+					implications:</p>
+				<ul>
+					<li>High Coverage: A high coverage percentage indicates that a significant portion of the code has
+						been tested. It suggests good test comprehensiveness.</li>
+					<li>Low Coverage: A low coverage percentage indicates that a substantial part of the code remains
+						untested. It may signify the presence of unverified code paths and potential issues.</li>
+					<li>Targeted Improvements: Identifying areas with low coverage allows teams to focus on writing
+						additional tests for critical code paths.</li>
+				</ul>
+				<p>Test coverage results guide testing efforts and help prioritize testing resources.</p>
+			</section>
+
+
+			<section>
+				<h3>Implementation: Instrumentation</h3>
+				<p>The first step in dynamic analysis for test coverage measurement is instrumentation. Instrumentation
+					involves adding code to the program under test to record information about code execution. This
+					added code, often referred to as "probes" or "coverage counters," tracks which parts of the code are
+					executed during test runs. These probes are strategically placed within the code to collect coverage
+					data.</p>
+			</section>
+
+			<section>
+				<h3>Implementation: Test Execution</h3>
+				<p>After instrumenting the code, the next step is to execute the test suite. During test execution, the
+					probes or coverage counters record data about which code paths are taken. As the tests run, the
+					coverage data accumulates, providing information about the extent to which the code is exercised by
+					the tests.</p>
+			</section>
+
+			<section>
+				<h3>Implementation: Data Collection</h3>
+				<p>Once the tests are executed, the data collected by the coverage counters is typically stored in a
+					data structure or file. This data includes details about which lines of code, functions, or branches
+					were executed during the test run. The collected data serves as the basis for calculating test
+					coverage metrics.</p>
+			</section>
+
+			<section>
+				<h3>Implementation: Coverage Analysis</h3>
+				<p>After data collection, coverage analysis is performed to determine the extent of code coverage
+					achieved by the tests. This analysis involves calculating coverage metrics such as line coverage,
+					function coverage, statement coverage, or branch coverage. These metrics indicate the percentage of
+					code exercised by the tests and provide insights into test comprehensiveness.</p>
+			</section>
+
+			<section>
+				<h3>Implementation: Reporting and Visualization</h3>
+				<p>Dynamic analysis tools often provide reporting and visualization capabilities to present test
+					coverage results in an understandable format. Reports may include coverage percentages, detailed
+					coverage maps, and visual representations of covered and uncovered code paths. These reports help
+					teams assess test coverage and identify areas that require additional testing.</p>
+			</section>
+
+			<section>
+				<h2>Conclusion</h2>
+			</section>
+
+			<section>
+				<h3>Next: Debuggers</h3>
 				<p>
 					TO DO
 				</p>
