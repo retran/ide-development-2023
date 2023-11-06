@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>IDE Development Course - Understanding Programming Language Part 3</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reset.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+	<link rel="stylesheet" href="dist/theme/jetbrains-dark.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/darkula.css">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+
+			<section class="background">
+				<h1>Dynamic Analysis</h1>
+				<p class="event-name-label">
+					IDE Development Course
+				</p>
+				<p class="name-and-position-label">
+					Andrew Vasilyev
+				</p>
+				<div class="jb-square-logo"></div>
+			</section>
+
+			<section>
+				<h3>Today's Agenda</h3>
+				<ul>
+					<li>Dynamic Analysis</li>
+					<li>Debuggers</li>
+					<li>Perfomarmance Profiling</li>
+					<li>Memory Profiling</li>
+					<li>Unit Testing and Test Coverage</li>
+					<li>Interactive REPL (Read-Evaluate-Print Loop) Environments</li>
+					<li>Bridging Static and Dynamic Analysis</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Introduction to Dynamic Analysis</h3>
+				<p>Unpacking the Term: What is Dynamic Analysis?</p>
+				<ul>
+					<li>Dynamic analysis is the examination of a program’s behavior during execution.</li>
+					<li>Key for understanding runtime behavior, performance issues, and bugs.</li>
+					<li>It allows for real-time error detection, performance optimization, and ensuring correctness of
+						code.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Why Dynamic Analysis in IDE Development?</h2>
+				<ul>
+					<li>Real-time feedback: Quick identification and rectification of issues during development.</li>
+					<li>Performance Optimization: Spotting and resolving performance bottlenecks.</li>
+					<li>Improved Debugging: Easier identification of bugs and problematic code segments.</li>
+					<li>Enhanced Code Quality: Ensures code correctness and robustness through runtime analysis.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Comparative Study: Static vs Dynamic Analysis</h3>
+				<table>
+					<thead>
+						<tr>
+							<th>Aspect</th>
+							<th>Static Analysis</th>
+							<th>Dynamic Analysis</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>When it's performed</td>
+							<td>Before program execution</td>
+							<td>During program execution</td>
+						</tr>
+						<tr>
+							<td>Error Detection</td>
+							<td>Can detect potential issues early in the development cycle</td>
+							<td>Identifies actual issues in real-time as the code executes</td>
+						</tr>
+						<tr>
+							<td>Performance Analysis</td>
+							<td>Limited to theoretical assessments</td>
+							<td>Provides actual performance data</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+
+			<section>
+				<h3>Fundamentals of Dynamic Analysis</h3>
+				<p>Data Collection Techniques</p>
+			</section>
+			<section>
+				<h3>Sampling and Instrumentation</h3>
+				<ul>
+					<li>Sampling: Periodic collection of data at set intervals to analyze program behavior.</li>
+					<li>Instrumentation: Inserting additional code into the program to collect data during execution.
+					</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Tracing and Hooks</h3>
+				<ul>
+					<li>Tracing: Recording events or function calls during program execution for later analysis.</li>
+					<li>Hooks: Points in code where additional functionality can be inserted to gather data or alter
+						program behavior.</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Event Tracing for Windows (ETW)</h3>
+				<ul>
+					<li>High-speed, low-overhead, scalable logging service by Microsoft.</li>
+					<li>Allows collection of detailed execution information from a running system.</li>
+					<li>Valuable for performance profiling, debugging, and analyzing complex software behaviors.</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Hardware Performance Counters</h3>
+				<ul>
+					<li>Provide insights into hardware-level operations.</li>
+					<li>Measure events like cache misses, branch mispredictions, etc.</li>
+					<li>Crucial for optimizing performance and understanding CPU behavior in relation to code execution.
+					</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Instruction Set Simulator (ISS)</h3>
+				<ul>
+					<li>Simulates the behavior of a processor to provide deeper insights into code execution.</li>
+					<li>Helps in analyzing performance, detecting bugs, and optimizing both software and hardware
+						configurations.</li>
+				</ul>
+				<img src="images/instruction-set-simulator-example.png" alt="Example of Instruction Set Simulator" />
+			</section>
+			<section>
+				<h3>A Journey Through Debuggers</h3>
+				<p>The Debugger’s Role: A critical tool for code analysis and correction.</p>
+			</section>
+			<section>
+				<h3>Features and Functionalities of Debuggers</h3>
+				<ul>
+					<li>Breakpoints: Halt execution for analysis.</li>
+					<li>Debugging Symbols: Provide a roadmap to code.</li>
+					<li>Expression Evaluator: Decipher code expressions.</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Visual Aids in Debugging</h3>
+				<ul>
+					<li>Heatmaps: Visual narratives of code execution.</li>
+					<li>Call Graphs: Visualize call flow and function relationships.</li>
+				</ul>
+				<img src="images/heatmap-example.png" alt="Example of a Heatmap" />
+			</section>
+			<section>
+				<h3>The Power of Visual Debugging Tools</h3>
+				<ul>
+					<li>Spotting bottlenecks and errors becomes intuitive.</li>
+					<li>Enhanced understanding of code behavior and performance.</li>
+					<li>Faster and more effective debugging process.</li>
+				</ul>
+				<img src="images/visual-debugging-example.png" alt="Example of Visual Debugging" />
+			</section>
+			<section>
+				<h3>Profiling: A Close-up on Program Performance</h3>
+				<p>Metrics Matter: Analyzing program's performance through various metrics.</p>
+			</section>
+			<section>
+				<h3>Call Graph Collection</h3>
+				<ul>
+					<li>Traces the call journey of functions and methods.</li>
+					<li>Helps in understanding the flow of program execution and identifying performance bottlenecks.
+					</li>
+				</ul>
+				<img src="images/call-graph-example.png" alt="Example of a Call Graph" />
+			</section>
+			<section>
+				<h3>Function and Procedure Execution Time</h3>
+				<ul>
+					<li>Measuring the time taken by functions and procedures to execute.</li>
+					<li>Accounting for nested calls and cumulative execution time.</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Procedure Call Counts</h3>
+				<ul>
+					<li>Keeping track of how often procedures are invoked.</li>
+					<li>Helpful in identifying frequently called procedures which could be optimized for better
+						performance.</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Thread Block Time</h3>
+				<ul>
+					<li>Measuring the time threads spend waiting for resource access or at critical sections.</li>
+					<li>Key for analyzing and improving multi-threaded program performance.</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Diving into Modes: User mode vs Kernel mode</h3>
+				<ul>
+					<li>User Mode: Restricted mode for running application code.</li>
+					<li>Kernel Mode: Privileged mode for running system code.</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Implementation Strategies for Profiling</h3>
+				<p>Sampling, Instrumentation, Event Tracing, and Performance Counters</p>
+			</section>
+			<section>
+				<h3>Sampling</h3>
+				<ul>
+					<li>Intermittent processor interruptions for call stack snapshots.</li>
+					<li>Provides a statistically significant view of program execution.</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Instrumentation</h3>
+				<ul>
+					<li>Code augmentation for statistics gathering.</li>
+					<li>Allows detailed data collection at specific points in code.</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Event Tracing and Performance Counters</h3>
+				<ul>
+					<li>Logging events and performance metrics in real-time.</li>
+					<li>Provides comprehensive insights into program behavior.</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Memory Profiling: Understanding Program Memory Usage</h3>
+				<p>Measurement Metrics</p>
+			</section>
+			<section>
+				<h3>Memory Footprint</h3>
+				<ul>
+					<li>Assessing how much memory the program is using.</li>
+					<li>Important for efficient memory management.</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Heap and Stack Insights</h3>
+				<ul>
+					<li>Understanding what objects and values reside in the heap and stack during program execution.
+					</li>
+					<li>Crucial for memory optimization and management.</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Object Dependency Tracing</h3>
+				<ul>
+					<li>Identifying object references preventing garbage collection.</li>
+					<li>Helpful for resolving memory leaks and optimizing memory usage.</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Allocation/Deallocation Frequency and Volume</h3>
+				<ul>
+					<li>Analysis of how frequently and in what volume memory is allocated and deallocated.</li>
+					<li>Insight into memory management patterns and potential issues.</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Allocation/Deallocation Frequency and Volume</h3>
+				<ul>
+					<li>Analysis of how frequently and in what volume memory is allocated and deallocated.</li>
+					<li>Insight into memory management patterns and potential issues.</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Snapshot Comparison</h3>
+				<ul>
+					<li>Comparing memory snapshots before and after specific program events or time intervals.</li>
+					<li>Identifying memory usage changes and potential issues.</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Object Retention Analysis</h3>
+				<ul>
+					<li>Identifying memory retention issues, such as objects that are not being released when they
+						should be.</li>
+					<li>Crucial for resolving memory leaks.</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Unit Testing and Test Coverage Integration within IDEs</h3>
+				<p>Test Coverage Measurement</p>
+			</section>
+			<section>
+				<h3>Ensuring Comprehensive Test Coverage</h3>
+				<ul>
+					<li>Measuring how much of the code is exercised by tests.</li>
+					<li>Ensures that all critical parts of the code are tested thoroughly.</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Implementation Strategies for Test Coverage</h3>
+				<p>Techniques and Tools for Measuring Test Coverage</p>
+			</section>
+			<section>
+				<h3>Interactive REPL (Read-Evaluate-Print Loop) Environments</h3>
+				<p>Exploring REPL: An iterative approach to coding and debugging.</p>
+			</section>
+			<section>
+				<h3>Interactive Debugging</h3>
+				<ul>
+					<li>Real-time code analysis and correction in a REPL environment.</li>
+					<li>Allows for immediate feedback and iterative development.</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Hot Code Reloading</h3>
+				<p>What is Hot Code Reloading?</p>
+			</section>
+			<section>
+				<h3>The Advantages of Hot Code Reloading</h3>
+				<ul>
+					<li>A mechanism for faster development and testing cycles.</li>
+					<li>Allows developers to see the effects of code changes without restarting the application.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Next: TO DO</h3>
+				<p>
+					TO DO
+				</p>
+			</section>
+
+			<section>
+				<h3>Questions & Answers</h3>
+				<p>Thank you for your attention!</p>
+				<p>I'm now open to any questions you might have.</p>
+			</section>
+
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+			<script
+				src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/highlight.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/math/math.min.js"></script>
+			<script
+				src="https://cdn.jsdelivr.net/npm/reveal.js-mermaid-plugin@2.0.0/plugin/mermaid/mermaid.js"></script>
+			<script>
+				Reveal.initialize({
+					hash: true,
+					width: 1920,
+					height: 1080,
+					center: true,
+					margin: 0,
+					mermaid: {},
+					plugins: [RevealHighlight, RevealNotes, RevealMath.KaTeX, RevealMermaid]
+				});
+			</script>
+</body>
+
+</html>

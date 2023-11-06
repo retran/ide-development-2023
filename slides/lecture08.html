@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>IDE Development Course - Understanding Programming Language Part 3</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reset.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+	<link rel="stylesheet" href="dist/theme/jetbrains-dark.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/darkula.css">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+
+			<section class="background">
+				<h1>Understanding<br />
+					Programming Language<br />
+					Part 4
+				</h1>
+				<p class="event-name-label">
+					IDE Development Course
+				</p>
+				<p class="name-and-position-label">
+					Andrew Vasilyev
+				</p>
+				<div class="jb-square-logo"></div>
+			</section>
+
+			<section>
+				<h3>Today's Agenda</h3>
+				<ul>
+					<li>Polymorphism</li>
+					<li>Type Inference</li>
+					<li>Introduction to Static Analysis</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Polymorphism and Type Systems</h2>
+			</section>
+
+			<section>
+				<h3>Polymorphism</h3>
+				<p><b>Polymorphism</b> is a concept in programming that refers to
+					the ability of different classes to respond to the same function call or method invocation, each in
+					their own class-specific way. This enables a single interface to interact with objects of different
+					types.</p>
+				<p>The interaction between polymorphism and type systems involves how polymorphic features are handled
+					within type hierarchies, and how overloading, overriding, and templating are managed.</p>
+			</section>
+
+			<section>
+				<h3>Static vs Dynamic Polymorphism</h3>
+				<p>Static polymorphism, also known as compile-time polymorphism, resolves method calls at compile time.
+					Dynamic polymorphism, or runtime polymorphism, resolves method calls at runtime.</p>
+				<pre><code class="language-java">
+			// Static polymorphism example in Java
+			class MathOperations {
+				public int multiply(int a, int b) {
+					return a * b;
+				}
+				
+				// Overloaded method with different signature
+				public double multiply(double a, double b) {
+					return a * b;
+				}
+			}
+			
+			// Dynamic polymorphism example in Java
+			class Animal {
+				public void sound() {
+					System.out.println("Animal makes a sound");
+				}
+			}
+			
+			class Dog extends Animal {
+				public void sound() {
+					System.out.println("Dog barks");
+				}
+			}
+			
+			Animal animal = new Dog();
+			animal.sound(); // Outputs: Dog barks
+				</code></pre>
+			</section>
+
+			<section>
+				<h3>Ad-hoc Polymorphism</h3>
+				<p>Ad-hoc polymorphism allows a single function symbol to have multiple implementations, with the
+					compiler choosing the appropriate implementation based on the types of the arguments.</p>
+				<pre><code class="language-java">
+			// Ad-hoc polymorphism example in Java (Method Overloading)
+			class MathOperations {
+				public int add(int a, int b) {
+					return a + b;
+				}
+				
+				public double add(double a, double b) {
+					return a + b;
+				}
+				
+				public String add(String a, String b) {
+					return a + b;
+				}
+			}
+				</code></pre>
+			</section>
+
+			<section>
+				<h3>Parametric Polymorphism</h3>
+				<p>Parametric polymorphism enables the use of the same code with different types, commonly implemented
+					using templates or generics.</p>
+				<pre><code class="language-java">
+			// Parametric polymorphism example in Java (Generics)
+			class Box<T> {
+				private T t;
+			
+				public void set(T t) {
+					this.t = t;
+				}
+			
+				public T get() {
+					return t;
+				}
+			}
+			
+			Box<Integer> integerBox = new Box<Integer>();
+			Box<String> stringBox = new Box<String>();
+				</code></pre>
+			</section>
+
+			<section>
+				<h3>Coercion Polymorphism</h3>
+				<p>Coercion polymorphism refers to the automatic conversion of a value from one data type to another. It
+					allows different types to be treated as the same type in certain contexts, often occurring
+					implicitly in many programming languages.</p>
+				<pre><code class="language-java">
+			// Coercion polymorphism example in Java
+			public class CoercionExample {
+				public static void main(String[] args) {
+					int integerNumber = 42;
+					// Automatic conversion from int to double
+					double doubleNumber = integerNumber;
+					
+					System.out.println(doubleNumber); // Outputs: 42.0
+				}
+			}
+				</code></pre>
+				<p>In this example, the integer value is automatically converted (coerced) to a double when assigned to
+					a variable of type double.</p>
+			</section>
+
+			<section>
+				<h2>Type Inference</h2>
+			</section>
+
+			<section>
+				<h3>What is Type Inference?</h3>
+				<p>Type inference is the automatic detection of the data type of an expression in a programming language
+					without explicit type annotations by the programmer.</p>
+				<p>Type-checking verifies if a given expression matches a type, while type inference deduces the type of
+					an untyped expression.</p>
+				<p>Type inference supports polymorphism by deducing the most general type, allowing the same code to be
+					used with different data types and promoting code reuse.</p>
+			</section>
+
+			<section>
+				<h3>Type Inference in Action</h3>
+				<p>Type inference involves deducing the type of an expression from the context in which it appears.</p>
+				<pre>
+					<code class="language-csharp">
+						public void Foo(double value)
+						{
+							Console.WriteLine("double");
+						}
+					
+						public void Foo(int value)
+						{
+							Console.WriteLine("int");
+						}
+					
+						public void Boo()
+						{
+							// C# uses the 'var' keyword to infer the type of 'total'
+							var total = 10 + 5; // 'total' is inferred to be of type int
+
+							Foo(total);        // int 	
+							Foo(total + 2);    // int
+							Foo(total + 2.1f); // double
+						}
+					</code>
+				</pre>
+			</section>
+
+			<section>
+				<h3>Type Inference Algorithm</h3>
+				<h5>1. Initialization</h5>
+				<p>The IDE begins with no assumptions about type and assigns types to literals based on their
+					value, such as inferring `int` for numerical literals.</p>
+				<h5>2. Type Variables</h5>
+				<p>For expressions where the type is not immediately apparent, the IDE uses type variables as
+					placeholders during the inference process.</p>
+				<h5>3. Gathering Type Constraints</h5>
+				<p>The compiler collects constraints for type variables based on how they are used in the code,
+					influencing the final inferred type.</p>
+			</section>
+
+			<section>
+				<h3>Type Inference Algorithm</h3>
+				<h5>4. Unification Process</h5>
+				<p>The unification step attempts to resolve type variables into concrete types by satisfying all
+					gathered constraints without conflicts.</p>
+				<h5>5. Type Checking</h5>
+				<p>Post-unification, the compiler checks for type consistency. Conflicts or unsatisfiable constraints
+					result in type errors.</p>
+				<h5>6. Finalization</h5>
+				<p>Successful type checking leads to the final assignment of concrete types to previously unresolved
+					type variables, completing the inference.</p>
+			</section>
+
+
+			<section>
+				<h3>Type Inference Example</h3>
+				<pre><code class="language-csharp">
+			public static (T1, T2) Combine&lt;T1, T2&gt;(T1 first, T2 second)
+			{
+				return (first, second);
+			}
+
+			var combinedIntString = Combine(1, "apple");
+			var combinedBoolDouble = Combine(true, 3.14);
+				</code></pre>
+			</section>
+
+			<section>
+				<h3>Type Inference Example</h3>
+				<ol>
+					<li><strong>Type Variables:</strong> Compiler introduces <code>T1</code> and <code>T2</code> for
+						method parameters.</li>
+					<li><strong>Type Constraints:</strong> Infers <code>T1</code> as <code>int</code>, <code>T2</code>
+						as <code>string</code> for <code>combinedIntString</code>; and <code>T1</code> as
+						<code>bool</code>, <code>T2</code> as <code>double</code> for <code>combinedBoolDouble</code>.
+					</li>
+					<li><strong>Unification and Type Checking:</strong> Validates that the inferred types are consistent
+						with the method's parameters.</li>
+					<li><strong>Finalization:</strong> Completes type inference, confirming the types of the method
+						calls.</li>
+				</ol>
+			</section>
+
+			<section>
+				<h3>How to implement type inference</h3>
+				<ol>
+					<li>Combine with the type-check stage.</li>
+					<li>Save known types and type constraints in the symbol table.</li>
+					<li>Collect types and constraints while traversing over the AST from the top to bottom.</li>
+					<li>Figure out types and ensure constraints are followed, while returning from the bottom to the top
+						of the AST.</li>
+				</ol>
+			</section>
+
+			<section>
+				<h3>Error Handling and Recovery</h3>
+				<p>In type systems, when an error is encountered, a type of "unknown" can be introduced.</p>
+				<ul>
+					<li><strong>Introducing 'Unknown' Type:</strong> To continue type checking past an error, an
+						'unknown' type placeholder is used.</li>
+					<li><strong>Expression Involving 'Unknown' Types:</strong> Any expression that involves an 'unknown'
+						type is also considered 'unknown'.</li>
+					<li><strong>Error Propagation:</strong> This approach prevents further type errors and allows the
+						IDE to continue processing the rest of the code.</li>
+					<li><strong>Recovery:</strong> Later, when more information is available, the 'unknown' types can be
+						replaced with specific types, if possible.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>What to learn?</h3>
+				<p>Hindley-Milner Type System</p>
+				<p>Algorithm W</p>
+				<p>Formal verification</p>
+				<p>Derived types</p>
+				<p>Automated theorem proving</p>
+			</section>
+
+			<section>
+				<h2>Introduction to Static Analysis</h2>
+			</section>
+
+			<section>
+				<h3>What is Static Analysis?</h3>
+				<p><b>Static analysis</b> is a process of examining code <b>without running it</b> to find errors, code
+					smells, and security
+					vulnerabilities.</p>
+			</section>
+
+			<section>
+				<h3>AST Verification</h3>
+				<p>AST verification checks the syntax tree of code for structural and logical correctness. For example,
+					it can flag a potential error if an assignment is made in a conditional statement.</p>
+				<pre><code class="language-javascript">
+			// Incorrect use of assignment in a conditional
+			if (a = 10) { ... } // Possible error
+			// Correct use of comparison
+			if (a == 10) { ... } // Expected check
+				</code></pre>
+			</section>
+
+			<section>
+				<h3>Control Flow Analysis</h3>
+				<p>CFA identifies unreachable code and other flow issues. For example, it detects code after a return
+					statement that will never execute.</p>
+				<pre><code class="language-javascript">
+			function example() {
+				return;
+				console.log('This will never be called');
+			}
+				</code></pre>
+			</section>
+
+			<section>
+				<h3>Control Flow Analysis</h3>
+				<div class="row">
+					<div class="column">
+						<div class="mermaid">
+							%%{
+							init: {
+							'theme': 'base',
+							'themeVariables': {
+							'fontSize': '15px',
+							'darkmode': true,
+							'lineColor': '#F8B229'
+							}
+							}
+							}%%
+							graph TD;
+							A[Start] --> B{Condition};
+							B -- Yes --> C[Block A];
+							C --> D{Another Condition};
+							D -- Yes --> E[Block B];
+							D -- No --> F[Block C];
+							E --> G[End];
+							F --> G;
+							B -- No --> G;
+						</div>
+					</div>
+					<div class="column">
+						<p>A Control Flow Graph is a graphical representation of all paths that might be traversed
+							through a program during its
+							execution.</p>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Building a CFG from an AST</h3>
+				<ul>
+					<li>Traverse AST for control flow elements (if-else, loops).</li>
+					<li>Create a node for each control flow element and sequential block.</li>
+					<li>Connect nodes with edges to show code flow.</li>
+					<li>Branch decision points to reflect possible execution paths.</li>
+					<li>Loop back edges at the end of loops to their start.</li>
+					<li>Mark entry and exit points of the CFG clearly.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Symbolic Execution and Abstract Interpretation</h3>
+				<p>Symbolic execution tests program paths with symbolic inputs, identifying potential errors like
+					division by zero.</p>
+				<p>Symbolic input is a variable used in program analysis that represents a range of possible values
+					rather than a specific one. </p>
+				<pre><code class="language-javascript">
+			function divide(x, y) {
+				return x / y; // Potential division by zero if y is symbolic and can be zero
+			}
+				</code></pre>
+			</section>
+
+			<section>
+				<h3>Dataflow Analysis</h3>
+				<p>Dataflow analysis tracks variable usage to prevent issues like uninitialized variables.</p>
+				<pre><code class="language-javascript">
+			let x;
+			console.log(x); // Uninitialized variable usage
+				</code></pre>
+			</section>
+
+			<section>
+				<h3>Interprocedural Analysis</h3>
+				<p>Interprocedural analysis checks interactions across functions, alerting to side effects or unintended
+					usages.</p>
+				<pre><code class="csharp">
+					// Command handler for creating an order
+					public class OrderCommandHandler {
+						private readonly Database db;
+					
+						public OrderCommandHandler(Database database) {
+							db = database;
+						}
+					
+						public void HandleCreateOrder(CreateOrderCommand command) {
+							var order = new Order(command.Data);
+							db.AddOrder(order);
+						}
+					}
+					
+					// Query handler for fetching order details
+					public class OrderQueryHandler {
+						private readonly Database db;
+					
+						public OrderQueryHandler(Database database) {
+							db = database;
+						}
+					
+						public OrderDetails GetOrderDetails(Guid orderId) {
+							return db.GetOrderById(orderId);
+						}
+					}
+					
+					// Interprocedural analysis would validate that OrderCommandHandler only modifies state and does not perform any queries.
+					// It would also check that OrderQueryHandler only reads state and does not modify it.
+									</code></pre>
+			</section>
+
+			<section>
+				<h3>Call Graph</h3>
+				<p>A call graph illustrates the calling relationships between different subroutines in a program.</p>
+				<div class="mermaid">
+					%%{
+					init: {
+					'theme': 'base',
+					'themeVariables': {
+					'fontSize': '30px',
+					'darkmode': true,
+					'lineColor': '#F8B229'
+					}
+					}
+					}%%
+					graph LR;
+					A[CreateOrder] -->|calls| B[ValidateOrder];
+					A -->|calls| C[SaveOrder];
+					B -->|calls| D[CheckInventory];
+					B -->|calls| E[VerifyPayment];
+					C -->|calls| F[UpdateDatabase];
+					C -->|calls| G[SendConfirmation];
+					D -->|calls| H[ReorderStock];
+					E -->|calls| I[ProcessPayment];
+					F -->|calls| J[LogTransaction];
+					G -->|calls| K[EmailCustomer];
+					I -->|calls| L[UpdatePaymentStatus];
+					J -->|calls| M[ArchiveOrder];
+				</div>
+			</section>
+
+			<section>
+				<h3>How to build a Call Graph</h3>
+				<ol>
+					<li>Traverse the AST to identify function declarations and add them to the symbol table.</li>
+					<li>Create nodes for each function call found during the traversal.</li>
+					<li>Connect nodes with edges from callers to callees using the symbol table.</li>
+					<li>Recursively process each function to map out all calls and complete the graph.</li>
+				</ol>
+			</section>
+
+			<section>
+				<h2>Conclusion</h2>
+			</section>
+
+			<section>
+				<h3>Programming Language Processing in IDE - Updated</h3>
+				<div class="mermaid">
+					<pre>
+						%%{
+							init: {
+								'theme': 'base',
+								'themeVariables': {
+									'fontSize': '30px',
+									'darkmode': true,
+									'lineColor': '#F8B229'
+								}
+							}
+						}%%
+						graph LR
+						A[Code] --> B[Lexical Analysis]
+						B --> C[Tokens]
+						C --> D[Syntax Analysis]
+						D --> E[AST]
+						E --> G[Semantic Analysis]
+						G --> I[PSI]
+						I --> K[Type System]
+						I --> L[Annotated AST]
+						I --> M[Symbol Tables]
+						I --> N[Declared Elements]
+						I --> O[Resolved References]
+						I --> P[Control Flow Graphs]
+						I --> R[Call Graph]
+						I --> S[...]
+						K --> Z[Static Analysis]
+						L --> Z
+						M --> Z
+						N --> Z
+						O --> Z
+						P --> Z
+						R --> Z
+						S --> Z
+					</pre>
+				</div>
+			</section>
+
+			<section>
+				<h3>What to learn about compilers?</h3>
+				<ul>
+					<li><strong>Operational Semantics:</strong> The rules that govern the behavior of program statements
+						during execution.</li>
+					<li><strong>Stack Machines:</strong> A model for executing code that uses a stack for storing data.
+					</li>
+					<li><strong>Code Generation:</strong> The process of converting high-level instructions into machine
+						code.</li>
+					<li><strong>Intermediate Code:</strong> A neutral code format used for optimization before final
+						code generation.</li>
+					<li><strong>Memory Management:</strong> Techniques for efficient allocation and management of memory
+						in programs.</li>
+					<li><strong>Register Allocation:</strong> The strategy for using CPU registers for variable storage
+						to enhance performance.</li>
+					<li><strong>Code Optimization:</strong> Methods for improving code to run faster and use fewer
+						resources.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>What to read?</h3>
+				<ul>
+					<li>"Types and Programming Languages" by Benjamin C. Pierce</li>
+					<li>"Programming Language Pragmatics" by Michael L. Scott</li>
+					<li>"Software Verification and Validation: An Engineering and Scientific Approach" by Norman E.
+						Fenton and James Neil</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Next: Dynamic Analysis</h3>
+				<p>
+					The upcoming lecture will cover Dynamic Analysis, detailing its integral role in IDE development.
+					We'll examine dynamic analysis tools, their application in real-time code evaluation, and their
+					contribution to advanced debugging and performance profiling.
+				</p>
+			</section>
+
+			<section>
+				<h3>Questions & Answers</h3>
+				<p>Thank you for your attention!</p>
+				<p>I'm now open to any questions you might have.</p>
+			</section>
+
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+			<script
+				src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/highlight.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/math/math.min.js"></script>
+			<script
+				src="https://cdn.jsdelivr.net/npm/reveal.js-mermaid-plugin@2.0.0/plugin/mermaid/mermaid.js"></script>
+			<script>
+				Reveal.initialize({
+					hash: true,
+					width: 1920,
+					height: 1080,
+					center: true,
+					margin: 0,
+					mermaid: {},
+					plugins: [RevealHighlight, RevealNotes, RevealMath.KaTeX, RevealMermaid]
+				});
+			</script>
+</body>
+
+</html>
