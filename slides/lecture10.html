@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>IDE Development Course - Debugging</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reset.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+	<link rel="stylesheet" href="dist/theme/jetbrains-dark.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/darkula.css">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+
+			<section class="background">
+				<h1>Debugging</h1>
+				<p class="event-name-label">
+					IDE Development Course
+				</p>
+				<p class="name-and-position-label">
+					Andrew Vasilyev
+				</p>
+				<div class="jb-square-logo"></div>
+			</section>
+
+			<section>
+				<h3>Today's Agenda</h3>
+				<ul>
+					<li>TO DO</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>What is a Debugger?</h2>
+			</section>
+
+			<section>
+				<h3>What is a Debugger?</h3>
+				<p>A debugger is a software tool used by programmers to inspect and manipulate the execution of a
+					computer program. It helps in identifying and fixing bugs or errors in the code.</p>
+			</section>
+
+			<section>
+				<h3>Purpose of a Debugger</h3>
+				<p>The primary purpose of a debugger is to allow programmers to see what is happening 'inside' a program
+					while it executes or what the program was doing at the moment it crashed.</p>
+			</section>
+
+			<section>
+				<h3>Machine-level Debuggers</h3>
+				<p>Machine-level debuggers enable debugging at the low-level assembly or machine code, offering granular
+					control and deep insights into the program's execution at the hardware level.</p>
+			</section>
+
+			<section>
+				<h3>Source-level Debuggers</h3>
+				<p>Source-level debuggers allow developers to debug programs at the high-level source code level,
+					providing an intuitive and user-friendly interface for code inspection and debugging.</p>
+			</section>
+
+			<section>
+				<h3>Standalone Debuggers</h3>
+				<p>Standalone debuggers are separate applications dedicated to debugging. They are often more
+					specialized and can be used independently of any specific IDE.</p>
+				<img src="path_to_standalone_debugger_image.jpg" alt="Standalone Debugger">
+			</section>
+
+			<section>
+				<h3>Integrated Debuggers</h3>
+				<p>Integrated debuggers are built into IDEs, offering a seamless debugging experience within the
+					development environment, with features tailored to the IDE's supported languages and frameworks.</p>
+			</section>
+
+			<section>
+				<h3>Remote Debugging</h3>
+				<p>Remote debugging refers to the process of debugging a program running on a different system (server,
+					virtual machine, or container) from the debugger itself, allowing developers to diagnose issues in
+					different environments.</p>
+				<img src="path_to_remote_debugging_setup_image.jpg" alt="Remote Debugging Setup">
+			</section>
+
+			<section>
+				<h3>Applications of Remote Debugging</h3>
+				<p>This technique is particularly useful for debugging applications in complex environments, such as
+					cloud-based architectures, where direct access to the execution environment is not feasible.</p>
+			</section>
+
+			<section>
+				<h3>Multi-threaded Application Debugging</h3>
+				<p>Debugging multi-threaded applications involves unique challenges due to the concurrent execution of
+					threads, making it harder to predict and replicate specific states and issues.</p>
+			</section>
+
+			<section>
+				<h3>Multi-threaded Debugging</h3>
+				<p>Effective techniques include setting thread-specific breakpoints, inspecting thread states, and
+					monitoring synchronization mechanisms like locks and semaphores.</p>
+				<div class="mermaid">
+					graph TB
+					A[Start Debugging] -->|Thread 1| B[Breakpoint Hit]
+					A -->|Thread 2| C[Continues Execution]
+					B -->|Inspect State| D[Modify Variables]
+					C -->|Parallel Execution| E[Monitor Thread State]
+				</div>
+			</section>
+
+			<section>
+				<h3>REPL</h3>
+				<p>A Read-Eval-Print Loop (REPL) is a simple, interactive computer programming environment. It allows
+					for the execution of user inputs and returns the results to the user. REPLs enable piecewise
+					execution of programs.</p>
+				<p>In a REPL environment, user inputs are read, evaluated (executed), and the results of this evaluation
+					are then printed out. This loop provides an interactive space for testing and debugging code.</p>
+			</section>
+
+			<section>
+				<h2>Evolution of Debuggers</h2>
+			</section>
+
+			<section>
+				<h3>1950s: Simple Logging Methods</h3>
+				<p>In the 1950s, debugging was a rudimentary process, largely based on the use of print statements and
+					manual logging. Developers relied on inserting print commands in their code to output variable
+					values and program states to a console or log file. This method, although primitive, was crucial for
+					early software development, allowing programmers to track the flow of execution and understand where
+					errors might be occurring.</p>
+			</section>
+
+			<section>
+				<h3>1970s: Introduction of Interactive Debuggers</h3>
+				<p>The 1970s introduced a significant advancement in debugging technology with the emergence of
+					interactive debuggers. These tools allowed developers to interact with running programs, setting
+					breakpoints, and inspecting program state in real-time. This innovation marked a departure from
+					static logging methods, providing a more dynamic and efficient approach to troubleshooting code.</p>
+			</section>
+
+			<section>
+				<h3>1990s: Emergence of Integrated Debuggers in IDEs</h3>
+				<p>The 1990s saw the integration of debuggers into Integrated Development Environments (IDEs),
+					significantly boosting developer productivity. This integration brought debugging tools directly
+					into the software development workflow, offering a seamless experience. Features like graphical
+					interfaces, source code highlighting, and context-aware debugging became commonplace, drastically
+					simplifying the debugging process.</p>
+			</section>
+
+			<section>
+				<h3>2000s Milestones</h3>
+				<p>Debugging took another major stride in the 2000s with the introduction of advanced features like
+					remote debugging and support for multi-threaded applications. Remote debugging allowed developers to
+					diagnose issues in software running on different machines or environments, while multi-threading
+					support was crucial for debugging more complex, performance-oriented applications.</p>
+			</section>
+
+			<section>
+				<h3>2010s: Advanced Features in Debugging</h3>
+				<p>The 2010s continued the trend of innovation in debugging with the further development of advanced
+					features. Debuggers became more sophisticated in handling remote systems and multi-threaded
+					applications, enabling developers to tackle increasingly complex software challenges. These
+					developments reflected the evolving landscape of software engineering, where applications often
+					spanned multiple platforms and environments.</p>
+			</section>
+
+			<section>
+				<h3>Influence of Programming Languages on Debugger Evolution</h3>
+				<p>The evolution of debugger technologies has been closely linked to the development of programming
+					languages, with each new language paradigm introducing unique debugging challenges and needs.</p>
+			</section>
+
+
+			<section>
+				<h3>Early Programming Languages</h3>
+				<p>In the era of early programming languages like Fortran and COBOL, debugging tools were rudimentary,
+					focused mainly on identifying syntax errors and basic runtime issues.</p>
+			</section>
+
+			<section>
+				<h3>Object-Oriented Languages</h3>
+				<p>The rise of object-oriented languages like Java and C++ necessitated debuggers that could handle
+					complexities like class hierarchies, object states, and encapsulation.</p>
+			</section>
+
+			<section>
+				<h3>Modern Languages</h3>
+				<p>Contemporary languages with advanced features, including concurrency and parallelism, have driven the
+					development of sophisticated debuggers capable of handling complex execution flows and environments.
+				</p>
+				<img src="path_to_language_evolution_image.jpg" alt="Programming Languages Evolution">
+			</section>
+
+			<section>
+				<h2>Features</h2>
+			</section>
+
+			<section>
+				<h3>Setting Breakpoints</h3>
+				<p>Breakpoints are fundamental to debugging, allowing developers to pause program execution at specific
+					points. They enable close examination of the state and behavior of the program at critical moments.
+				</p>
+				<ul>
+					<li>Conditional Breakpoints: Trigger based on specific conditions.</li>
+					<li>Line Breakpoints: Pause execution at a particular line in the code.</li>
+					<li>Function Breakpoints: Activate when a certain function is called.</li>
+					<li>Exception Breakpoints: Activate when a certain exception is thrown.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Stepping Through Code</h3>
+				<p>This feature allows developers to execute code one line or instruction at a time. It's crucial for
+					understanding the flow of execution and pinpointing where things go wrong.</p>
+				<ul>
+					<li>Step Over: Executes the next line of code, skipping functions.</li>
+					<li>Step Into: Moves into functions or methods for a deeper look.</li>
+					<li>Step Out: Exits the current function and returns to the caller.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Inspecting Variables</h3>
+				<p>Inspecting variables is a key feature allowing developers to view and analyze the current state of
+					variables at any point during program execution.</p>
+			</section>
+
+			<section>
+				<h3>Call Stack Inspection</h3>
+				<p>The call stack is a record of active function calls in the program, showing which functions are
+					running, where they were called from, and the state of their local variables. Inspecting the call
+					stack helps in tracing the path of execution and understanding program flow.</p>
+				<p>Inspecting the call stack is particularly useful for diagnosing errors and understanding complex
+					execution flows, especially in the case of nested function calls or recursive algorithms.</p>
+			</section>
+
+			<section>
+				<h3>Variable Inspection Tools</h3>
+				<p>Most debuggers provide a watch window or similar tools to monitor the values of variables, helping
+					developers understand how data changes over the course of execution.</p>
+			</section>
+			<section>
+				<h3>Modifying Program State</h3>
+				<p>Debuggers often allow for the modification of the program state, including changing variable values,
+					to test different scenarios and understand the impact of such changes.</p>
+				<p>This feature is particularly useful for testing how different inputs affect program behavior without
+					the need to stop and restart the program.</p>
+			</section>
+
+			<section>
+				<h3>Expression Evaluation</h3>
+				<p>Expression evaluation in debuggers allows developers to execute code snippets or evaluate expressions
+					on the fly. This is useful for testing hypotheses about code behavior or inspecting values without
+					modifying the source code.</p>
+			</section>
+
+			<section>
+				<h3>Hot Reloading</h3>
+				<p>Hot reloading refers to the ability of a debugger to apply changes in the code on the fly without
+					needing to restart the application. This feature greatly enhances the development workflow by
+					allowing immediate feedback on code modifications.</p>
+				<p>Hot reloading saves time and improves productivity by reducing the need for repetitive restarts and
+					recompilations. It enables a more interactive and responsive development experience.</p>
+			</section>
+
+			<section>
+				<h2>Implementation</h2>
+			</section>
+
+			<section>
+				<h3>Debugger Symbols</h3>
+				<p>Debugger symbols are markers or labels added to software programs during the development process.
+					They are used to establish a link between compiled binary code and the source code. They
+					include information like variable and function names, line numbers, and file names, which are
+					essential for debugging.</p>
+			</section>
+
+			<section>
+				<h3>How do Breakpoints work?</h3>
+				<p>Hardware breakpoints are implemented at the chipset level. They use comparators to match the
+					instruction being executed with a preset instruction in a peripheral register. When a match occurs,
+					a debug event is triggered, halting the processor or generating an exception. The number of hardware
+					breakpoints is typically limited due to hardware constraints.</p>
+				<p>Software breakpoints are implemented by the debugger itself. They function by modifying the code to
+					insert a breakpoint instruction or an instruction that causes a fault, thereby triggering a debug
+					event. Unlike hardware breakpoints, software breakpoints can be virtually unlimited, although they
+					face challenges like unpatchability of certain code regions (e.g., Read-Only Memory) and potential
+					code corruption if the debugger crashes.</p>
+				<p>Software breakpoints in some systems (like x86 architecture) use software interrupts, or 'traps,' to
+					implement breakpoints. The `int 3` instruction in x86 is an example, causing the operating system to
+					stop the process and send a signal, typically `SIGTRAP`, to the debugger.</p>
+			</section>
+
+			<section>
+				<h3>How does Stepping work?</h3>
+				<p>Historically, instruction stepping involved stopping the processor clock and manually advancing it
+					one cycle at a time. This required a control to stop the clock, a second control to manually advance
+					the clock, and a means of recording the state of the processor after each cycle.</p>
+				<p>In modern processors, similar functionality to manual stepping is achieved via a trap flag. This
+					flag, when enabled, instructs the processor to stop after each instruction, functioning similarly to
+					a breakpoint.</p>
+				<p>Instead of using a physical stop button, modern debuggers employ breakpoints or a 'Pause' request.
+					The debugger might also use system calls like `ptrace` on Linux to control the execution of a
+					process, stopping it at specific points or after each instruction using signals like `SIGTRAP`.</p>
+			</section>
+
+			<section>
+				<h3>How does Call Stack Inspection works</h3>
+				<p>When a program stops at a breakpoint, the debugger provides information about the current state,
+					including the current function and its callers. This is achieved by tracing function calls and
+					maintaining a record of active function calls in the program. This function
+					records the current state of the program, including the call stack, enabling the inspection of the
+					sequence of function calls.</p>
+			</section>
+
+			<section>
+				<h3>How does Expression Evaluator Work</h3>
+				<p>Evaluating an expression involves a complex interplay among the debug engine (DE), the symbol
+					provider (SP), the binder object, and the expression evaluator (EE). The EE takes an expression from
+					the DE in the form of a string and evaluates it using various interfaces.</p>
+				<p>The EE uses the binder object, provided by the DE, to get the value of symbols and objects in the
+					program.</p>
+				<p>Some debuggers, like Visual Studio, employ debugger intrinsic functions that allow the evaluation of
+					certain functions without altering the application state. These intrinsic functions are safe to
+					execute and can be used in all expressions.</p>
+			</section>
+
+			<section>
+				<h2>Conclusion</h2>
+			</section>
+
+			<section>
+				<h3>Next: Smart Search, Navigation, and Code Completion</h3>
+				<p>TO DO</p>
+			</section>
+
+			<section>
+				<h3>Questions & Answers</h3>
+				<p>Thank you for your attention!</p>
+				<p>I'm now open to any questions you might have.</p>
+			</section>
+
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+			<script
+				src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/highlight.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/math/math.min.js"></script>
+			<script
+				src="https://cdn.jsdelivr.net/npm/reveal.js-mermaid-plugin@2.0.0/plugin/mermaid/mermaid.js"></script>
+			<script>
+				Reveal.initialize({
+					hash: true,
+					width: 1920,
+					height: 1080,
+					center: true,
+					margin: 0,
+					mermaid: {},
+					plugins: [RevealHighlight, RevealNotes, RevealMath.KaTeX, RevealMermaid]
+				});
+			</script>
+</body>
+
+</html>
