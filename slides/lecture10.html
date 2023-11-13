@@ -42,60 +42,123 @@
 				<h3>What is a Debugger?</h3>
 				<p>A debugger is a software tool used by programmers to inspect and manipulate the execution of a
 					computer program. It helps in identifying and fixing bugs or errors in the code.</p>
-			</section>
-
-			<section>
-				<h3>Purpose of a Debugger</h3>
 				<p>The primary purpose of a debugger is to allow programmers to see what is happening 'inside' a program
 					while it executes or what the program was doing at the moment it crashed.</p>
 			</section>
 
 			<section>
 				<h3>Machine-level Debuggers</h3>
-				<p>Machine-level debuggers enable debugging at the low-level assembly or machine code, offering granular
-					control and deep insights into the program's execution at the hardware level.</p>
+				<div class="row">
+					<div class="column">
+						<img src="https://techpubs.jurassic.nl/manuals/0650/developer/WrkShp_OV/sgi_html/figures/a11646.gif"
+							width="700" />
+					</div>
+					<div class="column">
+						<p>Machine-level debuggers enable debugging at the low-level assembly or machine code, offering
+							granular
+							control and deep insights into the program's execution at the hardware level.</p>
+					</div>
+				</div>
 			</section>
 
 			<section>
 				<h3>Source-level Debuggers</h3>
-				<p>Source-level debuggers allow developers to debug programs at the high-level source code level,
-					providing an intuitive and user-friendly interface for code inspection and debugging.</p>
+				<div class="row">
+					<div class="column">
+						<img src="https://resources.jetbrains.com/help/img/idea/2023.2/debug_examining_frames_tab.png"
+							width="700" />
+					</div>
+					<div class="column">
+						<p>Source-level debuggers allow developers to debug programs at the high-level source code
+							level,
+							providing an intuitive and user-friendly interface for code inspection and debugging.</p>
+					</div>
+				</div>
 			</section>
 
 			<section>
 				<h3>Standalone Debuggers</h3>
-				<p>Standalone debuggers are separate applications dedicated to debugging. They are often more
-					specialized and can be used independently of any specific IDE.</p>
-				<img src="path_to_standalone_debugger_image.jpg" alt="Standalone Debugger">
+				<div class="row">
+					<div class="column">
+						<img src="https://i.stack.imgur.com/mHC8f.png" height="600" />
+					</div>
+					<div class="column">
+						<p>Standalone debuggers are separate applications dedicated to debugging. They are often more
+							specialized and can be used independently of any specific IDE.</p>
+					</div>
+				</div>
 			</section>
 
 			<section>
 				<h3>Integrated Debuggers</h3>
-				<p>Integrated debuggers are built into IDEs, offering a seamless debugging experience within the
-					development environment, with features tailored to the IDE's supported languages and frameworks.</p>
+
+				<div class="row">
+					<div class="column">
+						<img src="https://i.ytimg.com/vi/i6gdmT-BdOU/maxresdefault.jpg" width="700" />
+					</div>
+					<div class="column">
+						<p>Integrated debuggers are built into IDEs, offering a seamless debugging experience within the
+							development environment, with features tailored to the IDE's supported languages and
+							frameworks.</p>
+					</div>
+				</div>
 			</section>
 
 			<section>
 				<h3>Multi-threaded Application Debugging</h3>
-				<p>Debugging multi-threaded applications involves unique challenges due to the concurrent execution of
-					threads, making it harder to predict and replicate specific states and issues.</p>
+				<div class="row">
+					<div class="column">
+						<img src="https://learn.microsoft.com/en-us/visualstudio/debugger/media/vs-2022/dbg-multithreaded-parallel-stacks.png?view=vs-2022"
+							width="700" />
+						<img src="https://learn.microsoft.com/en-us/visualstudio/debugger/media/vs-2022/dbg-multithreaded-threads-window.png?view=vs-2022"
+							width="700" />
+
+					</div>
+					<div class="column">
+						<p>Debugging multi-threaded applications involves unique challenges due to the concurrent
+							execution of
+							threads, making it harder to predict and replicate specific states and issues.</p>
+					</div>
+				</div>
 			</section>
 
 			<section>
 				<h3>Remote Debugging</h3>
-				<p>Remote debugging refers to the process of debugging a program running on a different system (server,
-					virtual machine, or container) from the debugger itself, allowing developers to diagnose issues in
-					different environments.</p>
-				<img src="path_to_remote_debugging_setup_image.jpg" alt="Remote Debugging Setup">
+
+				<div class="row">
+					<div class="column">
+						<img src="https://learn.microsoft.com/en-us/visualstudio/debugger/media/vs-2022/remote-debugger-csharp.png?view=vs-2022"
+							width="700" />
+					</div>
+					<div class="column">
+						<p>Remote debugging refers to the process of debugging a program running on a different system
+							(server,
+							virtual machine, or container) from the debugger itself, allowing developers to diagnose
+							issues in
+							different environments.</p>
+					</div>
+				</div>
+
 			</section>
 
 			<section>
 				<h3>REPL</h3>
-				<p>A Read-Eval-Print Loop (REPL) is a simple, interactive computer programming environment. It allows
-					for the execution of user inputs and returns the results to the user. REPLs enable piecewise
-					execution of programs.</p>
-				<p>In a REPL environment, user inputs are read, evaluated (executed), and the results of this evaluation
-					are then printed out. This loop provides an interactive space for testing and debugging code.</p>
+				<div class="row">
+					<div class="column">
+						<img src="https://mallibone.com/assets/images/fb368afa-b3d6-4e93-80ff-38c39633d054.png"
+							width="700" />
+					</div>
+					<div class="column">
+						<p>A Read-Eval-Print Loop (REPL) is a simple, interactive computer programming environment. It
+							allows
+							for the execution of user inputs and returns the results to the user. REPLs enable piecewise
+							execution of programs.</p>
+						<p>In a REPL environment, user inputs are read, evaluated (executed), and the results of this
+							evaluation
+							are then printed out. This loop provides an interactive space for testing and debugging
+							code.</p>
+					</div>
+				</div>
 			</section>
 
 			<section>
@@ -104,28 +167,63 @@
 
 			<section>
 				<h3>1950s: Simple Logging Methods</h3>
-				<p>In the 1950s, debugging was a rudimentary process, largely based on the use of print statements and
-					manual logging. Developers relied on inserting print commands in their code to output variable
-					values and program states to a console or log file. This method, although primitive, was crucial for
-					early software development, allowing programmers to track the flow of execution and understand where
-					errors might be occurring.</p>
+				<div class="row">
+					<div class="column">
+						<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuft83sILOdlqK_z3cr5WjwBFoq2xRuyvkbg&usqp=CAU"
+							width="700" />
+					</div>
+					<div class="column">
+						<p>In the 1950s, debugging was a rudimentary process, largely based on the use of print
+							statements and
+							manual logging. Developers relied on inserting print commands in their code to output
+							variable
+							values and program states to a console or log file. This method, although primitive, was
+							crucial for
+							early software development, allowing programmers to track the flow of execution and
+							understand where
+							errors might be occurring.</p>
+					</div>
+				</div>
+			</section>
+
+
+
+			<section>
+				<h3>1970s: Interactive Debuggers</h3>
+				<div class="row">
+					<div class="column">
+						<img src="https://upload.wikimedia.org/wikipedia/commons/6/69/GNU_gdb_12.1_screenshot.png"
+							width="700" />
+					</div>
+					<div class="column">
+						<p>The 1970s introduced a significant advancement in debugging technology with the emergence of
+							interactive debuggers. These tools allowed developers to interact with running programs,
+							setting
+							breakpoints, and inspecting program state in real-time. This innovation marked a departure
+							from
+							static logging methods, providing a more dynamic and efficient approach to troubleshooting
+							code.</p>
+					</div>
+				</div>
+
 			</section>
 
 			<section>
-				<h3>1970s: Introduction of Interactive Debuggers</h3>
-				<p>The 1970s introduced a significant advancement in debugging technology with the emergence of
-					interactive debuggers. These tools allowed developers to interact with running programs, setting
-					breakpoints, and inspecting program state in real-time. This innovation marked a departure from
-					static logging methods, providing a more dynamic and efficient approach to troubleshooting code.</p>
-			</section>
-
-			<section>
-				<h3>1990s: Emergence of Integrated Debuggers in IDEs</h3>
-				<p>The 1990s saw the integration of debuggers into Integrated Development Environments (IDEs),
-					significantly boosting developer productivity. This integration brought debugging tools directly
-					into the software development workflow, offering a seamless experience. Features like graphical
-					interfaces, source code highlighting, and context-aware debugging became commonplace, drastically
-					simplifying the debugging process.</p>
+				<h3>1990s: Integrated Debuggers</h3>
+				<div class="row">
+					<div class="column">
+						<img src="https://blarg.ca/content/images/2018/10/turbo_pascal_7_debugging.png" width="700" />
+					</div>
+					<div class="column">
+						<p>The 1990s saw the integration of debuggers into Integrated Development Environments (IDEs),
+							significantly boosting developer productivity. This integration brought debugging tools
+							directly
+							into the software development workflow, offering a seamless experience. Features like
+							graphical
+							interfaces, source code highlighting, and context-aware debugging became commonplace,
+							drastically
+							simplifying the debugging process.</p>
+					</div>
 			</section>
 
 			<section>
@@ -134,15 +232,6 @@
 					remote debugging and support for multi-threaded applications. Remote debugging allowed developers to
 					diagnose issues in software running on different machines or environments, while multi-threading
 					support was crucial for debugging more complex, performance-oriented applications.</p>
-			</section>
-
-			<section>
-				<h3>2010s: Advanced Features in Debugging</h3>
-				<p>The 2010s continued the trend of innovation in debugging with the further development of advanced
-					features. Debuggers became more sophisticated in handling remote systems and multi-threaded
-					applications, enabling developers to tackle increasingly complex software challenges. These
-					developments reflected the evolving landscape of software engineering, where applications often
-					spanned multiple platforms and environments.</p>
 			</section>
 
 			<section>
@@ -174,25 +263,32 @@
 			</section>
 
 			<section>
-				<h3>Inspecting Variables</h3>
-				<p>Inspecting variables is a key feature allowing developers to view and analyze the current state of
-					variables at any point during program execution.</p>
+				<h3>Call Stack and Variables Inspection</h3>
+				<div class="row">
+					<div class="column">
+						<img src="https://resources.jetbrains.com/help/img/idea/2023.2/go_open_watches_pane.png"
+							width="700" />
+					</div>
+					<div class="column">
+						<p>The call stack is a record of active function calls in the program, showing which functions
+							are
+							running, where they were called from, and the state of their local variables. Inspecting the
+							call
+							stack helps in tracing the path of execution and understanding program flow.</p>
+						<p>Inspecting the call stack is particularly useful for diagnosing errors and understanding
+							complex
+							execution flows, especially in the case of nested function calls or recursive algorithms.
+						</p>
+						<p>Inspecting variables is a key feature allowing developers to view and analyze the current
+							state of
+							variables at any point during program execution.</p>
+						<p>Most debuggers provide a watch window or similar tools to monitor the values of variables,
+							helping
+							developers understand how data changes over the course of execution.</p>
+					</div>
+				</div>
 			</section>
 
-			<section>
-				<h3>Call Stack Inspection</h3>
-				<p>The call stack is a record of active function calls in the program, showing which functions are
-					running, where they were called from, and the state of their local variables. Inspecting the call
-					stack helps in tracing the path of execution and understanding program flow.</p>
-				<p>Inspecting the call stack is particularly useful for diagnosing errors and understanding complex
-					execution flows, especially in the case of nested function calls or recursive algorithms.</p>
-			</section>
-
-			<section>
-				<h3>Variable Inspection Tools</h3>
-				<p>Most debuggers provide a watch window or similar tools to monitor the values of variables, helping
-					developers understand how data changes over the course of execution.</p>
-			</section>
 			<section>
 				<h3>Modifying Program State</h3>
 				<p>Debuggers often allow for the modification of the program state, including changing variable values,
@@ -202,10 +298,21 @@
 			</section>
 
 			<section>
-				<h3>Expression Evaluation</h3>
-				<p>Expression evaluation in debuggers allows developers to execute code snippets or evaluate expressions
-					on the fly. This is useful for testing hypotheses about code behavior or inspecting values without
-					modifying the source code.</p>
+				<h3>Expression Evaluation and REPL</h3>
+				<div class="row">
+					<div class="column">
+						<img src="https://michaelscodingspot.com/wp-content/uploads/2019/07/immediate-window-vs.png"
+							width="700" />
+					</div>
+					<div class="column">
+						<p>Expression evaluation in debuggers allows developers to execute code snippets or evaluate
+							expressions
+							on the fly. This is useful for testing hypotheses about code behavior or inspecting values
+							without
+							modifying the source code.</p>
+					</div>
+				</div>
+
 			</section>
 
 			<section>
