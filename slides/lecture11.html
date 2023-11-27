@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>IDE Development Course - Search, Navigation, and Code Completion</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reset.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+	<link rel="stylesheet" href="dist/theme/jetbrains-dark.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/darkula.css">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+
+			<section class="background">
+				<h1>Advanced <br /> Features</h1>
+				<p class="event-name-label">
+					IDE Development Course
+				</p>
+				<p class="name-and-position-label">
+					Andrew Vasilyev
+				</p>
+				<div class="jb-square-logo"></div>
+			</section>
+
+			<section>
+				<h3>Lecture Agenda</h3>
+				<ul>
+					<li>Solutiod-wide Analysis</li>
+					<li>Code Navigation</li>
+					<li>"Find Usages" Feature</li>
+					<li>Code Completion</li>
+					<li>Refactorings and Quick Fixes</li>
+					<li>Code Generation</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Solution-wide Analysis</h2>
+			</section>
+
+			<section>
+				<h3>Solution-wide Analysis</h3>
+				<div class="row">
+					<div class="column">
+						<img src="https://resources.jetbrains.com/help/img/dotnet/2023.2/Reference__Windows__Errors_in_Solution.png"
+							width="700" />
+					</div>
+					<div class="column">
+						<p>Solution-wide analysis is a comprehensive process within IDEs that performs an extensive scan
+							of all the files in a software solution. This technique detects errors, warnings, and
+							potential improvements across the entire project scope, ensuring a higher level of code
+							quality and adherence to best practices.</p>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>How to Implement?</h3>
+				<ul>
+					<li><strong>Run in Background in Multiple Threads:</strong> Utilize parallel computing to perform
+						the
+						analysis without blocking the main IDE operations, enhancing performance and responsiveness.
+					</li>
+					<li><strong>Fine-Grained File Locks:</strong> Implement a locking mechanism that minimizes conflicts
+						and
+						interference with ongoing development activities while ensuring data integrity during analysis.
+					</li>
+					<li><strong>Make It Iterative:</strong> Design the analysis process to be iterative, allowing
+						incremental updates and minimizing the need for full project scans with each change.</li>
+					<li><strong>Reanalyze Only Changed and Dependent Files:</strong> Develop a dependency graph to track
+						file relationships and limit reanalysis to only those files and their dependencies affected by
+						recent changes.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Code Navigation</h2>
+			</section>
+
+			<section>
+				<h3>Code Navigation</h3>
+				<div class="row">
+					<div class="column">
+						<img src="https://www.jetbrains.com/resharper/features/screenshots/100/navigate_to.png"
+							width="700" />
+					</div>
+					<div class="column">
+						<p>Code Navigation in an IDE is a sophisticated set of features that facilitates seamless
+							movement across various components of a software project. It enables developers to
+							efficiently locate, view, and modify code segments within extensive codebases, enhancing
+							overall productivity and code comprehension.</p>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Code Navigation - Go To Declaration</h3>
+				<div class="row">
+					<div class="column">
+						<img src="https://www.jetbrains.com/resharper/features/screenshots/50/go_to_declaration.png"
+							width="700" />
+					</div>
+					<div class="column">
+						<p>'Go To Declaration' is a pivotal feature in modern IDEs that allows developers to instantly
+							navigate to the source declaration of any symbol in the code. This quick jump is
+							instrumental in understanding the underlying properties, definitions, and configurations of
+							variables, methods, classes, or interfaces.</p>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Code Navigation - Go To Symbol</h3>
+				<div class="row">
+					<div class="column">
+						<img src="https://www.jetbrains.com/resharper/features/screenshots/100/go_to_symbol.png"
+							width="700" />
+					</div>
+					<div class="column">
+						<p>'Go To Symbol' empowers developers to directly access any specific symbol in the codebase. It
+							bypasses the need for manual searching, allowing quick navigation to functions, variables,
+							classes, or any other code elements, significantly streamlining the development process.</p>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Code Navigation - Go To File Member</h3>
+				<div class="row">
+					<div class="column">
+						<img src="https://www.jetbrains.com/resharper/features/screenshots/100/go_to_file_member.png"
+							width="700" />
+					</div>
+					<div class="column">
+						<p>'Go To File Member' is a navigation feature focused on finding and accessing specific members
+							within a file, such as methods, fields, or properties. This feature is invaluable in
+							navigating large files and understanding the structure and components of the code at a
+							glance.</p>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Implementing Code Navigation</h3>
+				<ul>
+					<li><strong>Resolve Reference if Needed:</strong> Analyze the code to resolve references, guiding
+						navigation towards the correct declaration or symbol.</li>
+					<li><strong>Determine Context:</strong> Ascertain the current context within the IDE to offer
+						contextually relevant navigation options.</li>
+					<li><strong>Determine Search Domain:</strong> Specify the scope of the navigation search, be it a
+						specific file, project, or across the entire codebase.</li>
+					<li><strong>Traverse Symbol Tables:</strong> Navigate through symbol tables efficiently to locate
+						the
+						requested navigation target.</li>
+					<li><strong>Build a List of Variants:</strong> Compile a comprehensive list of potential navigation
+						destinations based on the search query and context.</li>
+					<li><strong>Offer User Selection of Variants:</strong> Present the user with a choice of navigation
+						options, allowing them to select the most relevant destination.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>"Find Usages" Feature</h3>
+				<div class="row">
+					<div class="column">
+						<img src="https://resources.jetbrains.com/help/img/dotnet/2023.2/Navigation_and_Search__Finding_Usages__Find_Usages__one_and_several.png"
+							width="700" />
+					</div>
+					<div class="column">
+						<p>The "Find Usages" feature is a crucial tool in IDEs that empowers developers to pinpoint
+							every instance where a specific symbol, like a variable, method, or class, is utilized in
+							the codebase. This functionality is pivotal for assessing the ramifications of code
+							modifications, aiding in effective refactoring, and ensuring code integrity.</p>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Implementing "Find Usages"</h3>
+				<ul>
+					<li><strong>Determine Context and Domain:</strong> Identify the current coding environment and the
+						scope
+						of the analysis, considering factors such as programming language and project-specific
+						characteristics.</li>
+					<li><strong>Scan Project and Resolve References:</strong> Conduct a comprehensive scan of the
+						project,
+						resolving all code references to ensure accurate identification of symbol usage.</li>
+					<li><strong>Traverse Symbol Tables and Collect Occurrences:</strong> Methodically navigate through
+						symbol tables, gathering instances of the symbol's occurrences for a thorough analysis.</li>
+					<li><strong>Prebuild Symbol Index if Solution-Wide Error Analysis (SWEA) is Available:</strong>
+						Leverage
+						SWEA to construct an index of symbols, which accelerates the "Find Usages" process and enhances
+						accuracy.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Challenges</h3>
+				<ul>
+					<li><strong>Handling Large Codebases:</strong> Managing the complexity and scale of extensive
+						projects.
+					</li>
+					<li><strong>Accurate Symbol Resolution:</strong> Ensuring precise identification of symbols amidst
+						various scopes and declarations in complex code environments.</li>
+					<li><strong>Maintaining Context Relevance:</strong> Providing results that are relevant to the
+						developer's current context and do not overwhelm with unnecessary data.</li>
+					<li><strong>Performance Optimization:</strong> Balancing thoroughness of search with the need for
+						speed,
+						ensuring that the feature does not hinder the overall performance of the IDE.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Code Completion</h2>
+			</section>
+
+			<section>
+				<h3>Code Completion</h3>
+				<div class="row">
+					<div class="column">
+						<img src="https://resources.jetbrains.com/help/img/dotnet/2023.2/Coding_Assistance__Code_Completion__Smart__smart_dot.png"
+							width="700" />
+					</div>
+					<div class="column">
+						<p>Code Completion in IDEs is an advanced feature designed to enhance coding efficiency by
+							predicting and suggesting possible code fragments based on the current context. It
+							significantly speeds up the coding process by reducing typing effort and helps in avoiding
+							syntax and typographical errors.</p>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>How to implement?</h3>
+				<ul>
+					<li><strong>Determine Qualifier and Context:</strong> Identify the current coding context and the
+						qualifier from which suggestions will be generated.</li>
+					<li><strong>Traverse Symbol Tables and Collect Variants:</strong> Methodically navigate through
+						symbol tables to gather possible code completions.</li>
+					<li><strong>Prioritize Variants:</strong> Organize the collected variants in a logical order,
+						prioritizing
+						the most relevant suggestions based on context.</li>
+					<li><strong>Offer User to Select:</strong> Display a sorted list of suggestions to the user,
+						allowing them to choose the most appropriate completion.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Prioritization Techniques</h3>
+				<ul>
+					<li><strong>Frequency of Use:</strong> Prioritize suggestions based on the frequency of their usage
+						in the codebase.</li>
+					<li><strong>Contextual Relevance:</strong> Rank suggestions higher if they are more relevant to the
+						current coding context.</li>
+					<li><strong>Lexical Proximity:</strong> Give preference to symbols that are lexically closer to the
+						point of completion.</li>
+					<li><strong>Historical User Preference:</strong> Adapt suggestions based on the historical
+						preferences and patterns of the developer.</li>
+					<li><strong>Typing Pattern Recognition:</strong> Utilize intelligent algorithms to predict likely
+						completions based on the developer's typing patterns.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Code Generation and Modification</h2>
+			</section>
+
+			<section>
+				<h3>Code Generation</h3>
+				<div class="row">
+					<div class="column">
+						<img src="https://www.jetbrains.com/resharper/features/screenshots/20171/create_from_usage.gif"
+							width="700" />
+					</div>
+					<div class="column">
+						<p>Code generation in IDEs automates the creation of code snippets and structures, significantly
+							reducing manual coding effort. It enhances productivity by generating reliable,
+							pattern-based code for common programming tasks, like setting up boilerplate code,
+							implementing patterns, or creating CRUD operations. This feature is especially useful in
+							large projects where consistency and adherence to design patterns are crucial.</p>
+					</div>
+				</div>
+			</section>
+
+
+			<section>
+				<h3>Refactorings</h3>
+				<div class="row">
+					<div class="column">
+						<img src="https://www.jetbrains.com/resharper/features/screenshots/50/rename_refactoring_in_XAML.png"
+							width="700" />
+					</div>
+					<div class="column">
+						<p>Refactoring is the process of restructuring existing computer code without changing its
+							external behavior. It's a vital aspect of software maintenance and evolution, aimed at
+							improving the non-functional attributes of the code. Common refactoring activities include
+							renaming variables for clarity, breaking down large functions into smaller ones, and
+							reorganizing code for better readability and maintainability. IDEs assist in refactoring by
+							automating these tasks and ensuring that changes do not affect the program's functionality.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>Quickfixes and Context Actions</h3>
+				<div class="row">
+					<div class="column">
+						<img src="https://www.jetbrains.com/resharper/features/screenshots/20163/qfix_enumerate_to_list.gif"
+							width="700" />
+						<img src="https://www.jetbrains.com/resharper/features/screenshots/20163/qf_vs_ca.png"
+							width="700" />
+					</div>
+					<div class="column">
+						<p>
+							Quickfixes in IDEs are automated solutions offered to resolve detected code issues, like
+							syntax errors or potential bugs. They provide immediate and context-sensitive corrections
+							that improve code quality and adherence to best practices. Context Actions, on the other
+							hand, are proactive suggestions not necessarily tied to code problems but aimed at enhancing
+							code readability, structure, or performance. Unlike Quickfixes, which are often essential
+							for code correctness, Context Actions offer optional, yet beneficial, transformations and
+							refactorings to improve the overall quality and maintainability of the code.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>How to Implement?</h3>
+				<ul>
+					<li><strong>Analyze PSI:</strong> Examine PSI to understand the current
+						code structure and identify what should be done.</li>
+					<li><strong>Modify/Create PSI:</strong> Based on the refactoring needs, modify existing PSI elements
+						or create new ones to represent the desired changes.</li>
+					<li><strong>Validate Updated PSI:</strong> Ensure that the changes made to the PSI are valid and do
+						not break the code structure or logic.</li>
+					<li><strong>Fix Issues:</strong> Address any issues or inconsistencies identified during the PSI
+						validation step.</li>
+					<li><strong>Materialize Updated PSI Nodes:</strong> Convert the modified or newly created PSI
+						elements into actual code changes.</li>
+					<li><strong>Replace Old Code with New:</strong> Apply the final changes to the codebase by replacing
+						the old code with the newly generated code, ensuring a seamless transition and maintaining code
+						integrity.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>How to Implement?</h3>
+				<ul>
+					<li>
+						<strong>Modification:</strong> Utilize the UnitOfWork pattern or PSI transactions for safe and
+						atomic code modifications. This approach allows for grouping a series of changes into a single
+						operation, ensuring consistency and enabling easier rollback if needed.
+					</li>
+					<li>
+						<strong>Validation:</strong> Conduct thorough checks for name conflicts, correct usage of
+						variables and methods, and proper module imports. This step is crucial to avoid introducing
+						errors into the codebase and to ensure that the refactoring aligns with the existing code
+						architecture and dependencies.
+					</li>
+					<li>
+						<strong>Materialization:</strong> Traverse the PSI nodes in-depth to generate new code segments.
+						Carefully replace the old code with the new, ensuring that the new code integrates seamlessly
+						with the rest of the project. This process involves not just the physical replacement of code
+						but also the preservation of code formatting, comments, and other non-functional elements.
+					</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Challenges</h3>
+				<ul>
+					<li>
+						<strong>Behavioral Preservation:</strong> Ensuring that the refactored code maintains the same
+						external behavior and functionality as the original.
+					</li>
+					<li>
+						<strong>Consistency:</strong> Achieving consistency in both code structure and design patterns
+						across the entire codebase. Refactoring should unify disparate coding practices to ensure
+						uniformity, which is especially challenging in large or legacy codebases with varied coding
+						styles and practices.
+					</li>
+					<li>
+						<strong>Bulk Updates:</strong> Managing bulk updates efficiently while ensuring accuracy and
+						consistency is a significant challenge. It involves updating large portions of the codebase
+						simultaneously, which can introduce risks of mass errors or inconsistencies if not managed
+						carefully.
+					</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Challenges</h3>
+				<ul>
+					<li>
+						<strong>Code Style:</strong> Maintaining a consistent code style during refactoring is crucial
+						for readability and maintainability. Refactoring should adhere to the project's coding standards
+						and style guides to ensure that the new code fits seamlessly with the existing codebase.
+					</li>
+					<li>
+						<strong>Comments:</strong> Preserving and updating comments during refactoring is essential to
+						keep the code well-documented. However, it is challenging to update comments automatically to
+						reflect changes in the code, often requiring manual review and adjustments.
+					</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Example: "Rename" Refactoring</h3>
+				<ul>
+					<li>
+						<strong>Identify Rename Scope:</strong> Analyze the codebase to determine the variables,
+						methods, classes, or files to be renamed. This step includes identifying all references to these
+						elements throughout the project to ensure a comprehensive renaming.
+					</li>
+					<li>
+						<strong>Symbol Resolution:</strong> Use symbol resolution techniques to accurately
+						identify and distinguish all instances of the symbol. This ensures that only relevant references
+						are affected by the rename operation, avoiding unintentional changes to unrelated code.
+					</li>
+					<li>
+						<strong>Conflict Detection:</strong> Scan for potential naming conflicts or
+						ambiguities that might arise from the renaming. This involves checking against existing names in
+						the scope and considering language-specific naming rules.
+					</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Example: "Rename" Refactoring</h3>
+				<ul>
+					<li>
+						<strong>User Input and Preview:</strong> Engage the user in the process by allowing them to
+						input the new name and providing a preview of the changes. This step includes showing the impact
+						of the rename operation on various parts of the codebase.
+					</li>
+					<li>
+						<strong>Refactoring Execution:</strong> Execute the renaming process across the entire PSI,
+						ensuring that all identified references are updated consistently and
+						correctly, thereby maintaining the integrity of the codebase.
+					</li>
+					<li>
+						<strong>Materialize Changes:</strong> Reflect the changes made in the PSI in the project files.
+						This includes updating the code files, any related documentation, and ensuring that the changes
+						persist across the development environment.
+					</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Conclusion</h2>
+			</section>
+
+			<section>
+				<h3>Even More Features</h3>
+				<ul>
+					<li><strong>Typing Assistance:</strong> Tools that aid in reducing typing effort and errors, such as
+						auto-indentation and brace matching.</li>
+					<li><strong>Full Text Search:</strong> A feature that allows developers to search across the entire
+						codebase for specific text strings.</li>
+					<li><strong>Semantic Search:</strong> Advanced search functionality that understands the context and
+						semantics of the code, beyond mere text matching.</li>
+					<li><strong>Fuzzy and Typing-Errors-Proof Search:</strong> Search capabilities that can tolerate and
+						correct typing errors, offering relevant results despite inaccuracies.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Even More Features</h3>
+				<ul>
+					<li><strong>Code Hierarchies and Diagrams:</strong> Tools for visualizing code structures and
+						relationships through hierarchies and diagrams, aiding in understanding complex codebases.</li>
+					<li><strong>Code Style and Cleanup:</strong> Features that help in maintaining a consistent coding
+						style and automatically cleaning up code to meet predefined standards.</li>
+					<li><strong>Unit-Testing Assistance:</strong> Integrated tools that support the creation, execution,
+						and management of unit tests, streamlining the testing process.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Next: Artificial Intelligence and the Future of IDEs</h3>
+				<p>Explore how Artificial Intelligence (AI) is shaping the future of Integrated Development Environments
+					(IDEs), transforming them into more intelligent, efficient, and intuitive tools. Discuss the
+					potential of AI in code analysis, automated refactoring, predictive coding, and personalized
+					developer assistance, and how these advancements could revolutionize software development processes.
+				</p>
+			</section>
+
+			<section>
+				<h3>Questions & Answers</h3>
+				<p>Thank you for your attention!</p>
+				<p>I'm now open to any questions you might have.</p>
+			</section>
+
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+			<script
+				src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/highlight.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/math/math.min.js"></script>
+			<script
+				src="https://cdn.jsdelivr.net/npm/reveal.js-mermaid-plugin@2.0.0/plugin/mermaid/mermaid.js"></script>
+			<script>
+				Reveal.initialize({
+					hash: true,
+					width: 1920,
+					height: 1080,
+					center: true,
+					margin: 0,
+					mermaid: {},
+					plugins: [RevealHighlight, RevealNotes, RevealMath.KaTeX, RevealMermaid]
+				});
+			</script>
+</body>
+
+</html>
