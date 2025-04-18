@@ -27,6 +27,7 @@
 					Andrew Vasilyev
 				</p>
 				<div class="jb-square-logo"></div>
+				<p class="license-label">Licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></p>
 			</section>
 
 			<section>
@@ -106,9 +107,9 @@
 								E["Expression: x + 5"]
 								F["Variable: x"]
 								G["Constant: 5"]
-							
+
 								A --> B
-							
+
 								%% Inherited Attributes
 								B -->|Scope: Global| C
 								C -->|Scope: Block 1| D
@@ -158,7 +159,7 @@
 								D["Multiplication"]
 								E["4 (int)"]
 								F["5 (int)"]
-														
+
 								%% Synthesized Attributes
 								C -->|"Type: int"| B
 								E -->|"Type: int"| D
@@ -200,45 +201,45 @@
 						sealed class Node {
 							abstract fun accept(visitor: Visitor): Int
 						}
-						
+
 						data class IntegerNode(val value: Int) : Node() {
 							override fun accept(visitor: Visitor): Int {
 								return visitor.visit(this)
 							}
 						}
-						
+
 						data class AdditionNode(val left: Node, val right: Node) : Node() {
 							override fun accept(visitor: Visitor): Int {
 								return visitor.visit(this)
 							}
 						}
-						
+
 						data class MultiplicationNode(val left: Node, val right: Node) : Node() {
 							override fun accept(visitor: Visitor): Int {
 								return visitor.visit(this)
 							}
 						}
-						
+
 						interface Visitor {
 							fun visit(node: IntegerNode): Int
 							fun visit(node: AdditionNode): Int
 							fun visit(node: MultiplicationNode): Int
 						}
-						
+
 						class EvaluationVisitor : Visitor {
 							override fun visit(node: IntegerNode): Int {
 								return node.value
 							}
-						
+
 							override fun visit(node: AdditionNode): Int {
 								return node.left.accept(this) + node.right.accept(this)
 							}
-						
+
 							override fun visit(node: MultiplicationNode): Int {
 								return node.left.accept(this) * node.right.accept(this)
 							}
 						}
-						
+
 						fun main() {
 							val expression = AdditionNode(
 								IntegerNode(3),
@@ -247,7 +248,7 @@
 									IntegerNode(5)
 								)
 							)
-						
+
 							val visitor = EvaluationVisitor()
 							val result = expression.accept(visitor)
 							println(result)  // Output: 23
@@ -264,56 +265,56 @@
 							fun nest(): SymbolTable {
 								return SymbolTable(table.toMutableMap(), this)
 							}
-						
+
 							fun set(name: String, value: Int) {
 								table[name] = value
 							}
-						
+
 							operator fun get(name: String): Int? {
 								return table[name] ?: parent?.get(name)
 							}
 						}
-						
+
 						sealed class Node {
 							abstract fun accept(visitor: Visitor, symbolTable: SymbolTable): Int
 						}
-						
+
 						data class BlockNode(val statements: List<Node>) : Node() {
 							override fun accept(visitor: Visitor, symbolTable: SymbolTable): Int {
 								return visitor.visit(this, symbolTable)
 							}
 						}
-						
+
 						data class IntegerNode(val value: Int) : Node() {
 							override fun accept(visitor: Visitor, symbolTable: SymbolTable): Int {
 								return visitor.visit(this, symbolTable)
 							}
 						}
-						
+
 						data class VariableNode(val name: String) : Node() {
 							override fun accept(visitor: Visitor, symbolTable: SymbolTable): Int {
 								return visitor.visit(this, symbolTable)
 							}
 						}
-						
+
 						data class DeclarationNode(val name: String, val expression: Node) : Node() {
 							override fun accept(visitor: Visitor, symbolTable: SymbolTable): Int {
 								return visitor.visit(this, symbolTable)
 							}
 						}
-						
+
 						data class AdditionNode(val left: Node, val right: Node) : Node() {
 							override fun accept(visitor: Visitor, symbolTable: SymbolTable): Int {
 								return visitor.visit(this, symbolTable)
 							}
 						}
-						
+
 						data class MultiplicationNode(val left: Node, val right: Node) : Node() {
 							override fun accept(visitor: Visitor, symbolTable: SymbolTable): Int {
 								return visitor.visit(this, symbolTable)
 							}
 						}
-						
+
 						interface Visitor {
 							fun visit(node: BlockNode, symbolTable: SymbolTable): Int
 							fun visit(node: IntegerNode, symbolTable: SymbolTable): Int
@@ -322,7 +323,7 @@
 							fun visit(node: AdditionNode, symbolTable: SymbolTable): Int
 							fun visit(node: MultiplicationNode, symbolTable: SymbolTable): Int
 						}
-						
+
 						class EvaluationVisitor : Visitor {
 							override fun visit(node: BlockNode, symbolTable: SymbolTable): Int {
 								var lastResult = 0
@@ -332,30 +333,30 @@
 								}
 								return lastResult
 							}
-						
+
 							override fun visit(node: IntegerNode, symbolTable: SymbolTable): Int {
 								return node.value
 							}
-						
+
 							override fun visit(node: VariableNode, symbolTable: SymbolTable): Int {
 								return symbolTable[node.name] ?: error("Undefined variable: ${node.name}")
 							}
-						
+
 							override fun visit(node: DeclarationNode, symbolTable: SymbolTable): Int {
 								val value = node.expression.accept(this, symbolTable)
 								symbolTable.set(node.name, value)
 								return value
 							}
-						
+
 							override fun visit(node: AdditionNode, symbolTable: SymbolTable): Int {
 								return node.left.accept(this, symbolTable) + node.right.accept(this, symbolTable)
 							}
-						
+
 							override fun visit(node: MultiplicationNode, symbolTable: SymbolTable): Int {
 								return node.left.accept(this, symbolTable) * node.right.accept(this, symbolTable)
 							}
 						}
-						
+
 						fun main() {
 							val program = BlockNode(
 								listOf(
@@ -372,7 +373,7 @@
 									)
 								)
 							)
-						
+
 							val visitor = EvaluationVisitor()
 							val result = program.accept(visitor, SymbolTable())
 							println(result)  // Output: 7
@@ -754,7 +755,7 @@
 									)
 								)
 							)
-						
+
 							val typeChecker = TypeCheckingVisitor()
 							val (result, type) = program.accept(typeChecker, SymbolTable()) as Pair<Any, Type>
 							println(result)  // Output: hello world

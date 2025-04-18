@@ -16,10 +16,7 @@
 		<div class="slides">
 
 			<section class="background">
-				<h1>Understanding<br />
-					Programming Language<br />
-					Part 4
-				</h1>
+				<h1>Understanding Programming Language Part 4</h1>
 				<p class="event-name-label">
 					IDE Development Course
 				</p>
@@ -27,6 +24,7 @@
 					Andrew Vasilyev
 				</p>
 				<div class="jb-square-logo"></div>
+				<p class="license-label">Licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></p>
 			</section>
 
 			<section>
@@ -62,26 +60,26 @@
 				public int multiply(int a, int b) {
 					return a * b;
 				}
-				
+
 				// Overloaded method with different signature
 				public double multiply(double a, double b) {
 					return a * b;
 				}
 			}
-			
+
 			// Dynamic polymorphism example in Java
 			class Animal {
 				public void sound() {
 					System.out.println("Animal makes a sound");
 				}
 			}
-			
+
 			class Dog extends Animal {
 				public void sound() {
 					System.out.println("Dog barks");
 				}
 			}
-			
+
 			Animal animal = new Dog();
 			animal.sound(); // Outputs: Dog barks
 				</code></pre>
@@ -97,11 +95,11 @@
 				public int add(int a, int b) {
 					return a + b;
 				}
-				
+
 				public double add(double a, double b) {
 					return a + b;
 				}
-				
+
 				public String add(String a, String b) {
 					return a + b;
 				}
@@ -117,16 +115,16 @@
 			// Parametric polymorphism example in Java (Generics)
 			class Box<T> {
 				private T t;
-			
+
 				public void set(T t) {
 					this.t = t;
 				}
-			
+
 				public T get() {
 					return t;
 				}
 			}
-			
+
 			Box<Integer> integerBox = new Box<Integer>();
 			Box<String> stringBox = new Box<String>();
 				</code></pre>
@@ -144,7 +142,7 @@
 					int integerNumber = 42;
 					// Automatic conversion from int to double
 					double doubleNumber = integerNumber;
-					
+
 					System.out.println(doubleNumber); // Outputs: 42.0
 				}
 			}
@@ -176,18 +174,18 @@
 						{
 							Console.WriteLine("double");
 						}
-					
+
 						public void Foo(int value)
 						{
 							Console.WriteLine("int");
 						}
-					
+
 						public void Boo()
 						{
 							// C# uses the 'var' keyword to infer the type of 'total'
 							var total = 10 + 5; // 'total' is inferred to be of type int
 
-							Foo(total);        // int 	
+							Foo(total);        // int
 							Foo(total + 2);    // int
 							Foo(total + 2.1f); // double
 						}
@@ -397,30 +395,30 @@
 					// Command handler for creating an order
 					public class OrderCommandHandler {
 						private readonly Database db;
-					
+
 						public OrderCommandHandler(Database database) {
 							db = database;
 						}
-					
+
 						public void HandleCreateOrder(CreateOrderCommand command) {
 							var order = new Order(command.Data);
 							db.AddOrder(order);
 						}
 					}
-					
+
 					// Query handler for fetching order details
 					public class OrderQueryHandler {
 						private readonly Database db;
-					
+
 						public OrderQueryHandler(Database database) {
 							db = database;
 						}
-					
+
 						public OrderDetails GetOrderDetails(Guid orderId) {
 							return db.GetOrderById(orderId);
 						}
 					}
-					
+
 					// Interprocedural analysis would validate that OrderCommandHandler only modifies state and does not perform any queries.
 					// It would also check that OrderQueryHandler only reads state and does not modify it.
 									</code></pre>

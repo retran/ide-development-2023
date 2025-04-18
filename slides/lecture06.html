@@ -27,6 +27,7 @@
 					Andrew Vasilyev
 				</p>
 				<div class="jb-square-logo"></div>
+				<p class="license-label">Licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></p>
 			</section>
 
 			<section>
@@ -203,33 +204,33 @@
 					<code data-trim data-noescape>
 						// Global scope
 						int globalVariable = 100;  // Has a global scope and lifetime extending the entire execution of the program
-						
+
 						class Program
 						{
 							// Class-level scope
 							static int classVariable = 50;  // Has a class-level scope and lifetime as long as the containing class is in memory
-						
+
 							static void Main(string[] args)
 							{
 								// Method-level scope
 								int localVariable = 10;  // Has a method-level scope and lifetime limited to the execution of the Main method
-								
+
 								Console.WriteLine(globalVariable);  // Accessible because it's in a global scope
 																	// "Console." is a class qualifier.
 								Console.WriteLine(classVariable);   // Accessible because it's in the class scope
-								
+
 								if (true)
 								{
 									// Block-level scope
 									int blockVariable = 5;  // Has a block-level scope and lifetime limited to this if-block
-									
+
 									Console.WriteLine(localVariable);   // Accessible because the block is inside the method
 									Console.WriteLine(blockVariable);   // Accessible within its own block
 								}
-								
+
 								// Console.WriteLine(blockVariable);  // This would be an error. blockVariable is out of scope here.
 							}
-						
+
 							static void AnotherMethod()
 							{
 								// Console.WriteLine(localVariable);  // This would be an error. localVariable is out of scope since it's local to Main.
@@ -337,7 +338,7 @@
 								Table3 --> Local3[Method Scope 1] --> Table5[Symbol Table: Method1]
 								Table3 --> Local4[Method Scope 2] --> Table6[Symbol Table: Method2]
 								Table4 --> Local5[Method Scope 3] --> Table7[Symbol Table: Method3]
-						
+
 								style Global fill:#f9d457,stroke:#f08c00
 								style Local1 fill:#bfe5bf,stroke:#5cd65c
 								style Local2 fill:#ffa07a,stroke:#ff4500
