@@ -1,15 +1,16 @@
-# Bootstrap starter
+# IDE Development Course - 2023
 
-Include [Bootstrap](https://getbootstrap.com) CSS and JS via the [jsDelivr CDN](https://www.jsdelivr.com/package/npm/bootstrap).
+This repository contains materials for the "IDE Development Course" taught by Andrew Vasilyev in 2023.
 
-## Edit in browser
+## License
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/twbs/examples/tree/main/starter?file=index.html)
+This content is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) (Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License).
 
-## Download
+This means you are free to:
+- Share — copy and redistribute the material in any medium or format
+- Adapt — remix, transform, and build upon the material
 
-```sh
-git clone https://github.com/twbs/examples.git
-cd examples/starter/
-open index.html
-```
+Under the following terms:
+- Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made.
+- NonCommercial — You may not use the material for commercial purposes.
+- ShareAlike — If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.
